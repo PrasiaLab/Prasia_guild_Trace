@@ -1,8 +1,8 @@
 {
   "snapshot_id": "2026-06-25_1150",
   "snapshot_folder": "2026-06-25_1150",
-  "snapshot_type": "guild_transfer_trace_baseline",
-  "description": "최근 랭킹 데이터 기준 결사 이전 추적용 기준 스냅샷",
+  "snapshot_type": "guild_transfer_trace_baseline_v1",
+  "description": "0625_0611 원본 데이터 기준 결사 이전 추적용 1차 스냅샷. 최근 스냅샷 양식과 맞추고 match_* 지문을 추가함.",
   "source_files": [
     "Who_are_you.json",
     "Who_are_you_class.json",
@@ -80,5 +80,15 @@
     "caution": "랭킹에 노출된 캐릭터 기준 스냅샷이므로 실제 결사 전체 인원과 다를 수 있음"
   },
   "schema_fixed": true,
-  "guilds_json_schema": "compatible_with_2026-06-25_2252_snapshot"
+  "guilds_json_schema": "compatible_with_2026-06-25_2252_snapshot",
+  "match_version": "trace_v1",
+  "match_rule_summary": "기본 92+ 유지, 92+가 없는 결사만 실제 존재 상위 3개 레벨 기준으로 보조 지문 생성",
+  "match_stats": {
+    "92plus": 55,
+    "with_match_member_data": 3587,
+    "top3_existing_levels": 3532,
+    "no_level_data": 602,
+    "without_match_member_data": 602
+  },
+  "web_filter_note": "웹페이지 기본값은 전체 서버, 선택 시 도착/변동 서버별 결과 필터를 추가하는 방향 권장. 실제 HTML/JS 수정에는 현재 웹 파일(index/app/style)이 필요함."
 }
