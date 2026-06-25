@@ -227,10 +227,7 @@ def add_count(counter: Dict[str, int], key: str, inc: int = 1) -> None:
     counter[key] = counter.get(key, 0) + inc
 
 
-def build_profile(guild: Dict[str, Any]) -> Dict[str, Any]:
-    members = [m for m in guild.get("members", []) if int(m.get("level") or 0) >= HIGH_LEVEL_MIN]
-    members.sort(key=lambda m: (not bool(m.get("is_master")), -int(m.get("level") or 0), str(m.get("nickname") or "")))
-
+def distribution_from_members(members: List[Dict[str, Any]]) -> Dict[str, Any]:
     level_distribution = Counter()
     class_distribution = Counter()
     level_class_distribution: Dict[str, Counter] = defaultdict(Counter)
@@ -239,33 +236,27 @@ def build_profile(guild: Dict[str, Any]) -> Dict[str, Any]:
     level_class_hunt_distribution: Counter = Counter()
     hunt_member_count = 0
 
-    if members:
-        for member in members:
-            level = str(member.get("level"))
-            cls = normalize_class(member.get("class"))
-            level_distribution[level] += 1
-            class_distribution[cls] += 1
-            level_class_distribution[level][cls] += 1
+    for member in members:
+        level_int = to_int(member.get("level"), 0)
+        if level_int <= 0:
+            continue
+        level = str(level_int)
+        cls = normalize_class(member.get("class"))
+        level_distribution[level] += 1
+        class_distribution[cls] += 1
+        level_class_distribution[level][cls] += 1
 
-            hunt_level = normalize_hunt_level(member)
-            if hunt_level is not None:
-                hunt_member_count += 1
-                member["hunt_level"] = hunt_level
-                member["grade"] = hunt_level
-                for threshold in HUNT_THRESHOLDS:
-                    if hunt_level >= threshold:
-                        bucket = f"{threshold}+"
-                        hunt_threshold_distribution[bucket] += 1
-                        class_hunt_distribution[f"{cls}|{bucket}"] += 1
-                        level_class_hunt_distribution[f"{level}|{cls}|{bucket}"] += 1
-    else:
-        # 멤버 상세가 없으면 92+ 레벨 분포만 level_counts에서 복원합니다.
-        for level, count in (guild.get("level_counts") or {}).items():
-            if str(level).isdigit() and int(level) >= HIGH_LEVEL_MIN:
-                level_distribution[str(level)] += int(count or 0)
-
-    high_level_count = sum(level_distribution.values())
-    max_level = max([int(x) for x in level_distribution.keys()], default=None)
+        hunt_level = normalize_hunt_level(member)
+        if hunt_level is not None:
+            hunt_member_count += 1
+            member["hunt_level"] = hunt_level
+            member["grade"] = hunt_level
+            for threshold in HUNT_THRESHOLDS:
+                if hunt_level >= threshold:
+                    bucket = f"{threshold}+"
+                    hunt_threshold_distribution[bucket] += 1
+                    class_hunt_distribution[f"{cls}|{bucket}"] += 1
+                    level_class_hunt_distribution[f"{level}|{cls}|{bucket}"] += 1
 
     level_dist = dict(sorted(level_distribution.items(), key=lambda x: int(x[0]), reverse=True))
     class_dist = dict(class_distribution.most_common())
@@ -273,27 +264,103 @@ def build_profile(guild: Dict[str, Any]) -> Dict[str, Any]:
         level: dict(counter.most_common())
         for level, counter in sorted(level_class_distribution.items(), key=lambda x: int(x[0]), reverse=True)
     }
+    return {
+        "level_distribution": level_dist,
+        "class_distribution": class_dist,
+        "level_class_distribution": level_class_dist,
+        "hunt_distribution": dict(hunt_threshold_distribution.most_common()),
+        "class_hunt_distribution": dict(class_hunt_distribution.most_common()),
+        "level_class_hunt_distribution": dict(level_class_hunt_distribution.most_common()),
+        "hunt_member_count": hunt_member_count,
+    }
+
+
+def existing_levels(guild: Dict[str, Any], members: List[Dict[str, Any]]) -> List[int]:
+    levels = set()
+    for member in members:
+        level = to_int(member.get("level"), 0)
+        if level > 0:
+            levels.add(level)
+    for level, count in (guild.get("level_counts") or {}).items():
+        if str(level).isdigit() and int(count or 0) > 0:
+            levels.add(int(level))
+    return sorted(levels, reverse=True)
+
+
+def level_count_distribution(guild: Dict[str, Any], levels: Iterable[int]) -> Dict[str, int]:
+    allowed = {str(level) for level in levels}
+    out: Dict[str, int] = {}
+    for level, count in (guild.get("level_counts") or {}).items():
+        if str(level) in allowed and int(count or 0) > 0:
+            out[str(level)] = int(count or 0)
+    return dict(sorted(out.items(), key=lambda x: int(x[0]), reverse=True))
+
+
+def select_match_levels(guild: Dict[str, Any], members: List[Dict[str, Any]]) -> tuple[str, List[int]]:
+    levels = existing_levels(guild, members)
+    if not levels:
+        return "no_level_data", []
+    high_levels = [level for level in levels if level >= HIGH_LEVEL_MIN]
+    if high_levels:
+        return "92plus", high_levels
+    return "top3_existing_levels", levels[:3]
+
+
+def build_profile(guild: Dict[str, Any]) -> Dict[str, Any]:
+    raw_members = [m for m in guild.get("members", []) if to_int(m.get("level"), 0) > 0]
+    raw_members.sort(key=lambda m: (not bool(m.get("is_master")), -to_int(m.get("level"), 0), str(m.get("nickname") or "")))
+
+    base_members = [m for m in raw_members if to_int(m.get("level"), 0) >= HIGH_LEVEL_MIN]
+    base_dist = distribution_from_members(base_members)
+
+    base_level_dist = base_dist["level_distribution"]
+    if not base_level_dist:
+        base_level_dist = level_count_distribution(guild, [level for level in existing_levels(guild, raw_members) if level >= HIGH_LEVEL_MIN])
+
+    match_rule, match_levels = select_match_levels(guild, raw_members)
+    match_level_set = set(match_levels)
+    match_members = [m for m in raw_members if to_int(m.get("level"), 0) in match_level_set]
+    match_dist = distribution_from_members(match_members)
+    match_level_dist = match_dist["level_distribution"]
+    if not match_level_dist:
+        match_level_dist = level_count_distribution(guild, match_levels)
+
+    all_levels = existing_levels(guild, raw_members)
+    high_level_count = sum(base_level_dist.values())
+    match_member_count = sum(match_level_dist.values()) if match_level_dist else len(match_members)
 
     return {
         "high_level_min": HIGH_LEVEL_MIN,
         "high_level_count": high_level_count,
         "high_level_count_92plus": high_level_count,
-        "max_level": max_level,
-        "level_distribution": level_dist,
-        "level_distribution_92plus": level_dist,
-        "class_distribution": class_dist,
-        "class_distribution_92plus": class_dist,
-        "level_class_distribution": level_class_dist,
-        "level_class_distribution_92plus": level_class_dist,
-        "hunt_threshold_distribution": dict(hunt_threshold_distribution.most_common()),
-        "hunt_distribution": dict(hunt_threshold_distribution.most_common()),
-        "class_hunt_distribution": dict(class_hunt_distribution.most_common()),
-        "class_hunt_distribution_92plus": dict(class_hunt_distribution.most_common()),
-        "level_class_hunt_distribution": dict(level_class_hunt_distribution.most_common()),
-        "level_class_hunt_distribution_92plus": dict(level_class_hunt_distribution.most_common()),
-        "hunt_member_count": hunt_member_count,
-        "has_hunt_data": hunt_member_count > 0,
-        "members": members,
+        "max_level": max(all_levels, default=None),
+        "level_distribution": base_level_dist,
+        "level_distribution_92plus": base_level_dist,
+        "class_distribution": base_dist["class_distribution"],
+        "class_distribution_92plus": base_dist["class_distribution"],
+        "level_class_distribution": base_dist["level_class_distribution"],
+        "level_class_distribution_92plus": base_dist["level_class_distribution"],
+        "hunt_threshold_distribution": base_dist["hunt_distribution"],
+        "hunt_distribution": base_dist["hunt_distribution"],
+        "class_hunt_distribution": base_dist["class_hunt_distribution"],
+        "class_hunt_distribution_92plus": base_dist["class_hunt_distribution"],
+        "level_class_hunt_distribution": base_dist["level_class_hunt_distribution"],
+        "level_class_hunt_distribution_92plus": base_dist["level_class_hunt_distribution"],
+        "hunt_member_count": base_dist["hunt_member_count"],
+        "has_hunt_data": base_dist["hunt_member_count"] > 0,
+        "match_version": "trace_v1",
+        "match_rule": match_rule,
+        "match_high_level_min": HIGH_LEVEL_MIN,
+        "match_levels": match_levels,
+        "match_member_count": match_member_count,
+        "match_has_member_data": len(match_members) > 0,
+        "match_level_distribution": match_level_dist,
+        "match_class_distribution": match_dist["class_distribution"],
+        "match_level_class_distribution": match_dist["level_class_distribution"],
+        "match_hunt_distribution": match_dist["hunt_distribution"],
+        "match_class_hunt_distribution": match_dist["class_hunt_distribution"],
+        "match_level_class_hunt_distribution": match_dist["level_class_hunt_distribution"],
+        "members": match_members,
     }
 
 
@@ -343,8 +410,13 @@ def main() -> None:
     member_sources = args.member_source or default_member_sources
     attach_members(guilds, load_members(member_sources))
 
+    match_stats: Dict[str, int] = defaultdict(int)
+    match_member_data_count = 0
     for guild in guilds:
         guild.update(build_profile(guild))
+        match_stats[str(guild.get("match_rule") or "unknown")] += 1
+        if guild.get("match_has_member_data"):
+            match_member_data_count += 1
 
     guilds.sort(key=lambda g: int(g.get("guild_rank") or 999999))
     out_dir = SNAPSHOT_DIR / args.snapshot_id
@@ -355,6 +427,11 @@ def main() -> None:
             "created_at": created_at,
             "high_level_min": HIGH_LEVEL_MIN,
             "hunt_thresholds": HUNT_THRESHOLDS,
+            "trace_version": "v1",
+            "match_version": "trace_v1",
+            "match_rule_summary": "기본 92+ 유지. 92+ 관측 레벨이 없으면 해당 결사의 실제 존재 상위 3개 레벨로 match_* 지문 생성.",
+            "match_stats": dict(match_stats),
+            "match_member_guild_count": match_member_data_count,
             "guild_count": len(guilds),
             "member_sources": [src for src in member_sources if (ROOT_DIR / src).exists()],
             "hunt_note": "member.grade 또는 hunt_level 계열 필드를 토벌 단계로 병합합니다.",
