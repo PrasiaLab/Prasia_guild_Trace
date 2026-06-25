@@ -48,8 +48,11 @@ function renderSnapshotOptions() {
   before.innerHTML = '';
   after.innerHTML = '';
   if (!state.snapshots.length) {
-    before.innerHTML = '<option>저장된 스냅샷 없음</option>';
-    after.innerHTML = '<option>저장된 스냅샷 없음</option>';
+    before.innerHTML = '<option value="">저장된 스냅샷 없음</option>';
+    after.innerHTML = '<option value="">저장된 스냅샷 없음</option>';
+    setSummary(null, null, '-', '스냅샷 없음');
+    setEmpty('저장된 스냅샷이 없습니다. 먼저 Actions에서 스냅샷을 생성해주세요.');
+    closeModal();
     return;
   }
   for (const snap of state.snapshots) {
@@ -217,4 +220,5 @@ function bindEvents() {
 }
 
 bindEvents();
+closeModal();
 loadSnapshotIndex();
