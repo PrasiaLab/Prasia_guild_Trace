@@ -92,33 +92,40 @@
         </div>
         <div class="tools">
           <input id="searchInput" type="search" placeholder="결사명 / 결사장 / 서버 검색" />
-          <select id="gradeFilter">
+          <select id="moveFilter" title="서버 변동 필터">
             <option value="all">전체</option>
+            <option value="moved">서버 변경만</option>
+            <option value="same">동일 서버만</option>
+            <option value="noChange">변동 없음</option>
+          </select>
+          <select id="gradeFilter" title="판정 필터">
+            <option value="all">전체 판정</option>
             <option value="veryHigh">매우 유력 이상</option>
             <option value="high">유력 이상</option>
             <option value="possible">가능성 있음 이상</option>
+            <option value="lowOnly">낮음만</option>
           </select>
         </div>
       </div>
 
+      <div id="resultNotice" class="result-notice" hidden></div>
       <div class="table-wrap">
         <table class="trace-table">
           <thead>
             <tr>
-              <th>이전 순위</th>
-              <th>이전 서버</th>
+              <th>결사순위</th>
               <th>이전 결사</th>
-              <th>이전 결사장</th>
-              <th>이후 서버</th>
+              <th>결사장</th>
+              <th>서버변동</th>
               <th>이후 결사</th>
-              <th>이후 결사장</th>
+              <th>결사장</th>
               <th>유사도</th>
               <th>판정</th>
               <th>보기</th>
             </tr>
           </thead>
           <tbody id="resultBody">
-            <tr><td colspan="10" class="empty">스냅샷을 선택한 뒤 비교하기를 눌러주세요.</td></tr>
+            <tr><td colspan="9" class="empty">스냅샷을 선택한 뒤 비교하기를 눌러주세요.</td></tr>
           </tbody>
         </table>
       </div>
