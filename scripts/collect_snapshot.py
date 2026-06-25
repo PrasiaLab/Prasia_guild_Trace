@@ -11,10 +11,10 @@ from typing import Any, Dict, Iterable, List, Optional
 from zoneinfo import ZoneInfo
 
 try:
-    from config import CLASS_ALIASES, DATA_DIR, HIGH_LEVEL_MIN, ROOT_DIR, SNAPSHOT_DIR, SNAPSHOT_INDEX
+    from config import CLASS_ALIASES, DATA_DIR, HIGH_LEVEL_MIN, HUNT_THRESHOLDS, ROOT_DIR, SNAPSHOT_DIR, SNAPSHOT_INDEX
 except ImportError:
     sys.path.append(str(Path(__file__).resolve().parent))
-    from config import CLASS_ALIASES, DATA_DIR, HIGH_LEVEL_MIN, ROOT_DIR, SNAPSHOT_DIR, SNAPSHOT_INDEX
+    from config import CLASS_ALIASES, DATA_DIR, HIGH_LEVEL_MIN, HUNT_THRESHOLDS, ROOT_DIR, SNAPSHOT_DIR, SNAPSHOT_INDEX
 
 
 def now_snapshot_id() -> str:
@@ -40,8 +40,10 @@ def read_json(source: str | Path) -> Any:
 
 def write_json(path: Path, data: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as fp:
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    with tmp.open("w", encoding="utf-8") as fp:
         json.dump(data, fp, ensure_ascii=False, indent=2)
+    tmp.replace(path)
 
 
 def pick(obj: Dict[str, Any], *keys: str, default: Any = None) -> Any:
@@ -49,6 +51,15 @@ def pick(obj: Dict[str, Any], *keys: str, default: Any = None) -> Any:
         if key in obj and obj[key] not in (None, ""):
             return obj[key]
     return default
+
+
+def to_int(value: Any, default: int = 0) -> int:
+    try:
+        if value is None or value == "":
+            return default
+        return int(float(value))
+    except (TypeError, ValueError):
+        return default
 
 
 def normalize_class(value: Any) -> str:
@@ -68,8 +79,22 @@ def as_list(payload: Any) -> List[Dict[str, Any]]:
     return []
 
 
+def server_from_world_id(world_id: Any) -> str:
+    text = str(world_id or "")
+    # LIVE_W05_R1 -> 5-1
+    import re
+    m = re.search(r"LIVE_W(\d+)_R(\d+)", text, re.I)
+    if not m:
+        return ""
+    return f"{int(m.group(1))}-{int(m.group(2))}"
+
+
 def server_value(item: Dict[str, Any]) -> str:
-    return str(pick(item, "server", "world", "world_name", "server_name", default="-")).strip()
+    value = pick(item, "server", "world", "world_name", "server_name", default="")
+    value = str(value or "").strip()
+    if value:
+        return value
+    return server_from_world_id(pick(item, "world_id", "worldId", default="")) or "-"
 
 
 def guild_key(server: str, guild_name: str, guild_master: str = "") -> str:
@@ -80,9 +105,42 @@ def fallback_key(guild_name: str, guild_master: str = "") -> str:
     return "|".join([guild_name.strip().lower(), guild_master.strip().lower()])
 
 
+def normalize_hunt_level(item: Dict[str, Any]) -> Optional[int]:
+    # grade는 프라시아 랭킹 원천에서 토벌 단계로 들어오는 값입니다.
+    candidates = [
+        "hunt_level",
+        "huntLevel",
+        "grade",
+        "subjugation_level",
+        "subjugationLevel",
+        "raid_level",
+        "raidLevel",
+        "boss_level",
+        "bossLevel",
+        "boss_clear_level",
+        "bossClearLevel",
+        "content_level",
+        "contentLevel",
+        "tobul_level",
+        "tobulLevel",
+        "토벌레벨",
+        "토벌",
+    ]
+    for key in candidates:
+        if key in item and item[key] not in (None, ""):
+            value = to_int(item[key], 0)
+            if value > 0:
+                return value
+    return None
+
+
 def normalize_guild(item: Dict[str, Any], index: int) -> Dict[str, Any]:
     level_counts = pick(item, "level_counts", "level_distribution", default={}) or {}
-    level_counts = {str(k): int(v or 0) for k, v in level_counts.items() if str(k).isdigit() and int(v or 0) > 0}
+    level_counts = {
+        str(k): int(v or 0)
+        for k, v in level_counts.items()
+        if str(k).isdigit() and int(v or 0) > 0
+    }
     return {
         "server": server_value(item),
         "world_group_id": pick(item, "world_group_id", default=""),
@@ -103,18 +161,21 @@ def normalize_member(item: Dict[str, Any]) -> Optional[Dict[str, Any]]:
     guild_name = str(pick(item, "guild_name", "guild", "guildName", default="")).strip()
     if not guild_name:
         return None
-    try:
-        level = int(float(pick(item, "level", "character_level", "gc_level", default=0) or 0))
-    except (TypeError, ValueError):
-        level = 0
+    level = to_int(pick(item, "level", "character_level", "gc_level", default=0), 0)
+    nickname = str(pick(item, "nickname", "name", "character_name", "gc_name", default="-")).strip()
+    cls = normalize_class(pick(item, "class", "class_name", "ranking_class_name", "job", "character_class", "classCode", default=""))
+    hunt_level = normalize_hunt_level(item)
     return {
         "server": server_value(item),
         "guild_name": guild_name,
         "guild_master": str(pick(item, "guild_master", "master", "master_name", default="")).strip(),
-        "nickname": str(pick(item, "nickname", "name", "character_name", "gc_name", default="-")).strip(),
+        "nickname": nickname,
         "level": level,
-        "class": normalize_class(pick(item, "class", "class_name", "ranking_class_name", "job", "character_class", "classCode", default="")),
+        "class": cls,
         "rank": pick(item, "rank", "ranking", default=None),
+        "hunt_level": hunt_level,
+        # 원본 확인용으로 grade도 남겨둡니다. 없으면 null.
+        "grade": hunt_level,
     }
 
 
@@ -126,7 +187,10 @@ def attach_members(guilds: List[Dict[str, Any]], members: Iterable[Dict[str, Any
         by_fallback[fallback_key(guild["guild_name"], guild["guild_master"])] = guild
         by_fallback[fallback_key(guild["guild_name"])] = guild
 
-    seen_members: set[tuple[str, str, str, int, str]] = set()
+    # 같은 멤버가 전체랭킹/직업별랭킹 양쪽에서 들어와도 하나로 병합합니다.
+    # 기존 멤버에 토벌값이 없고 새 멤버에 있으면 토벌값을 채웁니다.
+    member_maps: Dict[int, Dict[tuple[str, int, str], Dict[str, Any]]] = defaultdict(dict)
+
     for member in members:
         normalized = normalize_member(member)
         if not normalized:
@@ -141,13 +205,26 @@ def attach_members(guilds: List[Dict[str, Any]], members: Iterable[Dict[str, Any
             guild = by_key.get(key) or by_fallback.get(key)
             if guild:
                 break
-        if guild:
-            normalized["is_master"] = normalized["nickname"] == guild.get("guild_master")
-            unique_key = (guild["server"], guild["guild_name"], normalized["nickname"], normalized["level"], normalized["class"])
-            if unique_key in seen_members:
-                continue
-            seen_members.add(unique_key)
-            guild["members"].append(normalized)
+        if not guild:
+            continue
+
+        normalized["is_master"] = normalized["nickname"] == guild.get("guild_master")
+        unique_key = (normalized["nickname"], normalized["level"], normalized["class"])
+        bucket = member_maps[id(guild)]
+        previous = bucket.get(unique_key)
+        if previous:
+            if previous.get("hunt_level") in (None, "") and normalized.get("hunt_level") not in (None, ""):
+                previous["hunt_level"] = normalized.get("hunt_level")
+                previous["grade"] = normalized.get("hunt_level")
+            if normalized.get("is_master"):
+                previous["is_master"] = True
+            continue
+        bucket[unique_key] = normalized
+        guild["members"].append(normalized)
+
+
+def add_count(counter: Dict[str, int], key: str, inc: int = 1) -> None:
+    counter[key] = counter.get(key, 0) + inc
 
 
 def build_profile(guild: Dict[str, Any]) -> Dict[str, Any]:
@@ -157,6 +234,10 @@ def build_profile(guild: Dict[str, Any]) -> Dict[str, Any]:
     level_distribution = Counter()
     class_distribution = Counter()
     level_class_distribution: Dict[str, Counter] = defaultdict(Counter)
+    hunt_threshold_distribution: Counter = Counter()
+    class_hunt_distribution: Counter = Counter()
+    level_class_hunt_distribution: Counter = Counter()
+    hunt_member_count = 0
 
     if members:
         for member in members:
@@ -165,22 +246,53 @@ def build_profile(guild: Dict[str, Any]) -> Dict[str, Any]:
             level_distribution[level] += 1
             class_distribution[cls] += 1
             level_class_distribution[level][cls] += 1
+
+            hunt_level = normalize_hunt_level(member)
+            if hunt_level is not None:
+                hunt_member_count += 1
+                member["hunt_level"] = hunt_level
+                member["grade"] = hunt_level
+                for threshold in HUNT_THRESHOLDS:
+                    if hunt_level >= threshold:
+                        bucket = f"{threshold}+"
+                        hunt_threshold_distribution[bucket] += 1
+                        class_hunt_distribution[f"{cls}|{bucket}"] += 1
+                        level_class_hunt_distribution[f"{level}|{cls}|{bucket}"] += 1
     else:
+        # 멤버 상세가 없으면 92+ 레벨 분포만 level_counts에서 복원합니다.
         for level, count in (guild.get("level_counts") or {}).items():
-            if int(level) >= HIGH_LEVEL_MIN:
+            if str(level).isdigit() and int(level) >= HIGH_LEVEL_MIN:
                 level_distribution[str(level)] += int(count or 0)
 
     high_level_count = sum(level_distribution.values())
     max_level = max([int(x) for x in level_distribution.keys()], default=None)
+
+    level_dist = dict(sorted(level_distribution.items(), key=lambda x: int(x[0]), reverse=True))
+    class_dist = dict(class_distribution.most_common())
+    level_class_dist = {
+        level: dict(counter.most_common())
+        for level, counter in sorted(level_class_distribution.items(), key=lambda x: int(x[0]), reverse=True)
+    }
+
     return {
+        "high_level_min": HIGH_LEVEL_MIN,
         "high_level_count": high_level_count,
+        "high_level_count_92plus": high_level_count,
         "max_level": max_level,
-        "level_distribution": dict(sorted(level_distribution.items(), key=lambda x: int(x[0]), reverse=True)),
-        "class_distribution": dict(class_distribution.most_common()),
-        "level_class_distribution": {
-            level: dict(counter.most_common())
-            for level, counter in sorted(level_class_distribution.items(), key=lambda x: int(x[0]), reverse=True)
-        },
+        "level_distribution": level_dist,
+        "level_distribution_92plus": level_dist,
+        "class_distribution": class_dist,
+        "class_distribution_92plus": class_dist,
+        "level_class_distribution": level_class_dist,
+        "level_class_distribution_92plus": level_class_dist,
+        "hunt_threshold_distribution": dict(hunt_threshold_distribution.most_common()),
+        "hunt_distribution": dict(hunt_threshold_distribution.most_common()),
+        "class_hunt_distribution": dict(class_hunt_distribution.most_common()),
+        "class_hunt_distribution_92plus": dict(class_hunt_distribution.most_common()),
+        "level_class_hunt_distribution": dict(level_class_hunt_distribution.most_common()),
+        "level_class_hunt_distribution_92plus": dict(level_class_hunt_distribution.most_common()),
+        "hunt_member_count": hunt_member_count,
+        "has_hunt_data": hunt_member_count > 0,
         "members": members,
     }
 
@@ -217,7 +329,7 @@ def update_indexes(snapshot_id: str, created_at: str) -> None:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="랭킹 데이터를 시간별 스냅샷으로 저장합니다.")
+    parser = argparse.ArgumentParser(description="랭킹 데이터를 시간별 스냅샷으로 저장합니다. 92+ 및 토벌25/26 지문을 포함합니다.")
     parser.add_argument("--snapshot-id", default=now_snapshot_id(), help="예: 2026-06-25_1200")
     parser.add_argument("--guild-source", default="data/Who_are_you_guild_score.json")
     parser.add_argument("--member-source", action="append", default=[])
@@ -242,8 +354,10 @@ def main() -> None:
             "label": snapshot_label(args.snapshot_id),
             "created_at": created_at,
             "high_level_min": HIGH_LEVEL_MIN,
+            "hunt_thresholds": HUNT_THRESHOLDS,
             "guild_count": len(guilds),
             "member_sources": [src for src in member_sources if (ROOT_DIR / src).exists()],
+            "hunt_note": "member.grade 또는 hunt_level 계열 필드를 토벌 단계로 병합합니다.",
         },
         "guilds": guilds,
     }
@@ -254,6 +368,8 @@ def main() -> None:
     print(f"[OK] snapshot saved: {out_dir}")
     print(f"[OK] snapshot label: {snapshot_label(args.snapshot_id)}")
     print(f"[OK] guild count: {len(guilds):,}")
+    print(f"[OK] high level min: {HIGH_LEVEL_MIN}+")
+    print(f"[OK] hunt thresholds: {HUNT_THRESHOLDS}")
 
 
 if __name__ == "__main__":

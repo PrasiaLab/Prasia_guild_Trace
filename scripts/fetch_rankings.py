@@ -182,6 +182,7 @@ def extract_character_ranking(
             "name": player.get("gc_name"),
             "level": player.get("gc_level"),
             "grade": safe_int(player.get("string_map", {}).get("grade", 0)),
+            "hunt_level": safe_int(player.get("string_map", {}).get("grade", 0)),
             "class": player.get("class"),
             "guild": player.get("guild_name"),
             "ranking": player.get("ranking"),
