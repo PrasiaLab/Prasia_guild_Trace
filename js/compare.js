@@ -1,9 +1,11 @@
 (function () {
-  // 추적 기준: 92레벨 이상 + 토벌 25/26 지문을 우선 사용합니다.
-  // 토벌 필드가 없는 스냅샷은 토벌 점수 항목을 자동 제외해서 기존 데이터도 비교 가능합니다.
+  // Trace v1
+  // 기본: 92레벨 이상 지문 유지
+  // 예외: 92+ 지문이 없으면 해당 결사의 실제 존재 상위 3개 레벨 지문 사용
   const TRACE_CONFIG = {
     highLevelMin: 92,
     huntThresholds: [26, 25],
+    topLevelFallbackCount: 3,
   };
 
   function toNumber(value, fallback = 0) {
@@ -68,8 +70,10 @@
   function normalizeDist(obj, options = {}) {
     const out = {};
     if (!obj || typeof obj !== 'object') return out;
+    const allowedLevels = options.allowedLevels ? new Set(options.allowedLevels.map(String)) : null;
     const minLevel = options.minLevel ?? null;
     Object.entries(obj).forEach(([k, v]) => {
+      if (allowedLevels && /^\d+$/.test(String(k)) && !allowedLevels.has(String(k))) return;
       if (minLevel !== null && /^\d+$/.test(String(k)) && Number(k) < minLevel) return;
       const n = toNumber(v, 0);
       if (n > 0) out[String(k)] = n;
@@ -80,9 +84,11 @@
   function normalizeLevelClassDist(obj, options = {}) {
     const out = {};
     if (!obj || typeof obj !== 'object') return out;
+    const allowedLevels = options.allowedLevels ? new Set(options.allowedLevels.map(String)) : null;
     const minLevel = options.minLevel ?? TRACE_CONFIG.highLevelMin;
     Object.entries(obj).forEach(([level, classes]) => {
-      if (Number(level) < minLevel) return;
+      if (allowedLevels && !allowedLevels.has(String(level))) return;
+      if (!allowedLevels && Number(level) < minLevel) return;
       out[String(level)] = {};
       if (classes && typeof classes === 'object') {
         Object.entries(classes).forEach(([cls, cnt]) => {
@@ -99,6 +105,7 @@
     const candidates = [
       member.hunt_level,
       member.huntLevel,
+      member.grade,
       member.subjugation_level,
       member.subjugationLevel,
       member.raid_level,
@@ -121,7 +128,7 @@
     return null;
   }
 
-  function normalizeMembers(members, guildMaster) {
+  function normalizeRawMembers(members, guildMaster) {
     const list = Array.isArray(members) ? members : [];
     const seen = new Set();
     return list
@@ -132,7 +139,7 @@
         hunt_level: normalizeHuntLevel(m),
         is_master: text(m.nickname ?? m.name ?? m.gc_name ?? m.character_name, '-') === text(guildMaster, '') || Boolean(m.is_master),
       }))
-      .filter(m => m.nickname !== '-' && m.level >= TRACE_CONFIG.highLevelMin)
+      .filter(m => m.nickname !== '-' && m.level > 0)
       .filter(m => {
         const key = `${m.nickname}|${m.level}|${m.class}|${m.hunt_level ?? ''}`;
         if (seen.has(key)) return false;
@@ -183,37 +190,82 @@
     return null;
   }
 
+  function levelsFromObject(obj) {
+    return Object.entries(obj || {})
+      .filter(([k, v]) => /^\d+$/.test(String(k)) && toNumber(v, 0) > 0)
+      .map(([k]) => Number(k));
+  }
+
+  function availableLevels(item, rawMembers) {
+    const levels = new Set();
+    rawMembers.forEach(m => { if (m.level > 0) levels.add(m.level); });
+    levelsFromObject(item.level_counts).forEach(lv => levels.add(lv));
+    levelsFromObject(item.level_distribution).forEach(lv => levels.add(lv));
+    levelsFromObject(item.level_distribution_92plus).forEach(lv => levels.add(lv));
+    levelsFromObject(item.match_level_distribution).forEach(lv => levels.add(lv));
+    return Array.from(levels).sort((a, b) => b - a);
+  }
+
+  function parseMatchLevels(item, rawMembers) {
+    if (Array.isArray(item.match_levels) && item.match_levels.length) {
+      const levels = item.match_levels.map(v => toNumber(v, NaN)).filter(Number.isFinite).sort((a, b) => b - a);
+      if (levels.length) return { rule: item.match_rule || (levels.some(lv => lv >= TRACE_CONFIG.highLevelMin) ? '92plus' : 'top3_existing_levels'), levels };
+    }
+    const levels = availableLevels(item, rawMembers);
+    if (levels.some(lv => lv >= TRACE_CONFIG.highLevelMin)) {
+      return { rule: '92plus', levels: levels.filter(lv => lv >= TRACE_CONFIG.highLevelMin) };
+    }
+    return { rule: levels.length ? 'top3_existing_levels' : 'no_level_data', levels: levels.slice(0, TRACE_CONFIG.topLevelFallbackCount) };
+  }
+
+  function traceLabel(guild) {
+    if (guild.match_rule === '92plus') return '92+';
+    if (guild.match_rule === 'top3_existing_levels') return `상위 ${guild.match_levels.join('/')}`;
+    return '자료 없음';
+  }
+
   function normalizeGuild(item, index = 0) {
     const master = text(item.guild_master ?? item.guildMaster ?? item.master ?? item.master_name, '-');
-    const members = normalizeMembers(item.members, master);
+    const rawMembers = normalizeRawMembers(item.members, master);
+    const match = parseMatchLevels(item, rawMembers);
+    const matchLevelSet = new Set(match.levels.map(Number));
+    const members = rawMembers.filter(m => matchLevelSet.has(Number(m.level)));
     const memberDist = buildDistFromMembers(members);
 
-    const levelDistribution = Object.keys(memberDist.level).length
-      ? memberDist.level
-      : normalizeDist(item.level_distribution_92plus ?? item.level_distribution ?? item.level_counts, { minLevel: TRACE_CONFIG.highLevelMin });
+    const prebuiltLevel = item.match_level_distribution ?? null;
+    const prebuiltClass = item.match_class_distribution ?? null;
+    const prebuiltLevelClass = item.match_level_class_distribution ?? null;
+    const prebuiltHunt = item.match_hunt_distribution ?? item.match_hunt_threshold_distribution ?? null;
+    const prebuiltClassHunt = item.match_class_hunt_distribution ?? null;
+    const prebuiltLevelClassHunt = item.match_level_class_hunt_distribution ?? null;
 
-    // class_distribution은 91+ 전체값일 수 있으므로 멤버가 없고 92+ 전용 필드도 없으면 비워둡니다.
-    const explicitClass92 = item.class_distribution_92plus ?? item.class_distribution_high ?? null;
+    let levelDistribution = Object.keys(memberDist.level).length
+      ? memberDist.level
+      : normalizeDist(prebuiltLevel, { allowedLevels: match.levels });
+    if (!Object.keys(levelDistribution).length) {
+      levelDistribution = normalizeDist(item.level_counts ?? item.level_distribution ?? item.level_distribution_92plus, { allowedLevels: match.levels });
+    }
+
     const classDistribution = Object.keys(memberDist.cls).length
       ? memberDist.cls
-      : normalizeDist(explicitClass92);
+      : normalizeDist(prebuiltClass ?? (match.rule === '92plus' ? item.class_distribution_92plus : null));
 
-    const explicitLevelClass92 = item.level_class_distribution_92plus ?? item.level_class_distribution_high ?? null;
     const levelClassDistribution = Object.keys(memberDist.levelCls).length
       ? memberDist.levelCls
-      : normalizeLevelClassDist(explicitLevelClass92 ?? item.level_class_distribution, { minLevel: TRACE_CONFIG.highLevelMin });
+      : normalizeLevelClassDist(prebuiltLevelClass ?? (match.rule === '92plus' ? item.level_class_distribution_92plus : null), { allowedLevels: match.levels });
 
-    const prebuiltHuntThreshold = pickFirstObject(item, ['hunt_threshold_distribution', 'hunt_distribution', 'tobul_distribution']);
-    const prebuiltClassHunt = pickFirstObject(item, ['class_hunt_distribution_92plus', 'class_hunt_distribution']);
-    const prebuiltLevelClassHunt = pickFirstObject(item, ['level_class_hunt_distribution_92plus', 'level_class_hunt_distribution']);
+    const fallbackHuntThreshold = pickFirstObject(item, ['hunt_threshold_distribution', 'hunt_distribution', 'tobul_distribution']);
+    const fallbackClassHunt = pickFirstObject(item, ['class_hunt_distribution_92plus', 'class_hunt_distribution']);
+    const fallbackLevelClassHunt = pickFirstObject(item, ['level_class_hunt_distribution_92plus', 'level_class_hunt_distribution']);
 
-    const huntThresholdDistribution = Object.keys(memberDist.huntThreshold).length ? memberDist.huntThreshold : normalizeDist(prebuiltHuntThreshold);
-    const classHuntDistribution = Object.keys(memberDist.classHunt).length ? memberDist.classHunt : normalizeDist(prebuiltClassHunt);
-    const levelClassHuntDistribution = Object.keys(memberDist.levelClassHunt).length ? memberDist.levelClassHunt : normalizeDist(prebuiltLevelClassHunt);
+    const huntThresholdDistribution = Object.keys(memberDist.huntThreshold).length ? memberDist.huntThreshold : normalizeDist(prebuiltHunt ?? fallbackHuntThreshold);
+    const classHuntDistribution = Object.keys(memberDist.classHunt).length ? memberDist.classHunt : normalizeDist(prebuiltClassHunt ?? fallbackClassHunt);
+    const levelClassHuntDistribution = Object.keys(memberDist.levelClassHunt).length ? memberDist.levelClassHunt : normalizeDist(prebuiltLevelClassHunt ?? fallbackLevelClassHunt);
     const hasHuntData = Object.keys(huntThresholdDistribution).length || Object.keys(classHuntDistribution).length || Object.keys(levelClassHuntDistribution).length;
 
-    const highLevelCount = Object.values(levelDistribution).reduce((a, b) => a + toNumber(b), 0);
-    const masterMember = members.find(m => m.is_master) || members.find(m => m.nickname === master) || null;
+    const matchCount = Object.values(levelDistribution).reduce((a, b) => a + toNumber(b), 0);
+    const masterMember = members.find(m => m.is_master) || rawMembers.find(m => m.nickname === master) || null;
+    const allLevels = availableLevels(item, rawMembers);
 
     return {
       raw: item,
@@ -226,8 +278,11 @@
       guild_score: toNumber(item.guild_score ?? item.score ?? item.total_score, 0),
       guild_level: item.guild_level ?? null,
       guild_member_count: item.guild_member_count ?? item.member_count ?? null,
-      high_level_count: highLevelCount || toNumber(item.high_level_count_92plus ?? item.high_level_count, 0),
-      max_level: toNumber(item.max_level, Math.max(0, ...Object.keys(levelDistribution).map(Number))),
+      high_level_count: matchCount || toNumber(item.match_member_count ?? item.high_level_count_92plus ?? item.high_level_count, 0),
+      max_level: toNumber(item.max_level, allLevels[0] || Math.max(0, ...Object.keys(levelDistribution).map(Number))),
+      match_rule: match.rule,
+      match_levels: match.levels,
+      trace_label: match.rule === '92plus' ? '92+' : traceLabel({ match_rule: match.rule, match_levels: match.levels }),
       level_distribution: levelDistribution,
       class_distribution: classDistribution,
       level_class_distribution: levelClassDistribution,
@@ -235,7 +290,7 @@
       class_hunt_distribution: classHuntDistribution,
       level_class_hunt_distribution: levelClassHuntDistribution,
       has_hunt_data: hasHuntData,
-      hunt_member_count: memberDist.huntMemberCount || toNumber(item.hunt_member_count, 0),
+      hunt_member_count: memberDist.huntMemberCount || toNumber(item.match_member_count ?? item.hunt_member_count, 0),
       master_level: masterMember ? masterMember.level : toNumber(item.master_level, 0),
       master_class: masterMember ? masterMember.class : normalizeClass(item.master_class ?? item.guild_master_class ?? ''),
       members,
@@ -409,18 +464,19 @@
 
     const internalScore = total + tieBreakScore(before, after) / 1000;
     const evidence = [];
+    const label = before.trace_label === after.trace_label ? before.trace_label : `${before.trace_label}↔${after.trace_label}`;
     if (parts.master > 0) evidence.push('결사장 일치');
     if (parts.masterProfile > 0) evidence.push('결사장 레벨/직업 보정');
     if (parts.name >= 4.9) evidence.push('결사명 일치');
     else if (parts.name > 0) evidence.push('결사명 일부 유사');
-    if (parts.levelClass >= maxes.levelClass * 0.72) evidence.push('92+ 레벨별 직업군 유사');
-    if (levelClassWeighted !== null && levelClassBase !== null && levelClassWeighted > levelClassBase + 0.03) evidence.push('희귀 92+ 레벨×직업 패턴 보정');
-    if (parts.level >= maxes.level * 0.72) evidence.push('92+ 레벨 분포 유사');
-    if (parts.class >= maxes.class * 0.72) evidence.push('92+ 직업군 분포 유사');
+    if (parts.levelClass >= maxes.levelClass * 0.72) evidence.push(`${label} 레벨별 직업군 유사`);
+    if (levelClassWeighted !== null && levelClassBase !== null && levelClassWeighted > levelClassBase + 0.03) evidence.push(`희귀 ${label} 레벨×직업 패턴 보정`);
+    if (parts.level >= maxes.level * 0.72) evidence.push(`${label} 레벨 분포 유사`);
+    if (parts.class >= maxes.class * 0.72) evidence.push(`${label} 직업군 분포 유사`);
     if (huntAvailable) {
       if (parts.huntThreshold >= maxes.huntThreshold * 0.7) evidence.push('토벌25+/26+ 인원 분포 유사');
       if (parts.classHunt >= maxes.classHunt * 0.7) evidence.push('직업군별 토벌 분포 유사');
-      if (parts.levelClassHunt >= maxes.levelClassHunt * 0.7) evidence.push('92+ 직업군×토벌 지문 유사');
+      if (parts.levelClassHunt >= maxes.levelClassHunt * 0.7) evidence.push(`${label} 직업군×토벌 지문 유사`);
     } else {
       evidence.push('토벌 데이터 없음: 토벌 점수 제외');
     }
@@ -440,6 +496,7 @@
       sameServer: sameServer(before, after),
       noChange: sameGuildIdentity(before, after),
       huntAvailable,
+      traceLabel: label,
       alternates: [],
     };
   }
@@ -504,6 +561,7 @@
           sameServer: alt.sameServer,
           noChange: alt.noChange,
           huntAvailable: alt.huntAvailable,
+          traceLabel: alt.traceLabel,
           alreadyUsed: usedAfter.has(alt.afterIndex),
         }));
       matches.push(candidate);
@@ -522,6 +580,8 @@
       matchingMode: 'one-to-one',
       highLevelMin: TRACE_CONFIG.highLevelMin,
       huntThresholds: TRACE_CONFIG.huntThresholds,
+      traceVersion: 'v1',
+      traceRule: '92+ 유지, 92+ 없을 때만 실제 존재 상위 3개 레벨',
     };
   }
 

@@ -33,7 +33,7 @@ async function loadSnapshotIndex() {
     .filter(s => s && s.id)
     .map(s => ({
       id: s.id,
-      label: PrasiaCompare.formatSnapshotId(s.id),
+      label: s.label || PrasiaCompare.formatSnapshotId(s.id),
       created_at: s.created_at || s.label || '',
       path: s.path || `data/snapshots/${s.id}/guilds.json`,
     }))
@@ -88,7 +88,8 @@ async function compareSelected() {
       afterLimit: Number($('afterLimitSelect').value),
     });
     state.matches = result.matches;
-    setSummary(beforeSnap, afterSnap, `${result.comparedBefore.toLocaleString('ko-KR')} × ${result.comparedAfter.toLocaleString('ko-KR')} · 1:1 대표 매칭 · 92+ 기준 · 토벌25/26 있으면 반영`, '완료');
+    setSummary(beforeSnap, afterSnap, `${result.comparedBefore.toLocaleString('ko-KR')} × ${result.comparedAfter.toLocaleString('ko-KR')} · 1:1 대표 매칭 · Trace v1 · 토벌25/26 있으면 반영`, '완료');
+    updateServerFilter(result.matches);
     renderResults();
   } catch (err) {
     console.error(err);
@@ -133,6 +134,27 @@ function displayJudgement(m) {
   return m.judgement;
 }
 
+function traceLabelText(guild) {
+  return guild?.trace_label || (Array.isArray(guild?.match_levels) && guild.match_levels.length ? guild.match_levels.join('/') : '자료 없음');
+}
+
+function updateServerFilter(matches) {
+  const select = $('serverFilter');
+  if (!select) return;
+  const current = select.value || 'all';
+  const map = new Map();
+  for (const m of matches || []) {
+    if (sameServer(m)) continue;
+    const name = m.after.serverName || '-';
+    const code = m.after.server || name;
+    const key = `${name}||${code}`;
+    map.set(key, { name, code, count: (map.get(key)?.count || 0) + 1 });
+  }
+  const rows = Array.from(map.values()).sort((a, b) => b.count - a.count || a.name.localeCompare(b.name, 'ko', { numeric: true }));
+  select.innerHTML = '<option value="all">전체 서버</option>' + rows.map(r => `<option value="${escapeHtml(r.name)}">${escapeHtml(r.name)} (${r.count})</option>`).join('');
+  if ([...select.options].some(opt => opt.value === current)) select.value = current;
+}
+
 function setNotice(message) {
   const notice = $('resultNotice');
   if (!notice) return;
@@ -167,7 +189,7 @@ function renderConcentrationNotice(rows) {
     const target = maxMatch ? `${escapeHtml(maxMatch.after.serverName)} / ${escapeHtml(maxMatch.after.guild_name)} / ${escapeHtml(maxMatch.after.guild_master)}` : '특정 이후 결사';
     setNotice(`
       <strong>해석 주의</strong>
-      <span>현재 결과는 <b>1:1 대표 매칭 · 92+ 기준 · 토벌25/26 있으면 반영</b>으로 정리되어 있어요. 그래도 낮은 점수 후보가 많다면 서버 이전이 아직 완료되지 않았거나 이후 후보 범위가 좁을 때 생길 수 있는 현상이라, <b>낮음/동일 서버 후보는 확정 추적 결과가 아니고 참고용</b>으로 보면 돼요.</span>
+      <span>현재 결과는 <b>1:1 대표 매칭 · Trace v1(92+ 우선, 92+ 없으면 실제 상위 3레벨) · 토벌25/26 있으면 반영</b>으로 정리되어 있어요. 그래도 낮은 점수 후보가 많다면 서버 이전이 아직 완료되지 않았거나 이후 후보 범위가 좁을 때 생길 수 있는 현상이라, <b>낮음/동일 서버 후보는 확정 추적 결과가 아니고 참고용</b>으로 보면 돼요.</span>
     `);
   } else {
     setNotice('');
@@ -178,12 +200,14 @@ function filterMatches() {
   const q = $('searchInput').value.trim().toLowerCase();
   const move = $('moveFilter')?.value || 'all';
   const grade = $('gradeFilter').value;
+  const server = $('serverFilter')?.value || 'all';
   return state.matches.filter(m => {
     const hay = [m.before.guild_name, m.before.guild_master, m.before.serverName, m.after.guild_name, m.after.guild_master, m.after.serverName].join(' ').toLowerCase();
     if (q && !hay.includes(q)) return false;
     if (move === 'moved' && sameServer(m)) return false;
     if (move === 'same' && !sameServer(m)) return false;
     if (move === 'noChange' && !sameGuildIdentity(m)) return false;
+    if (server !== 'all' && (sameServer(m) || String(m.after.serverName || '') !== server)) return false;
     if (grade === 'veryHigh') return m.total >= 85;
     if (grade === 'high') return m.total >= 70;
     if (grade === 'possible') return m.total >= 55;
@@ -229,7 +253,7 @@ function memberTable(title, guild) {
       <td>${escapeHtml(m.class)}</td>
       <td>${m.hunt_level ? m.hunt_level : '-'}</td>
     </tr>
-  `).join('') : `<tr><td colspan="4" class="empty">92+ 멤버 원본 없음</td></tr>`;
+  `).join('') : `<tr><td colspan="4" class="empty">기준 레벨 멤버 원본 없음</td></tr>`;
   return `
     <div class="member-box">
       <h3>${title}</h3>
@@ -282,6 +306,8 @@ function openModal(matchIndex) {
       <div class="detail-card"><span>판정</span><strong>${displayJudgement(m).text}</strong></div>
       <div class="detail-card"><span>이전 점수</span><strong>${m.before.guild_score.toLocaleString('ko-KR')}</strong></div>
       <div class="detail-card"><span>이후 점수</span><strong>${m.after.guild_score.toLocaleString('ko-KR')}</strong></div>
+      <div class="detail-card"><span>이전 기준</span><strong>${escapeHtml(traceLabelText(m.before))}</strong></div>
+      <div class="detail-card"><span>이후 기준</span><strong>${escapeHtml(traceLabelText(m.after))}</strong></div>
     </div>
     <div class="evidence-list">${m.evidence.length ? m.evidence.map(e => `<span>${escapeHtml(e)}</span>`).join('') : '<span>강한 일치 근거 없음</span>'}</div>
     <div class="score-breakdown">
@@ -290,16 +316,16 @@ function openModal(matchIndex) {
       <div class="score-row"><span>결사명 보너스</span><strong>${(p.name || 0).toFixed(3)} / ${(m.maxes?.name || 0).toFixed(0)}</strong></div>
       <div class="score-row"><span>결사 점수 근접도</span><strong>${(p.score || 0).toFixed(3)} / ${(m.maxes?.score || 0).toFixed(0)}</strong></div>
       <div class="score-row"><span>순위 근접 보정</span><strong>${(p.rankTie || 0).toFixed(3)} / ${(m.maxes?.rankTie || 0).toFixed(0)}</strong></div>
-      <div class="score-row"><span>92+ 인원 수</span><strong>${(p.highCount || 0).toFixed(3)} / ${(m.maxes?.highCount || 0).toFixed(0)}</strong></div>
-      <div class="score-row"><span>92+ 레벨 분포</span><strong>${(p.level || 0).toFixed(3)} / ${(m.maxes?.level || 0).toFixed(0)}</strong></div>
-      <div class="score-row"><span>92+ 직업군 분포</span><strong>${(p.class || 0).toFixed(3)} / ${(m.maxes?.class || 0).toFixed(0)}</strong></div>
-      <div class="score-row"><span>92+ 레벨별 직업군 + 희귀도</span><strong>${(p.levelClass || 0).toFixed(3)} / ${(m.maxes?.levelClass || 0).toFixed(0)}</strong></div>
+      <div class="score-row"><span>기준 레벨 인원 수</span><strong>${(p.highCount || 0).toFixed(3)} / ${(m.maxes?.highCount || 0).toFixed(0)}</strong></div>
+      <div class="score-row"><span>기준 레벨 분포</span><strong>${(p.level || 0).toFixed(3)} / ${(m.maxes?.level || 0).toFixed(0)}</strong></div>
+      <div class="score-row"><span>기준 직업군 분포</span><strong>${(p.class || 0).toFixed(3)} / ${(m.maxes?.class || 0).toFixed(0)}</strong></div>
+      <div class="score-row"><span>기준 레벨별 직업군 + 희귀도</span><strong>${(p.levelClass || 0).toFixed(3)} / ${(m.maxes?.levelClass || 0).toFixed(0)}</strong></div>
       <div class="score-row"><span>토벌25+/26+ 인원</span><strong>${(p.huntThreshold || 0).toFixed(3)} / ${(m.maxes?.huntThreshold || 0).toFixed(0)}</strong></div>
       <div class="score-row"><span>직업군별 토벌25+/26+</span><strong>${(p.classHunt || 0).toFixed(3)} / ${(m.maxes?.classHunt || 0).toFixed(0)}</strong></div>
-      <div class="score-row"><span>92+ 직업군×토벌 지문</span><strong>${(p.levelClassHunt || 0).toFixed(3)} / ${(m.maxes?.levelClassHunt || 0).toFixed(0)}</strong></div>
+      <div class="score-row"><span>기준 직업군×토벌 지문</span><strong>${(p.levelClassHunt || 0).toFixed(3)} / ${(m.maxes?.levelClassHunt || 0).toFixed(0)}</strong></div>
       <div class="score-row"><span>결사장 레벨/직업 보정</span><strong>${(p.masterProfile || 0).toFixed(3)} / ${(m.maxes?.masterProfile || 0).toFixed(0)}</strong></div>
-      ${distHtml('92+ 레벨 분포', m.before.level_distribution, m.after.level_distribution)}
-      ${distHtml('92+ 직업군 분포', m.before.class_distribution, m.after.class_distribution)}
+      ${distHtml('기준 레벨 분포', m.before.level_distribution, m.after.level_distribution)}
+      ${distHtml('기준 직업군 분포', m.before.class_distribution, m.after.class_distribution)}
       ${distHtml('토벌25+/26+ 인원', m.before.hunt_threshold_distribution || {}, m.after.hunt_threshold_distribution || {})}
     </div>
     ${alternateHtml(m)}
@@ -320,6 +346,7 @@ function bindEvents() {
   $('compareBtn').addEventListener('click', compareSelected);
   $('searchInput').addEventListener('input', renderResults);
   $('moveFilter')?.addEventListener('change', renderResults);
+  $('serverFilter')?.addEventListener('change', renderResults);
   $('gradeFilter').addEventListener('change', renderResults);
   $('beforeLimitSelect').addEventListener('change', () => state.matches.length && compareSelected());
   $('afterLimitSelect').addEventListener('change', () => state.matches.length && compareSelected());
