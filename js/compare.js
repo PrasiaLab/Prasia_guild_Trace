@@ -11,6 +11,10 @@
     return str || fallback;
   }
 
+  function normText(value) {
+    return text(value, '').replace(/\s+/g, '').toLowerCase();
+  }
+
   function normalizeClass(value) {
     const raw = text(value, '미확인');
     return window.PRASIA_MAPPINGS?.classes?.[raw] || raw;
@@ -130,8 +134,10 @@
       ? memberDist.levelCls
       : normalizeLevelClassDist(item.level_class_distribution);
     const highLevelCount = toNumber(item.high_level_count, Object.values(levelDistribution).reduce((a, b) => a + toNumber(b), 0));
+    const masterMember = members.find(m => m.is_master) || members.find(m => m.nickname === master) || null;
     return {
       raw: item,
+      uid: `${text(item.server ?? item.world ?? item.world_name ?? serverCodeFromWorldId(item.world_id), '-')}/${text(item.guild_name ?? item.guild ?? item.guildName, '-')}/${master}/${index}`,
       server: text(item.server ?? item.world ?? item.world_name ?? serverCodeFromWorldId(item.world_id), '-'),
       serverName: serverName(item.server ?? item.world, item),
       guild_name: text(item.guild_name ?? item.guild ?? item.guildName, '-'),
@@ -145,8 +151,20 @@
       level_distribution: levelDistribution,
       class_distribution: classDistribution,
       level_class_distribution: levelClassDistribution,
+      master_level: masterMember ? masterMember.level : toNumber(item.master_level, 0),
+      master_class: masterMember ? masterMember.class : normalizeClass(item.master_class ?? item.guild_master_class ?? ''),
       members,
     };
+  }
+
+  function flattenLevelClass(obj) {
+    const out = {};
+    Object.entries(obj || {}).forEach(([level, classes]) => {
+      Object.entries(classes || {}).forEach(([cls, cnt]) => {
+        out[`${level}|${normalizeClass(cls)}`] = toNumber(cnt);
+      });
+    });
+    return out;
   }
 
   function distributionSimilarity(a, b) {
@@ -163,17 +181,19 @@
     return Math.max(0, 1 - diff / total);
   }
 
-  function levelClassSimilarity(a, b) {
-    const flatten = (obj) => {
-      const out = {};
-      Object.entries(obj || {}).forEach(([level, classes]) => {
-        Object.entries(classes || {}).forEach(([cls, cnt]) => {
-          out[`${level}|${normalizeClass(cls)}`] = toNumber(cnt);
-        });
-      });
-      return out;
-    };
-    return distributionSimilarity(flatten(a), flatten(b));
+  function weightedDistributionSimilarity(a, b, weights = {}) {
+    const keys = new Set([...Object.keys(a || {}), ...Object.keys(b || {})]);
+    let diff = 0;
+    let total = 0;
+    for (const key of keys) {
+      const w = toNumber(weights[key], 1);
+      const av = toNumber(a?.[key]);
+      const bv = toNumber(b?.[key]);
+      diff += Math.abs(av - bv) * w;
+      total += (av + bv) * w;
+    }
+    if (total <= 0) return 0;
+    return Math.max(0, 1 - diff / total);
   }
 
   function countSimilarity(a, b) {
@@ -190,34 +210,109 @@
   }
 
   function nameBonus(a, b) {
-    const aa = text(a, '').replace(/\s+/g, '').toLowerCase();
-    const bb = text(b, '').replace(/\s+/g, '').toLowerCase();
+    const aa = normText(a);
+    const bb = normText(b);
     if (!aa || !bb) return 0;
     if (aa === bb) return 1;
     if (aa.includes(bb) || bb.includes(aa)) return 0.5;
     return 0;
   }
 
-  function compareGuild(before, after) {
+  function sameServer(a, b) {
+    return String(a.serverName || '') === String(b.serverName || '');
+  }
+
+  function sameGuildIdentity(a, b) {
+    return sameServer(a, b) && normText(a.guild_name) === normText(b.guild_name) && normText(a.guild_master) === normText(b.guild_master);
+  }
+
+  function buildRarityContext(beforeList, afterList) {
+    const freq = {};
+    const totalGuilds = beforeList.length + afterList.length;
+    for (const guild of [...beforeList, ...afterList]) {
+      const flat = flattenLevelClass(guild.level_class_distribution);
+      for (const key of Object.keys(flat)) {
+        if (toNumber(flat[key]) > 0) freq[key] = (freq[key] || 0) + 1;
+      }
+    }
+    const levelClassWeights = {};
+    Object.entries(freq).forEach(([key, count]) => {
+      const level = toNumber(String(key).split('|')[0], HIGH_LEVEL_MIN);
+      const rarity = Math.log((totalGuilds + 1) / (count + 1)) + 1;
+      const levelBoost = 1 + Math.max(0, level - HIGH_LEVEL_MIN) * 0.18;
+      levelClassWeights[key] = Math.min(4.5, rarity * levelBoost);
+    });
+    return { levelClassWeights };
+  }
+
+  function tieBreakScore(before, after, parts) {
+    const rankDiff = Math.abs(toNumber(before.guild_rank) - toNumber(after.guild_rank));
+    const scoreClose = scoreSimilarity(before.guild_score, after.guild_score);
+    const memberClose = countSimilarity(before.guild_member_count, after.guild_member_count);
+    const guildLevelClose = countSimilarity(before.guild_level, after.guild_level);
+    const masterLevel = before.master_level && after.master_level && before.master_level === after.master_level ? 0.08 : 0;
+    const masterClass = before.master_class && after.master_class && before.master_class === after.master_class ? 0.08 : 0;
+    const maxLevel = before.max_level && after.max_level && before.max_level === after.max_level ? 0.05 : 0;
+    const exactName = normText(before.guild_name) && normText(before.guild_name) === normText(after.guild_name) ? 0.12 : 0;
+    const exactMaster = normText(before.guild_master) && normText(before.guild_master) === normText(after.guild_master) ? 0.18 : 0;
+    const noChange = sameGuildIdentity(before, after) ? 1.0 : 0;
+    return noChange + exactName + exactMaster + masterLevel + masterClass + maxLevel + scoreClose * 0.25 + memberClose * 0.12 + guildLevelClose * 0.08 + Math.max(0, 1 - rankDiff / 500) * 0.08;
+  }
+
+  function compareGuild(before, after, context = {}) {
+    const flatBefore = flattenLevelClass(before.level_class_distribution);
+    const flatAfter = flattenLevelClass(after.level_class_distribution);
+    const levelClassBase = distributionSimilarity(flatBefore, flatAfter);
+    const levelClassWeighted = weightedDistributionSimilarity(flatBefore, flatAfter, context.levelClassWeights);
+    const levelClassMixed = levelClassBase * 0.55 + levelClassWeighted * 0.45;
+
     const parts = {
-      master: text(before.guild_master, '') && text(before.guild_master, '') === text(after.guild_master, '') ? 22 : 0,
-      levelClass: levelClassSimilarity(before.level_class_distribution, after.level_class_distribution) * 28,
-      level: distributionSimilarity(before.level_distribution, after.level_distribution) * 17,
-      class: distributionSimilarity(before.class_distribution, after.class_distribution) * 15,
+      master: normText(before.guild_master) && normText(before.guild_master) === normText(after.guild_master) ? 22 : 0,
+      levelClass: levelClassMixed * 28,
+      level: distributionSimilarity(before.level_distribution, after.level_distribution) * 16,
+      class: distributionSimilarity(before.class_distribution, after.class_distribution) * 14,
       highCount: countSimilarity(before.high_level_count, after.high_level_count) * 8,
       score: scoreSimilarity(before.guild_score, after.guild_score) * 7,
       name: nameBonus(before.guild_name, after.guild_name) * 3,
+      masterProfile: 0,
+      rankTie: 0,
     };
-    const total = Object.values(parts).reduce((a, b) => a + b, 0);
+
+    if (parts.master > 0) {
+      if (before.master_level && after.master_level && before.master_level === after.master_level) parts.masterProfile += 1.0;
+      if (before.master_class && after.master_class && before.master_class === after.master_class) parts.masterProfile += 1.0;
+    }
+    const rankDiff = Math.abs(toNumber(before.guild_rank) - toNumber(after.guild_rank));
+    parts.rankTie = Math.max(0, 1 - rankDiff / 500) * 1;
+
+    let total = Object.values(parts).reduce((a, b) => a + b, 0);
+    total = Math.max(0, Math.min(100, total));
+    if (sameGuildIdentity(before, after) && total >= 96) total = 100;
+
+    const internalScore = total + tieBreakScore(before, after, parts) / 1000;
     const evidence = [];
     if (parts.master > 0) evidence.push('결사장 일치');
+    if (parts.masterProfile > 0) evidence.push('결사장 레벨/직업 보정');
     if (parts.name >= 3) evidence.push('결사명 일치');
     else if (parts.name > 0) evidence.push('결사명 일부 유사');
     if (parts.levelClass >= 19) evidence.push('레벨별 직업군 유사');
-    if (parts.level >= 12) evidence.push('레벨 분포 유사');
-    if (parts.class >= 10) evidence.push('직업군 분포 유사');
+    if (levelClassWeighted > levelClassBase + 0.03) evidence.push('희귀 레벨×직업 패턴 보정');
+    if (parts.level >= 11) evidence.push('레벨 분포 유사');
+    if (parts.class >= 9) evidence.push('직업군 분포 유사');
     if (parts.score >= 4.5) evidence.push('결사 점수 근접');
-    return { before, after, parts, total, evidence, judgement: judgement(total) };
+
+    return {
+      before,
+      after,
+      parts,
+      total,
+      internalScore,
+      evidence,
+      judgement: judgement(total),
+      sameServer: sameServer(before, after),
+      noChange: sameGuildIdentity(before, after),
+      alternates: [],
+    };
   }
 
   function judgement(score) {
@@ -227,6 +322,15 @@
     return { key: 'low', text: '낮음' };
   }
 
+  function candidateSort(a, b) {
+    return b.internalScore - a.internalScore
+      || b.total - a.total
+      || Number(b.noChange) - Number(a.noChange)
+      || Number(!b.sameServer) - Number(!a.sameServer)
+      || a.before.guild_rank - b.before.guild_rank
+      || a.after.guild_rank - b.after.guild_rank;
+  }
+
   function buildMatches(beforePayload, afterPayload, options = {}) {
     const beforeAll = asList(beforePayload).map(normalizeGuild).sort((a, b) => a.guild_rank - b.guild_rank);
     const afterAll = asList(afterPayload).map(normalizeGuild).sort((a, b) => a.guild_rank - b.guild_rank);
@@ -234,15 +338,57 @@
     const afterLimit = Number(options.afterLimit || 400);
     const beforeList = beforeLimit > 0 ? beforeAll.slice(0, beforeLimit) : beforeAll;
     const afterList = afterLimit > 0 ? afterAll.slice(0, afterLimit) : afterAll;
-    const matches = beforeList.map(before => {
-      let best = null;
-      for (const after of afterList) {
-        const match = compareGuild(before, after);
-        if (!best || match.total > best.total) best = match;
-      }
-      return best;
-    }).filter(Boolean).sort((a, b) => a.before.guild_rank - b.before.guild_rank);
-    return { matches, beforeCount: beforeAll.length, afterCount: afterAll.length, comparedBefore: beforeList.length, comparedAfter: afterList.length };
+    const context = buildRarityContext(beforeList, afterList);
+
+    const byBefore = new Map();
+    const allCandidates = [];
+    beforeList.forEach((before, beforeIndex) => {
+      const row = [];
+      afterList.forEach((after, afterIndex) => {
+        const match = compareGuild(before, after, context);
+        match.beforeIndex = beforeIndex;
+        match.afterIndex = afterIndex;
+        row.push(match);
+        allCandidates.push(match);
+      });
+      row.sort(candidateSort);
+      byBefore.set(beforeIndex, row);
+    });
+
+    allCandidates.sort(candidateSort);
+    const usedBefore = new Set();
+    const usedAfter = new Set();
+    const matches = [];
+
+    for (const candidate of allCandidates) {
+      if (usedBefore.has(candidate.beforeIndex) || usedAfter.has(candidate.afterIndex)) continue;
+      candidate.alternates = (byBefore.get(candidate.beforeIndex) || [])
+        .filter(alt => alt.afterIndex !== candidate.afterIndex)
+        .slice(0, 5)
+        .map(alt => ({
+          after: alt.after,
+          total: alt.total,
+          internalScore: alt.internalScore,
+          judgement: alt.judgement,
+          sameServer: alt.sameServer,
+          noChange: alt.noChange,
+          alreadyUsed: usedAfter.has(alt.afterIndex),
+        }));
+      matches.push(candidate);
+      usedBefore.add(candidate.beforeIndex);
+      usedAfter.add(candidate.afterIndex);
+      if (usedBefore.size >= beforeList.length) break;
+    }
+
+    matches.sort((a, b) => a.before.guild_rank - b.before.guild_rank);
+    return {
+      matches,
+      beforeCount: beforeAll.length,
+      afterCount: afterAll.length,
+      comparedBefore: beforeList.length,
+      comparedAfter: afterList.length,
+      matchingMode: 'one-to-one',
+    };
   }
 
   window.PrasiaCompare = { buildMatches, formatSnapshotId, serverName, normalizeGuild, toNumber };

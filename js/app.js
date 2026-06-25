@@ -88,7 +88,7 @@ async function compareSelected() {
       afterLimit: Number($('afterLimitSelect').value),
     });
     state.matches = result.matches;
-    setSummary(beforeSnap, afterSnap, `${result.comparedBefore.toLocaleString('ko-KR')} × ${result.comparedAfter.toLocaleString('ko-KR')}`, '완료');
+    setSummary(beforeSnap, afterSnap, `${result.comparedBefore.toLocaleString('ko-KR')} × ${result.comparedAfter.toLocaleString('ko-KR')} · 1:1 대표 매칭`, '완료');
     renderResults();
   } catch (err) {
     console.error(err);
@@ -167,7 +167,7 @@ function renderConcentrationNotice(rows) {
     const target = maxMatch ? `${escapeHtml(maxMatch.after.serverName)} / ${escapeHtml(maxMatch.after.guild_name)} / ${escapeHtml(maxMatch.after.guild_master)}` : '특정 이후 결사';
     setNotice(`
       <strong>해석 주의</strong>
-      <span>현재 ${maxCount.toLocaleString('ko-KR')}개 후보가 <b>${target}</b> 쪽으로 반복 매칭되고 있어요. 서버 이전이 아직 완료되지 않았거나 이후 후보 범위가 좁을 때 생길 수 있는 현상이라, <b>낮음/동일 서버 후보는 확정 추적 결과가 아니고 참고용</b>으로 보면 돼요.</span>
+      <span>현재 결과는 <b>1:1 대표 매칭</b>으로 정리되어 있어요. 그래도 낮은 점수 후보가 많다면 서버 이전이 아직 완료되지 않았거나 이후 후보 범위가 좁을 때 생길 수 있는 현상이라, <b>낮음/동일 서버 후보는 확정 추적 결과가 아니고 참고용</b>으로 보면 돼요.</span>
     `);
   } else {
     setNotice('');
@@ -239,6 +239,35 @@ function memberTable(title, guild) {
     </div>`;
 }
 
+
+function alternateHtml(match) {
+  const alts = Array.isArray(match.alternates) ? match.alternates : [];
+  if (!alts.length) return '';
+  const rows = alts.map(alt => {
+    const used = alt.alreadyUsed ? '<span class="alt-used">대표 매칭 제외</span>' : '<span class="alt-free">참고 후보</span>';
+    const move = String(match.before.serverName || '') === String(alt.after.serverName || '')
+      ? escapeHtml(alt.after.serverName || '-')
+      : `${escapeHtml(match.before.serverName || '-')} → ${escapeHtml(alt.after.serverName || '-')}`;
+    return `
+      <tr>
+        <td>${move}</td>
+        <td>${escapeHtml(alt.after.guild_name)}</td>
+        <td>${escapeHtml(alt.after.guild_master)}</td>
+        <td class="score">${alt.total.toFixed(3)}점</td>
+        <td>${used}</td>
+      </tr>`;
+  }).join('');
+  return `
+    <div class="alternate-box">
+      <h3>대표 매칭에서 제외된 참고 후보</h3>
+      <p>이미 더 강하게 1:1 매칭된 이후 결사는 대표 결과에서 제외하고, 상세 참고용으로만 표시합니다.</p>
+      <table class="member-table alt-table">
+        <thead><tr><th>서버</th><th>이후 결사</th><th>결사장</th><th>내부점수</th><th>상태</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+}
+
 function openModal(matchIndex) {
   const m = state.matches[Number(matchIndex)];
   if (!m) return;
@@ -248,22 +277,26 @@ function openModal(matchIndex) {
   $('modalContent').innerHTML = `
     <div class="detail-grid">
       <div class="detail-card"><span>유사도</span><strong>${m.total.toFixed(1)}점</strong></div>
-      <div class="detail-card"><span>판정</span><strong>${m.judgement.text}</strong></div>
+      <div class="detail-card"><span>내부 정렬점수</span><strong>${m.internalScore ? m.internalScore.toFixed(6) : m.total.toFixed(6)}</strong></div>
+      <div class="detail-card"><span>판정</span><strong>${displayJudgement(m).text}</strong></div>
       <div class="detail-card"><span>이전 점수</span><strong>${m.before.guild_score.toLocaleString('ko-KR')}</strong></div>
       <div class="detail-card"><span>이후 점수</span><strong>${m.after.guild_score.toLocaleString('ko-KR')}</strong></div>
     </div>
     <div class="evidence-list">${m.evidence.length ? m.evidence.map(e => `<span>${escapeHtml(e)}</span>`).join('') : '<span>강한 일치 근거 없음</span>'}</div>
     <div class="score-breakdown">
       <div class="score-row"><span>결사장</span><strong>${p.master.toFixed(1)} / 22</strong></div>
-      <div class="score-row"><span>레벨별 직업군</span><strong>${p.levelClass.toFixed(1)} / 28</strong></div>
-      <div class="score-row"><span>레벨 분포</span><strong>${p.level.toFixed(1)} / 17</strong></div>
+      <div class="score-row"><span>레벨별 직업군 + 희귀도</span><strong>${p.levelClass.toFixed(3)} / 28</strong></div>
+      <div class="score-row"><span>레벨 분포</span><strong>${p.level.toFixed(3)} / 16</strong></div>
       <div class="score-row"><span>직업군 분포</span><strong>${p.class.toFixed(1)} / 15</strong></div>
-      <div class="score-row"><span>91+ 인원 수</span><strong>${p.highCount.toFixed(1)} / 8</strong></div>
-      <div class="score-row"><span>결사 점수 근접도</span><strong>${p.score.toFixed(1)} / 7</strong></div>
-      <div class="score-row"><span>결사명 보너스</span><strong>${p.name.toFixed(1)} / 3</strong></div>
+      <div class="score-row"><span>91+ 인원 수</span><strong>${p.highCount.toFixed(3)} / 8</strong></div>
+      <div class="score-row"><span>결사 점수 근접도</span><strong>${p.score.toFixed(3)} / 7</strong></div>
+      <div class="score-row"><span>결사명 보너스</span><strong>${p.name.toFixed(3)} / 3</strong></div>
+      <div class="score-row"><span>결사장 레벨/직업 보정</span><strong>${(p.masterProfile || 0).toFixed(3)} / 2</strong></div>
+      <div class="score-row"><span>순위 근접 보정</span><strong>${(p.rankTie || 0).toFixed(3)} / 1</strong></div>
       ${distHtml('레벨 분포', m.before.level_distribution, m.after.level_distribution)}
       ${distHtml('직업군 분포', m.before.class_distribution, m.after.class_distribution)}
     </div>
+    ${alternateHtml(m)}
     <div class="member-columns">
       ${memberTable('이전 멤버', m.before)}
       ${memberTable('이후 멤버', m.after)}
