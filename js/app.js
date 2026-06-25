@@ -88,7 +88,7 @@ async function compareSelected() {
       afterLimit: Number($('afterLimitSelect').value),
     });
     state.matches = result.matches;
-    setSummary(beforeSnap, afterSnap, `${result.comparedBefore.toLocaleString('ko-KR')} × ${result.comparedAfter.toLocaleString('ko-KR')} · 1:1 대표 매칭`, '완료');
+    setSummary(beforeSnap, afterSnap, `${result.comparedBefore.toLocaleString('ko-KR')} × ${result.comparedAfter.toLocaleString('ko-KR')} · 1:1 대표 매칭 · 92+ 기준 · 토벌25/26 있으면 반영`, '완료');
     renderResults();
   } catch (err) {
     console.error(err);
@@ -167,7 +167,7 @@ function renderConcentrationNotice(rows) {
     const target = maxMatch ? `${escapeHtml(maxMatch.after.serverName)} / ${escapeHtml(maxMatch.after.guild_name)} / ${escapeHtml(maxMatch.after.guild_master)}` : '특정 이후 결사';
     setNotice(`
       <strong>해석 주의</strong>
-      <span>현재 결과는 <b>1:1 대표 매칭</b>으로 정리되어 있어요. 그래도 낮은 점수 후보가 많다면 서버 이전이 아직 완료되지 않았거나 이후 후보 범위가 좁을 때 생길 수 있는 현상이라, <b>낮음/동일 서버 후보는 확정 추적 결과가 아니고 참고용</b>으로 보면 돼요.</span>
+      <span>현재 결과는 <b>1:1 대표 매칭 · 92+ 기준 · 토벌25/26 있으면 반영</b>으로 정리되어 있어요. 그래도 낮은 점수 후보가 많다면 서버 이전이 아직 완료되지 않았거나 이후 후보 범위가 좁을 때 생길 수 있는 현상이라, <b>낮음/동일 서버 후보는 확정 추적 결과가 아니고 참고용</b>으로 보면 돼요.</span>
     `);
   } else {
     setNotice('');
@@ -227,13 +227,14 @@ function memberTable(title, guild) {
       <td>${escapeHtml(m.nickname)}</td>
       <td>${m.level}</td>
       <td>${escapeHtml(m.class)}</td>
+      <td>${m.hunt_level ? m.hunt_level : '-'}</td>
     </tr>
-  `).join('') : `<tr><td colspan="3" class="empty">91+ 멤버 원본 없음</td></tr>`;
+  `).join('') : `<tr><td colspan="4" class="empty">92+ 멤버 원본 없음</td></tr>`;
   return `
     <div class="member-box">
       <h3>${title}</h3>
       <table class="member-table">
-        <thead><tr><th>닉네임</th><th>레벨</th><th>직업군</th></tr></thead>
+        <thead><tr><th>닉네임</th><th>레벨</th><th>직업군</th><th>토벌</th></tr></thead>
         <tbody>${body}</tbody>
       </table>
     </div>`;
@@ -284,17 +285,22 @@ function openModal(matchIndex) {
     </div>
     <div class="evidence-list">${m.evidence.length ? m.evidence.map(e => `<span>${escapeHtml(e)}</span>`).join('') : '<span>강한 일치 근거 없음</span>'}</div>
     <div class="score-breakdown">
-      <div class="score-row"><span>결사장</span><strong>${p.master.toFixed(1)} / 22</strong></div>
-      <div class="score-row"><span>레벨별 직업군 + 희귀도</span><strong>${p.levelClass.toFixed(3)} / 28</strong></div>
-      <div class="score-row"><span>레벨 분포</span><strong>${p.level.toFixed(3)} / 16</strong></div>
-      <div class="score-row"><span>직업군 분포</span><strong>${p.class.toFixed(1)} / 15</strong></div>
-      <div class="score-row"><span>91+ 인원 수</span><strong>${p.highCount.toFixed(3)} / 8</strong></div>
-      <div class="score-row"><span>결사 점수 근접도</span><strong>${p.score.toFixed(3)} / 7</strong></div>
-      <div class="score-row"><span>결사명 보너스</span><strong>${p.name.toFixed(3)} / 3</strong></div>
-      <div class="score-row"><span>결사장 레벨/직업 보정</span><strong>${(p.masterProfile || 0).toFixed(3)} / 2</strong></div>
-      <div class="score-row"><span>순위 근접 보정</span><strong>${(p.rankTie || 0).toFixed(3)} / 1</strong></div>
-      ${distHtml('레벨 분포', m.before.level_distribution, m.after.level_distribution)}
-      ${distHtml('직업군 분포', m.before.class_distribution, m.after.class_distribution)}
+      <div class="score-row"><span>총점 산식</span><strong>${(m.rawScore || 0).toFixed(3)} / ${(m.maxScore || 0).toFixed(1)} → ${m.total.toFixed(1)}점</strong></div>
+      <div class="score-row"><span>결사장</span><strong>${(p.master || 0).toFixed(1)} / ${(m.maxes?.master || 0).toFixed(0)}</strong></div>
+      <div class="score-row"><span>결사명 보너스</span><strong>${(p.name || 0).toFixed(3)} / ${(m.maxes?.name || 0).toFixed(0)}</strong></div>
+      <div class="score-row"><span>결사 점수 근접도</span><strong>${(p.score || 0).toFixed(3)} / ${(m.maxes?.score || 0).toFixed(0)}</strong></div>
+      <div class="score-row"><span>순위 근접 보정</span><strong>${(p.rankTie || 0).toFixed(3)} / ${(m.maxes?.rankTie || 0).toFixed(0)}</strong></div>
+      <div class="score-row"><span>92+ 인원 수</span><strong>${(p.highCount || 0).toFixed(3)} / ${(m.maxes?.highCount || 0).toFixed(0)}</strong></div>
+      <div class="score-row"><span>92+ 레벨 분포</span><strong>${(p.level || 0).toFixed(3)} / ${(m.maxes?.level || 0).toFixed(0)}</strong></div>
+      <div class="score-row"><span>92+ 직업군 분포</span><strong>${(p.class || 0).toFixed(3)} / ${(m.maxes?.class || 0).toFixed(0)}</strong></div>
+      <div class="score-row"><span>92+ 레벨별 직업군 + 희귀도</span><strong>${(p.levelClass || 0).toFixed(3)} / ${(m.maxes?.levelClass || 0).toFixed(0)}</strong></div>
+      <div class="score-row"><span>토벌25+/26+ 인원</span><strong>${(p.huntThreshold || 0).toFixed(3)} / ${(m.maxes?.huntThreshold || 0).toFixed(0)}</strong></div>
+      <div class="score-row"><span>직업군별 토벌25+/26+</span><strong>${(p.classHunt || 0).toFixed(3)} / ${(m.maxes?.classHunt || 0).toFixed(0)}</strong></div>
+      <div class="score-row"><span>92+ 직업군×토벌 지문</span><strong>${(p.levelClassHunt || 0).toFixed(3)} / ${(m.maxes?.levelClassHunt || 0).toFixed(0)}</strong></div>
+      <div class="score-row"><span>결사장 레벨/직업 보정</span><strong>${(p.masterProfile || 0).toFixed(3)} / ${(m.maxes?.masterProfile || 0).toFixed(0)}</strong></div>
+      ${distHtml('92+ 레벨 분포', m.before.level_distribution, m.after.level_distribution)}
+      ${distHtml('92+ 직업군 분포', m.before.class_distribution, m.after.class_distribution)}
+      ${distHtml('토벌25+/26+ 인원', m.before.hunt_threshold_distribution || {}, m.after.hunt_threshold_distribution || {})}
     </div>
     ${alternateHtml(m)}
     <div class="member-columns">
