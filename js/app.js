@@ -88,7 +88,7 @@ async function compareSelected() {
       afterLimit: Number($('afterLimitSelect').value),
     });
     state.matches = result.matches;
-    setSummary(beforeSnap, afterSnap, `${result.comparedBefore.toLocaleString('ko-KR')} × ${result.comparedAfter.toLocaleString('ko-KR')} · 1:1 대표 매칭 · Trace v1 · 토벌25/26 있으면 반영`, '완료');
+    setSummary(beforeSnap, afterSnap, `${result.comparedBefore.toLocaleString('ko-KR')} × ${result.comparedAfter.toLocaleString('ko-KR')} · 1:1 대표 매칭 · Trace v2 · 토벌25/26 있으면 반영`, '완료');
     updateServerFilter(result.matches);
     renderResults();
   } catch (err) {
@@ -189,7 +189,7 @@ function renderConcentrationNotice(rows) {
     const target = maxMatch ? `${escapeHtml(maxMatch.after.serverName)} / ${escapeHtml(maxMatch.after.guild_name)} / ${escapeHtml(maxMatch.after.guild_master)}` : '특정 이후 결사';
     setNotice(`
       <strong>해석 주의</strong>
-      <span>현재 결과는 <b>1:1 대표 매칭 · Trace v1(92+ 우선, 92+ 없으면 실제 상위 3레벨) · 토벌25/26 있으면 반영</b>으로 정리되어 있어요. 그래도 낮은 점수 후보가 많다면 서버 이전이 아직 완료되지 않았거나 이후 후보 범위가 좁을 때 생길 수 있는 현상이라, <b>낮음/동일 서버 후보는 확정 추적 결과가 아니고 참고용</b>으로 보면 돼요.</span>
+      <span>현재 결과는 <b>1:1 대표 매칭 · Trace v2(92+ 3명 이상 유지, 1~2명은 91 보조, 0명은 실제 상위 3레벨) · 토벌25/26 있으면 반영</b>으로 정리되어 있어요. 그래도 낮은 점수 후보가 많다면 서버 이전이 아직 완료되지 않았거나 이후 후보 범위가 좁을 때 생길 수 있는 현상이라, <b>낮음/동일 서버 후보는 확정 추적 결과가 아니고 참고용</b>으로 보면 돼요.</span>
     `);
   } else {
     setNotice('');

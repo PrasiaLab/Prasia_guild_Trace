@@ -1,7 +1,8 @@
 (function () {
-  // Trace v1
-  // 기본: 92레벨 이상 지문 유지
-  // 예외: 92+ 지문이 없으면 해당 결사의 실제 존재 상위 3개 레벨 지문 사용
+  // Trace v2
+  // 92+ 3명 이상: 92+ 유지
+  // 92+ 1~2명: 91레벨 보조 포함
+  // 92+ 0명: 실제 존재 상위 3개 레벨 사용
   const TRACE_CONFIG = {
     highLevelMin: 92,
     huntThresholds: [26, 25],
@@ -209,17 +210,30 @@
   function parseMatchLevels(item, rawMembers) {
     if (Array.isArray(item.match_levels) && item.match_levels.length) {
       const levels = item.match_levels.map(v => toNumber(v, NaN)).filter(Number.isFinite).sort((a, b) => b - a);
-      if (levels.length) return { rule: item.match_rule || (levels.some(lv => lv >= TRACE_CONFIG.highLevelMin) ? '92plus' : 'top3_existing_levels'), levels };
+      if (levels.length) return { rule: item.match_rule || '92plus', levels };
     }
+
     const levels = availableLevels(item, rawMembers);
-    if (levels.some(lv => lv >= TRACE_CONFIG.highLevelMin)) {
+    const highCountFromDist = Object.entries(item.level_counts || {})
+      .filter(([level]) => /^\d+$/.test(String(level)) && Number(level) >= TRACE_CONFIG.highLevelMin)
+      .reduce((sum, [, count]) => sum + toNumber(count, 0), 0);
+    const highCount = highCountFromDist > 0
+      ? highCountFromDist
+      : rawMembers.filter(m => m.level >= TRACE_CONFIG.highLevelMin).length;
+    const hasHigh = levels.some(lv => lv >= TRACE_CONFIG.highLevelMin);
+
+    if (hasHigh && highCount >= 3) {
       return { rule: '92plus', levels: levels.filter(lv => lv >= TRACE_CONFIG.highLevelMin) };
+    }
+    if (hasHigh) {
+      return { rule: '92plus_with_91_support', levels: levels.filter(lv => lv >= TRACE_CONFIG.highLevelMin - 1) };
     }
     return { rule: levels.length ? 'top3_existing_levels' : 'no_level_data', levels: levels.slice(0, TRACE_CONFIG.topLevelFallbackCount) };
   }
 
   function traceLabel(guild) {
     if (guild.match_rule === '92plus') return '92+';
+    if (guild.match_rule === '92plus_with_91_support') return '92+·91 보조';
     if (guild.match_rule === 'top3_existing_levels') return `상위 ${guild.match_levels.join('/')}`;
     return '자료 없음';
   }
@@ -227,9 +241,12 @@
   function normalizeGuild(item, index = 0) {
     const master = text(item.guild_master ?? item.guildMaster ?? item.master ?? item.master_name, '-');
     const rawMembers = normalizeRawMembers(item.members, master);
+    const storedMatchMembers = normalizeRawMembers(item.match_members, master);
     const match = parseMatchLevels(item, rawMembers);
     const matchLevelSet = new Set(match.levels.map(Number));
-    const members = rawMembers.filter(m => matchLevelSet.has(Number(m.level)));
+    const members = storedMatchMembers.length
+      ? storedMatchMembers
+      : rawMembers.filter(m => matchLevelSet.has(Number(m.level)));
     const memberDist = buildDistFromMembers(members);
 
     const prebuiltLevel = item.match_level_distribution ?? null;
@@ -580,8 +597,8 @@
       matchingMode: 'one-to-one',
       highLevelMin: TRACE_CONFIG.highLevelMin,
       huntThresholds: TRACE_CONFIG.huntThresholds,
-      traceVersion: 'v1',
-      traceRule: '92+ 유지, 92+ 없을 때만 실제 존재 상위 3개 레벨',
+      traceVersion: 'v2',
+      traceRule: '92+ 3명 이상 유지, 1~2명은 91 보조, 0명은 실제 상위 3개 레벨',
     };
   }
 
