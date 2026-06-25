@@ -1,94 +1,30 @@
 {
   "snapshot_id": "2026-06-25_1150",
-  "snapshot_folder": "2026-06-25_1150",
-  "snapshot_type": "guild_transfer_trace_baseline_v1",
-  "description": "0625_0611 원본 데이터 기준 결사 이전 추적용 1차 스냅샷. 최근 스냅샷 양식과 맞추고 match_* 지문을 추가함.",
-  "source_files": [
-    "Who_are_you.json",
-    "Who_are_you_class.json",
-    "Who_are_you_guild.json",
-    "Who_are_you_guild_score.json"
+  "label": "2026-06-25 11:50",
+  "created_at": "2026-06-25 11:50:00",
+  "high_level_min": 92,
+  "hunt_thresholds": [
+    26,
+    25
   ],
-  "source_metadata": {
-    "overall": {
-      "data_type": "overall_ranking",
-      "extracted_at": "2026-06-25T06:11:49+09:00",
-      "extracted_at_text": "2026-06-25 06:11:49",
-      "timezone": "Asia/Seoul",
-      "world_count": 50,
-      "item_count": 5000,
-      "failure_count": 0,
-      "version": 2
-    },
-    "class": {
-      "data_type": "class_ranking",
-      "extracted_at": "2026-06-25T06:11:49+09:00",
-      "extracted_at_text": "2026-06-25 06:11:49",
-      "timezone": "Asia/Seoul",
-      "world_count": 50,
-      "item_count": 34088,
-      "failure_count": 0,
-      "version": 2,
-      "class_count": 7,
-      "request_count": 350
-    },
-    "guild": {
-      "data_type": "guild_ranking",
-      "extracted_at": "2026-06-25T06:11:49+09:00",
-      "extracted_at_text": "2026-06-25 06:11:49",
-      "timezone": "Asia/Seoul",
-      "world_count": 50,
-      "item_count": 2500,
-      "failure_count": 0,
-      "version": 2
-    },
-    "guild_score": {
-      "data_type": "guild_score_ranking",
-      "extracted_at": "2026-06-25T06:11:49+09:00",
-      "extracted_at_text": "2026-06-25 06:11:49",
-      "timezone": "Asia/Seoul",
-      "world_count": 50,
-      "item_count": 3587,
-      "version": 1,
-      "comparison_basis": "previous_successful_file"
-    }
-  },
-  "output_files": [
-    "guilds.json",
-    "snapshot_info.json"
-  ],
-  "counts": {
-    "guild_count": 4189,
-    "official_guild_ranking_count": 2500,
-    "guild_score_count": 3587,
-    "overall_character_count": 5000,
-    "class_character_count": 34088,
-    "source_failure_count": 0
-  },
-  "matching_notes": {
-    "primary_key": "world + guild_name",
-    "member_basis": "전체 랭킹과 클래스별 랭킹에서 확인되는 캐릭터를 world+name 기준으로 중복 제거",
-    "fingerprint_basis": [
-      "guild_level",
-      "score",
-      "observed_ranked_member_count",
-      "grade_counts",
-      "level_counts",
-      "class_counts",
-      "level_class_hunt_distribution_92plus"
-    ],
-    "caution": "랭킹에 노출된 캐릭터 기준 스냅샷이므로 실제 결사 전체 인원과 다를 수 있음"
-  },
-  "schema_fixed": true,
-  "guilds_json_schema": "compatible_with_2026-06-25_2252_snapshot",
-  "match_version": "trace_v1",
-  "match_rule_summary": "기본 92+ 유지, 92+가 없는 결사만 실제 존재 상위 3개 레벨 기준으로 보조 지문 생성",
+  "trace_version": "v2",
+  "match_version": "trace_v2",
+  "guild_rank_source": "data/Who_are_you_guild_score.json",
+  "match_rule_summary": "92+ 3명 이상은 92+ 유지, 92+ 1~2명은 91레벨 보조 포함, 92+ 0명은 실제 존재 상위 3개 레벨로 match_* 지문 생성.",
   "match_stats": {
-    "92plus": 55,
-    "with_match_member_data": 3587,
-    "top3_existing_levels": 3532,
-    "no_level_data": 602,
-    "without_match_member_data": 602
+    "92plus": 34,
+    "92plus_with_91_support": 21,
+    "top3_existing_levels": 3532
   },
-  "web_filter_note": "웹페이지 기본값은 전체 서버, 선택 시 도착/변동 서버별 결과 필터를 추가하는 방향 권장. 실제 HTML/JS 수정에는 현재 웹 파일(index/app/style)이 필요함."
+  "match_member_guild_count": 3587,
+  "guild_count": 3587,
+  "member_sources": [
+    "data/Who_are_you.json",
+    "data/Who_are_you_class.json"
+  ],
+  "hunt_note": "member.grade 또는 hunt_level 계열 필드를 토벌 단계로 병합합니다.",
+  "source_archive": "0625_0611.zip",
+  "source_extracted_at": "2026-06-25T06:11:49+09:00",
+  "source_extracted_at_text": "2026-06-25 06:11:49",
+  "member_match_key": "server + guild_name (동명이 결사 서버 오배정 방지)"
 }
