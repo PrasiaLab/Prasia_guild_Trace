@@ -297,12 +297,30 @@ def level_count_distribution(guild: Dict[str, Any], levels: Iterable[int]) -> Di
 
 
 def select_match_levels(guild: Dict[str, Any], members: List[Dict[str, Any]]) -> tuple[str, List[int]]:
+    """Trace v2 기준 레벨 선택.
+
+    - 92+ 관측 인원이 3명 이상: 기존 92+ 지문
+    - 92+ 관측 인원이 1~2명: 91레벨을 보조 지문으로 포함
+    - 92+ 관측 인원이 0명: 실제 존재하는 상위 3개 레벨
+    """
     levels = existing_levels(guild, members)
     if not levels:
         return "no_level_data", []
+
     high_levels = [level for level in levels if level >= HIGH_LEVEL_MIN]
-    if high_levels:
+    high_count = sum(
+        to_int(count, 0)
+        for level, count in (guild.get("level_counts") or {}).items()
+        if str(level).isdigit() and int(level) >= HIGH_LEVEL_MIN
+    )
+    if high_count <= 0:
+        high_count = sum(1 for member in members if to_int(member.get("level"), 0) >= HIGH_LEVEL_MIN)
+
+    if high_levels and high_count >= 3:
         return "92plus", high_levels
+    if high_levels:
+        support_levels = [level for level in levels if level >= HIGH_LEVEL_MIN - 1]
+        return "92plus_with_91_support", support_levels
     return "top3_existing_levels", levels[:3]
 
 
@@ -348,7 +366,7 @@ def build_profile(guild: Dict[str, Any]) -> Dict[str, Any]:
         "level_class_hunt_distribution_92plus": base_dist["level_class_hunt_distribution"],
         "hunt_member_count": base_dist["hunt_member_count"],
         "has_hunt_data": base_dist["hunt_member_count"] > 0,
-        "match_version": "trace_v1",
+        "match_version": "trace_v2",
         "match_rule": match_rule,
         "match_high_level_min": HIGH_LEVEL_MIN,
         "match_levels": match_levels,
@@ -360,7 +378,9 @@ def build_profile(guild: Dict[str, Any]) -> Dict[str, Any]:
         "match_hunt_distribution": match_dist["hunt_distribution"],
         "match_class_hunt_distribution": match_dist["class_hunt_distribution"],
         "match_level_class_hunt_distribution": match_dist["level_class_hunt_distribution"],
-        "members": match_members,
+        "match_members": match_members,
+        # 전체 관측 멤버는 보존하고, 비교에는 match_members만 사용합니다.
+        "members": raw_members,
     }
 
 
@@ -396,7 +416,7 @@ def update_indexes(snapshot_id: str, created_at: str) -> None:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="랭킹 데이터를 시간별 스냅샷으로 저장합니다. 92+ 및 토벌25/26 지문을 포함합니다.")
+    parser = argparse.ArgumentParser(description="랭킹 데이터를 시간별 스냅샷으로 저장합니다. Trace v2 기준 지문을 포함합니다.")
     parser.add_argument("--snapshot-id", default=now_snapshot_id(), help="예: 2026-06-25_1200")
     parser.add_argument("--guild-source", default="data/Who_are_you_guild_score.json")
     parser.add_argument("--member-source", action="append", default=[])
@@ -427,9 +447,10 @@ def main() -> None:
             "created_at": created_at,
             "high_level_min": HIGH_LEVEL_MIN,
             "hunt_thresholds": HUNT_THRESHOLDS,
-            "trace_version": "v1",
-            "match_version": "trace_v1",
-            "match_rule_summary": "기본 92+ 유지. 92+ 관측 레벨이 없으면 해당 결사의 실제 존재 상위 3개 레벨로 match_* 지문 생성.",
+            "trace_version": "v2",
+            "match_version": "trace_v2",
+            "guild_rank_source": args.guild_source,
+            "match_rule_summary": "92+ 3명 이상은 92+ 유지, 92+ 1~2명은 91레벨 보조 포함, 92+ 0명은 실제 존재 상위 3개 레벨로 match_* 지문 생성.",
             "match_stats": dict(match_stats),
             "match_member_guild_count": match_member_data_count,
             "guild_count": len(guilds),
