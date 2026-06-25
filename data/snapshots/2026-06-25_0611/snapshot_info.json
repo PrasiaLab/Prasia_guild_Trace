@@ -1,0 +1,21 @@
+{
+  "snapshot_id": "2026-06-25_0611",
+  "label": "2026-06-25 06:11",
+  "created_at": "2026-06-25 06:11:49",
+  "extracted_at": "2026-06-25T06:11:49+09:00",
+  "timezone": "Asia/Seoul",
+  "high_level_min": 92,
+  "hunt_thresholds": [
+    26,
+    25
+  ],
+  "guild_count": 3587,
+  "member_count": 21477,
+  "source_files": [
+    "Who_are_you.json",
+    "Who_are_you_class.json",
+    "Who_are_you_guild.json",
+    "Who_are_you_guild_score.json"
+  ],
+  "note": "12시 이전 원천 JSON에서 변환한 92+ 및 토벌25/26 대응 스냅샷입니다."
+}
