@@ -168,3 +168,40 @@ select:focus, input:focus { border-color: #79aef7; box-shadow: 0 0 0 3px rgba(12
 .result-notice strong { color: var(--gold); white-space: nowrap; }
 .result-notice span { color: var(--muted); }
 .result-notice b { color: var(--text); }
+
+.alternate-box {
+  margin-top: 16px;
+  padding: 14px;
+  border: 1px solid rgba(124, 162, 205, .22);
+  border-radius: 14px;
+  background: rgba(11, 18, 30, .35);
+}
+.alternate-box h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  color: #f3f7ff;
+}
+.alternate-box p {
+  margin: 0 0 10px;
+  color: #9fb3ca;
+  font-size: 13px;
+}
+.alt-table td { font-size: 13px; }
+.alt-used, .alt-free {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 9px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+}
+.alt-used {
+  color: #ffd1d1;
+  background: rgba(161, 69, 75, .22);
+  border: 1px solid rgba(255, 128, 128, .28);
+}
+.alt-free {
+  color: #cfe2ff;
+  background: rgba(91, 132, 187, .22);
+  border: 1px solid rgba(145, 187, 247, .25);
+}
