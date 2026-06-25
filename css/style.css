@@ -205,3 +205,4 @@ select:focus, input:focus { border-color: #79aef7; box-shadow: 0 0 0 3px rgba(12
   background: rgba(91, 132, 187, .22);
   border: 1px solid rgba(145, 187, 247, .25);
 }
+.member-table td:nth-child(4), .member-table th:nth-child(4) { text-align: center; }
