@@ -1,0 +1,62 @@
+name: Update Snapshot
+
+on:
+  workflow_dispatch:
+    inputs:
+      snapshot_id:
+        description: "스냅샷 ID (예: 2026-06-25_1200, 비우면 현재 KST 시간)"
+        required: false
+        default: ""
+      use_existing:
+        description: "원천 랭킹 API 추출을 건너뛰고 기존 JSON 사용 (true/false)"
+        required: true
+        default: "false"
+  schedule:
+    - cron: "0 */3 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  update-snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Run snapshot updater
+        env:
+          PRASIA_API_TOKEN: ${{ secrets.PRASIA_API_TOKEN }}
+        run: |
+          SNAPSHOT_ID="${{ github.event.inputs.snapshot_id }}"
+          USE_EXISTING="${{ github.event.inputs.use_existing }}"
+          if [ "$GITHUB_EVENT_NAME" = "schedule" ]; then
+            USE_EXISTING="false"
+          fi
+          CMD="python scripts/run_snapshot.py"
+          if [ -n "$SNAPSHOT_ID" ]; then
+            CMD="$CMD --snapshot-id $SNAPSHOT_ID"
+          fi
+          if [ "$USE_EXISTING" = "true" ]; then
+            CMD="$CMD --use-existing"
+          fi
+          echo "Run CMD=$CMD"
+          $CMD
+
+      - name: Commit updated snapshot data
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add data
+          git commit -m "Update guild snapshot data" || echo "No changes to commit"
+          git push
