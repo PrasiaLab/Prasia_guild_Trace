@@ -144,3 +144,27 @@ select:focus, input:focus { border-color: #79aef7; box-shadow: 0 0 0 3px rgba(12
 [hidden] {
   display: none !important;
 }
+
+/* 결과 테이블 개편: 서버 변동을 한 칸에 표시 */
+.tools select { width: 150px; }
+.trace-table { min-width: 1080px; }
+.server-move { display: inline-flex; align-items: center; justify-content: center; gap: 7px; white-space: nowrap; }
+.server-move b { color: var(--gold); font-size: 18px; line-height: 1; }
+.server-move span:last-child { color: var(--green); font-weight: 900; }
+.server-same { color: var(--blue); font-weight: 850; white-space: nowrap; }
+.badge.no-change { background: rgba(159,199,255,.14); color: var(--blue); border: 1px solid rgba(159,199,255,.38); }
+.badge.same-server { background: rgba(159,199,255,.10); color: #b7c8df; border: 1px solid rgba(159,199,255,.26); }
+.result-notice {
+  margin: 0 0 12px;
+  padding: 13px 15px;
+  border-radius: 14px;
+  background: rgba(255,217,102,.09);
+  border: 1px solid rgba(255,217,102,.28);
+  color: #dce8fb;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.result-notice strong { color: var(--gold); white-space: nowrap; }
+.result-notice span { color: var(--muted); }
+.result-notice b { color: var(--text); }
