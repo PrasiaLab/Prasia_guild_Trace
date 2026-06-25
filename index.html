@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>추적 연구소</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <aside class="sidebar" aria-label="메뉴">
+    <div class="brand">
+      <div class="brand-mark">P</div>
+      <div>
+        <div class="brand-title">Prasia Lab</div>
+        <div class="brand-sub">Guild Trace</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="#trace" class="nav-link active">추적 연구소</a>
+      <a href="#snapshot" class="nav-link">스냅샷 비교</a>
+      <a href="#result" class="nav-link">결사 유사 후보</a>
+      <a href="#guide" class="nav-link">판정 기준</a>
+    </nav>
+  </aside>
+
+  <main class="main" id="trace">
+    <header class="hero panel">
+      <div>
+        <p class="eyebrow">Prasia Guild Trace</p>
+        <h1>추적 연구소</h1>
+        <p class="hero-desc">저장된 날짜/시간별 스냅샷을 선택해 웹에서 즉시 결사 유사성을 비교합니다.</p>
+      </div>
+      <div class="status-card">
+        <span class="status-label">저장된 스냅샷</span>
+        <strong id="snapshotCount">-</strong>
+      </div>
+    </header>
+
+    <section class="panel snapshot-panel" id="snapshot">
+      <div class="section-head">
+        <div>
+          <h2>스냅샷 선택</h2>
+          <p>이전 데이터와 이후 데이터를 선택하면 브라우저에서 바로 비교합니다.</p>
+        </div>
+        <button class="ghost-btn" id="reloadBtn" type="button">목록 새로고침</button>
+      </div>
+
+      <div class="snapshot-grid">
+        <label class="field">
+          <span>이전 데이터</span>
+          <select id="beforeSelect"></select>
+        </label>
+        <label class="field">
+          <span>이후 데이터</span>
+          <select id="afterSelect"></select>
+        </label>
+        <label class="field small-field">
+          <span>이전 결사 범위</span>
+          <select id="beforeLimitSelect">
+            <option value="100">상위 100개</option>
+            <option value="200" selected>상위 200개</option>
+            <option value="300">상위 300개</option>
+            <option value="500">상위 500개</option>
+            <option value="0">전체</option>
+          </select>
+        </label>
+        <label class="field small-field">
+          <span>이후 후보 범위</span>
+          <select id="afterLimitSelect">
+            <option value="200">상위 200개</option>
+            <option value="400" selected>상위 400개</option>
+            <option value="700">상위 700개</option>
+            <option value="0">전체</option>
+          </select>
+        </label>
+        <button class="primary-btn" id="compareBtn" type="button">비교하기</button>
+      </div>
+
+      <div class="compare-summary" id="compareSummary">
+        <div><span>이전 기준</span><strong>-</strong></div>
+        <div><span>이후 기준</span><strong>-</strong></div>
+        <div><span>비교 대상</span><strong>-</strong></div>
+        <div><span>상태</span><strong>대기</strong></div>
+      </div>
+    </section>
+
+    <section class="panel result-panel" id="result">
+      <div class="section-head result-head">
+        <div>
+          <h2>결사 유사 후보</h2>
+          <p>이전 결사 순위 기준으로 정렬됩니다.</p>
+        </div>
+        <div class="tools">
+          <input id="searchInput" type="search" placeholder="결사명 / 결사장 / 서버 검색" />
+          <select id="gradeFilter">
+            <option value="all">전체</option>
+            <option value="veryHigh">매우 유력 이상</option>
+            <option value="high">유력 이상</option>
+            <option value="possible">가능성 있음 이상</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>이전 순위</th>
+              <th>이전 서버</th>
+              <th>이전 결사</th>
+              <th>이전 결사장</th>
+              <th>이후 서버</th>
+              <th>이후 결사</th>
+              <th>이후 결사장</th>
+              <th>유사도</th>
+              <th>판정</th>
+              <th>보기</th>
+            </tr>
+          </thead>
+          <tbody id="resultBody">
+            <tr><td colspan="10" class="empty">스냅샷을 선택한 뒤 비교하기를 눌러주세요.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel guide-panel" id="guide">
+      <h2>판정 기준</h2>
+      <div class="guide-grid">
+        <div><strong>핵심 기준</strong><span>결사장, 91+ 레벨/직업군 분포, 결사 점수 근접도</span></div>
+        <div><strong>결사명</strong><span>필수 조건이 아닌 보너스 기준</span></div>
+        <div><strong>일반 멤버 닉네임</strong><span>유사도 점수에는 미반영, 상세 참고용으로만 표시</span></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-backdrop" id="modalBackdrop" hidden>
+    <article class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="close-btn" id="modalClose" type="button" aria-label="닫기">×</button>
+      <header class="modal-header">
+        <p class="eyebrow">상세 분석</p>
+        <h2 id="modalTitle">-</h2>
+        <div id="modalSub" class="modal-sub"></div>
+      </header>
+      <div id="modalContent" class="modal-content"></div>
+    </article>
+  </div>
+
+  <script src="js/mappings.js"></script>
+  <script src="js/compare.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
