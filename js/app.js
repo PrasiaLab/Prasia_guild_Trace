@@ -106,18 +106,88 @@ function setSummary(beforeSnap, afterSnap, target, status) {
 }
 
 function setEmpty(message) {
-  $('resultBody').innerHTML = `<tr><td colspan="10" class="empty">${message}</td></tr>`;
+  $('resultBody').innerHTML = `<tr><td colspan="9" class="empty">${message}</td></tr>`;
+  setNotice('');
+}
+
+function sameServer(m) {
+  return String(m.before.serverName || '') === String(m.after.serverName || '');
+}
+
+function sameGuildIdentity(m) {
+  return sameServer(m)
+    && String(m.before.guild_name || '') === String(m.after.guild_name || '')
+    && String(m.before.guild_master || '') === String(m.after.guild_master || '');
+}
+
+function serverMoveHtml(m) {
+  const before = escapeHtml(m.before.serverName || '-');
+  const after = escapeHtml(m.after.serverName || '-');
+  if (sameServer(m)) return `<span class="server-same">${before}</span>`;
+  return `<span class="server-move"><span>${before}</span><b>→</b><span>${after}</span></span>`;
+}
+
+function displayJudgement(m) {
+  if (sameGuildIdentity(m)) return { key: 'no-change', text: '변동없음' };
+  if (sameServer(m)) return { key: 'same-server', text: '동일 서버' };
+  return m.judgement;
+}
+
+function setNotice(message) {
+  const notice = $('resultNotice');
+  if (!notice) return;
+  if (!message) {
+    notice.hidden = true;
+    notice.innerHTML = '';
+    return;
+  }
+  notice.hidden = false;
+  notice.innerHTML = message;
+}
+
+function renderConcentrationNotice(rows) {
+  if (!rows.length) return setNotice('');
+  const counts = new Map();
+  for (const m of rows) {
+    const key = `${m.after.serverName}|${m.after.guild_name}|${m.after.guild_master}`;
+    counts.set(key, (counts.get(key) || 0) + 1);
+  }
+  let maxCount = 0;
+  let maxMatch = null;
+  for (const m of rows) {
+    const key = `${m.after.serverName}|${m.after.guild_name}|${m.after.guild_master}`;
+    const count = counts.get(key) || 0;
+    if (count > maxCount) {
+      maxCount = count;
+      maxMatch = m;
+    }
+  }
+  const lowCount = rows.filter(m => m.total < 55).length;
+  if (maxCount >= 5 || lowCount >= Math.ceil(rows.length * 0.45)) {
+    const target = maxMatch ? `${escapeHtml(maxMatch.after.serverName)} / ${escapeHtml(maxMatch.after.guild_name)} / ${escapeHtml(maxMatch.after.guild_master)}` : '특정 이후 결사';
+    setNotice(`
+      <strong>해석 주의</strong>
+      <span>현재 ${maxCount.toLocaleString('ko-KR')}개 후보가 <b>${target}</b> 쪽으로 반복 매칭되고 있어요. 서버 이전이 아직 완료되지 않았거나 이후 후보 범위가 좁을 때 생길 수 있는 현상이라, <b>낮음/동일 서버 후보는 확정 추적 결과가 아니고 참고용</b>으로 보면 돼요.</span>
+    `);
+  } else {
+    setNotice('');
+  }
 }
 
 function filterMatches() {
   const q = $('searchInput').value.trim().toLowerCase();
+  const move = $('moveFilter')?.value || 'all';
   const grade = $('gradeFilter').value;
   return state.matches.filter(m => {
     const hay = [m.before.guild_name, m.before.guild_master, m.before.serverName, m.after.guild_name, m.after.guild_master, m.after.serverName].join(' ').toLowerCase();
     if (q && !hay.includes(q)) return false;
+    if (move === 'moved' && sameServer(m)) return false;
+    if (move === 'same' && !sameServer(m)) return false;
+    if (move === 'noChange' && !sameGuildIdentity(m)) return false;
     if (grade === 'veryHigh') return m.total >= 85;
     if (grade === 'high') return m.total >= 70;
     if (grade === 'possible') return m.total >= 55;
+    if (grade === 'lowOnly') return m.total < 55;
     return true;
   });
 }
@@ -125,20 +195,22 @@ function filterMatches() {
 function renderResults() {
   const rows = filterMatches();
   if (!rows.length) return setEmpty('조건에 맞는 후보가 없습니다.');
-  $('resultBody').innerHTML = rows.map((m, idx) => `
-    <tr>
-      <td>${m.before.guild_rank}</td>
-      <td class="server-name">${escapeHtml(m.before.serverName)}</td>
-      <td class="guild-name">${escapeHtml(m.before.guild_name)}</td>
-      <td>${escapeHtml(m.before.guild_master)}</td>
-      <td class="server-name">${escapeHtml(m.after.serverName)}</td>
-      <td class="guild-name">${escapeHtml(m.after.guild_name)}</td>
-      <td>${escapeHtml(m.after.guild_master)}</td>
-      <td class="score">${m.total.toFixed(1)}점</td>
-      <td><span class="badge ${m.judgement.key}">${m.judgement.text}</span></td>
-      <td><button class="view-btn" type="button" data-index="${state.matches.indexOf(m)}">보기</button></td>
-    </tr>
-  `).join('');
+  renderConcentrationNotice(rows);
+  $('resultBody').innerHTML = rows.map((m) => {
+    const judgement = displayJudgement(m);
+    return `
+      <tr class="${sameServer(m) ? 'same-server-row' : 'moved-server-row'}">
+        <td>${m.before.guild_rank}</td>
+        <td class="guild-name">${escapeHtml(m.before.guild_name)}</td>
+        <td>${escapeHtml(m.before.guild_master)}</td>
+        <td class="server-name">${serverMoveHtml(m)}</td>
+        <td class="guild-name">${escapeHtml(m.after.guild_name)}</td>
+        <td>${escapeHtml(m.after.guild_master)}</td>
+        <td class="score">${m.total.toFixed(1)}점</td>
+        <td><span class="badge ${judgement.key}">${judgement.text}</span></td>
+        <td><button class="view-btn" type="button" data-index="${state.matches.indexOf(m)}">보기</button></td>
+      </tr>`;
+  }).join('');
 }
 
 function distHtml(title, before, after) {
@@ -208,6 +280,7 @@ function bindEvents() {
   $('reloadBtn').addEventListener('click', loadSnapshotIndex);
   $('compareBtn').addEventListener('click', compareSelected);
   $('searchInput').addEventListener('input', renderResults);
+  $('moveFilter')?.addEventListener('change', renderResults);
   $('gradeFilter').addEventListener('change', renderResults);
   $('beforeLimitSelect').addEventListener('change', () => state.matches.length && compareSelected());
   $('afterLimitSelect').addEventListener('change', () => state.matches.length && compareSelected());
