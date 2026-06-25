@@ -28,7 +28,7 @@
       <div>
         <p class="eyebrow">Prasia Guild Trace</p>
         <h1>추적 연구소</h1>
-        <p class="hero-desc">저장된 날짜/시간별 스냅샷을 선택해 92+ 지문을 우선 비교하고, 92+가 없는 결사는 실제 존재하는 상위 3개 레벨 지문으로 보정합니다.</p>
+        <p class="hero-desc">저장된 날짜/시간별 스냅샷을 선택해 92+가 충분하면 기존 지문을 유지하고, 92+가 1~2명인 결사는 91레벨을 보조로 포함하며, 92+가 없으면 실제 상위 3개 레벨로 보정합니다.</p>
       </div>
       <div class="status-card">
         <span class="status-label">저장된 스냅샷</span>
@@ -57,19 +57,19 @@
         <label class="field small-field">
           <span>이전 결사 범위</span>
           <select id="beforeLimitSelect">
-            <option value="100">상위 100개</option>
-            <option value="200" selected>상위 200개</option>
-            <option value="300">상위 300개</option>
-            <option value="500">상위 500개</option>
+            <option value="50" selected>스코어 순위 1~50위</option>
+            <option value="100">스코어 순위 1~100위</option>
+            <option value="200">스코어 순위 1~200위</option>
+            <option value="500">스코어 순위 1~500위</option>
             <option value="0">전체</option>
           </select>
         </label>
         <label class="field small-field">
           <span>이후 후보 범위</span>
           <select id="afterLimitSelect">
-            <option value="200">상위 200개</option>
-            <option value="400" selected>상위 400개</option>
-            <option value="700">상위 700개</option>
+            <option value="200">스코어 후보 1~200위</option>
+            <option value="500" selected>스코어 후보 1~500위</option>
+            <option value="1000">스코어 후보 1~1000위</option>
             <option value="0">전체</option>
           </select>
         </label>
@@ -137,7 +137,7 @@
     <section class="panel guide-panel" id="guide">
       <h2>판정 기준</h2>
       <div class="guide-grid">
-        <div><strong>핵심 기준</strong><span>결사장, 결사명, 결사 점수/순위, 92+ 또는 상위 3레벨 레벨·직업군 분포</span></div>
+        <div><strong>핵심 기준</strong><span>결사장, 결사명, 스코어 랭킹, 92+·91 보조 또는 상위 3레벨의 레벨·직업군 분포</span></div>
         <div><strong>토벌 지문</strong><span>멤버별 토벌 데이터가 있으면 토벌25+/26+ 및 기준 레벨 직업군×토벌 조합을 반영</span></div>
         <div><strong>일반 멤버 닉네임</strong><span>유사도 점수에는 미반영, 상세 참고용으로만 표시</span></div>
       </div>
