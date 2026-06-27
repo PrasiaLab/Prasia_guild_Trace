@@ -1,0 +1,26 @@
+{
+  "snapshot_id": "2026-06-27_2357",
+  "label": "2026-06-27 23:57",
+  "created_at": "2026-06-28 00:00:43",
+  "high_level_min": 92,
+  "hunt_thresholds": [
+    26,
+    25
+  ],
+  "trace_version": "v2",
+  "match_version": "trace_v2",
+  "guild_rank_source": "data/Who_are_you_guild_score.json",
+  "match_rule_summary": "92+ 3명 이상은 92+ 유지, 92+ 1~2명은 91레벨 보조 포함, 92+ 0명은 실제 존재 상위 3개 레벨로 match_* 지문 생성.",
+  "match_stats": {
+    "92plus": 36,
+    "92plus_with_91_support": 31,
+    "top3_existing_levels": 3604
+  },
+  "match_member_guild_count": 3260,
+  "guild_count": 3671,
+  "member_sources": [
+    "data/Who_are_you.json",
+    "data/Who_are_you_class.json"
+  ],
+  "hunt_note": "member.grade 또는 hunt_level 계열 필드를 토벌 단계로 병합합니다."
+}
