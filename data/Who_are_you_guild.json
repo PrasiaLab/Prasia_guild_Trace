@@ -1,8 +1,8 @@
 {
   "metadata": {
     "data_type": "guild_ranking",
-    "extracted_at": "2026-09-11T05:42:05+09:00",
-    "extracted_at_text": "2026-09-11 05:42:05",
+    "extracted_at": "2026-09-11T08:02:41+09:00",
+    "extracted_at_text": "2026-09-11 08:02:41",
     "timezone": "Asia/Seoul",
     "world_count": 50,
     "item_count": 2500,
@@ -141,7 +141,7 @@
       "guild_name": "쥬피터",
       "guild_master": "나여나",
       "guild_level": 60,
-      "guild_member_count": 45,
+      "guild_member_count": 47,
       "max_guild_member_count": 50,
       "territory_flag_id": [],
       "territory_name": []
@@ -4267,7 +4267,7 @@
       "guild_name": "신사",
       "guild_master": "신패",
       "guild_level": 38,
-      "guild_member_count": 40,
+      "guild_member_count": 41,
       "max_guild_member_count": 42,
       "territory_flag_id": [
         "Garrison",
@@ -5603,21 +5603,7 @@
       "world_group_id": "LIVE_W03",
       "world_id": "LIVE_W03_R3",
       "ranking": 13,
-      "ranking_change": 0,
-      "guild_name": "라비엘",
-      "guild_master": "히오하나",
-      "guild_level": 60,
-      "guild_member_count": 2,
-      "max_guild_member_count": 50,
-      "territory_flag_id": [],
-      "territory_name": []
-    },
-    {
-      "world": "3-3",
-      "world_group_id": "LIVE_W03",
-      "world_id": "LIVE_W03_R3",
-      "ranking": 14,
-      "ranking_change": 0,
+      "ranking_change": 1,
       "guild_name": "성심당",
       "guild_master": "성심당으로오세요",
       "guild_level": 60,
@@ -5631,6 +5617,20 @@
         "GARRISON00_RONDO",
         "GARRISON04_KROHN"
       ]
+    },
+    {
+      "world": "3-3",
+      "world_group_id": "LIVE_W03",
+      "world_id": "LIVE_W03_R3",
+      "ranking": 14,
+      "ranking_change": -1,
+      "guild_name": "라비엘",
+      "guild_master": "히오하나",
+      "guild_level": 60,
+      "guild_member_count": 2,
+      "max_guild_member_count": 50,
+      "territory_flag_id": [],
+      "territory_name": []
     },
     {
       "world": "3-3",
@@ -6359,7 +6359,7 @@
       "guild_name": "킬러들의쇼핑몰",
       "guild_master": "정지안",
       "guild_level": 57,
-      "guild_member_count": 25,
+      "guild_member_count": 26,
       "max_guild_member_count": 50,
       "territory_flag_id": [
         "Fortress"
@@ -6664,20 +6664,6 @@
       "world_id": "LIVE_W03_R4",
       "ranking": 30,
       "ranking_change": 0,
-      "guild_name": "물약공장",
-      "guild_master": "공장장",
-      "guild_level": 36,
-      "guild_member_count": 1,
-      "max_guild_member_count": 50,
-      "territory_flag_id": [],
-      "territory_name": []
-    },
-    {
-      "world": "3-4",
-      "world_group_id": "LIVE_W03",
-      "world_id": "LIVE_W03_R4",
-      "ranking": 31,
-      "ranking_change": 0,
       "guild_name": "브로맨스",
       "guild_master": "머신",
       "guild_level": 36,
@@ -6689,6 +6675,20 @@
       "territory_name": [
         "GARRISON03_AMINTA"
       ]
+    },
+    {
+      "world": "3-4",
+      "world_group_id": "LIVE_W03",
+      "world_id": "LIVE_W03_R4",
+      "ranking": 31,
+      "ranking_change": 0,
+      "guild_name": "물약공장",
+      "guild_master": "공장장",
+      "guild_level": 36,
+      "guild_member_count": 1,
+      "max_guild_member_count": 50,
+      "territory_flag_id": [],
+      "territory_name": []
     },
     {
       "world": "3-4",
@@ -10373,21 +10373,7 @@
       "world_group_id": "LIVE_W05",
       "world_id": "LIVE_W05_R4",
       "ranking": 22,
-      "ranking_change": 0,
-      "guild_name": "시그널",
-      "guild_master": "시그널",
-      "guild_level": 37,
-      "guild_member_count": 1,
-      "max_guild_member_count": 46,
-      "territory_flag_id": [],
-      "territory_name": []
-    },
-    {
-      "world": "5-4",
-      "world_group_id": "LIVE_W05",
-      "world_id": "LIVE_W05_R4",
-      "ranking": 23,
-      "ranking_change": 0,
+      "ranking_change": 1,
       "guild_name": "추억",
       "guild_master": "새벽의여신",
       "guild_level": 37,
@@ -10399,6 +10385,20 @@
       "territory_name": [
         "GARRISON05_LINESAUF"
       ]
+    },
+    {
+      "world": "5-4",
+      "world_group_id": "LIVE_W05",
+      "world_id": "LIVE_W05_R4",
+      "ranking": 23,
+      "ranking_change": -1,
+      "guild_name": "시그널",
+      "guild_master": "시그널",
+      "guild_level": 37,
+      "guild_member_count": 1,
+      "max_guild_member_count": 46,
+      "territory_flag_id": [],
+      "territory_name": []
     },
     {
       "world": "5-4",
@@ -12825,7 +12825,7 @@
       "guild_name": "레드스톰",
       "guild_master": "헤이호",
       "guild_level": 35,
-      "guild_member_count": 49,
+      "guild_member_count": 50,
       "max_guild_member_count": 50,
       "territory_flag_id": [
         "Garrison"
@@ -15735,7 +15735,7 @@
       "guild_name": "동네형들",
       "guild_master": "돌파",
       "guild_level": 59,
-      "guild_member_count": 50,
+      "guild_member_count": 48,
       "max_guild_member_count": 50,
       "territory_flag_id": [
         "Garrison"
@@ -17945,7 +17945,7 @@
       "guild_name": "여리",
       "guild_master": "여리",
       "guild_level": 60,
-      "guild_member_count": 25,
+      "guild_member_count": 27,
       "max_guild_member_count": 45,
       "territory_flag_id": [],
       "territory_name": []
@@ -18808,7 +18808,7 @@
       "ranking_change": 0,
       "guild_name": "황태",
       "guild_master": "황태",
-      "guild_level": 57,
+      "guild_level": 58,
       "guild_member_count": 41,
       "max_guild_member_count": 41,
       "territory_flag_id": [],
@@ -19977,7 +19977,7 @@
       "ranking": 44,
       "ranking_change": 0,
       "guild_name": "라이아",
-      "guild_master": "영무느",
+      "guild_master": "루아느",
       "guild_level": 39,
       "guild_member_count": 44,
       "max_guild_member_count": 50,
@@ -21174,11 +21174,11 @@
       "world_id": "LIVE_W11_R3",
       "ranking": 21,
       "ranking_change": 0,
-      "guild_name": "다크엘프",
-      "guild_master": "다크엘프",
+      "guild_name": "수호자",
+      "guild_master": "수호자",
       "guild_level": 49,
-      "guild_member_count": 1,
-      "max_guild_member_count": 50,
+      "guild_member_count": 25,
+      "max_guild_member_count": 46,
       "territory_flag_id": [],
       "territory_name": []
     },
@@ -21188,11 +21188,11 @@
       "world_id": "LIVE_W11_R3",
       "ranking": 22,
       "ranking_change": 0,
-      "guild_name": "수호자",
-      "guild_master": "수호자",
+      "guild_name": "다크엘프",
+      "guild_master": "다크엘프",
       "guild_level": 49,
-      "guild_member_count": 25,
-      "max_guild_member_count": 46,
+      "guild_member_count": 1,
+      "max_guild_member_count": 50,
       "territory_flag_id": [],
       "territory_name": []
     },
@@ -23461,7 +23461,7 @@
       "guild_name": "제로베이스",
       "guild_master": "몽비",
       "guild_level": 59,
-      "guild_member_count": 45,
+      "guild_member_count": 41,
       "max_guild_member_count": 45,
       "territory_flag_id": [],
       "territory_name": []
@@ -24033,7 +24033,7 @@
       "guild_name": "아기고양이",
       "guild_master": "아기두부",
       "guild_level": 66,
-      "guild_member_count": 43,
+      "guild_member_count": 44,
       "max_guild_member_count": 50,
       "territory_flag_id": [],
       "territory_name": []
@@ -25826,7 +25826,7 @@
       "ranking_change": 0,
       "guild_name": "진달래",
       "guild_master": "진달래",
-      "guild_level": 50,
+      "guild_level": 51,
       "guild_member_count": 35,
       "max_guild_member_count": 45,
       "territory_flag_id": [],
