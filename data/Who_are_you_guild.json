@@ -1,8 +1,8 @@
 {
   "metadata": {
     "data_type": "guild_ranking",
-    "extracted_at": "2026-09-12T05:47:39+09:00",
-    "extracted_at_text": "2026-09-12 05:47:39",
+    "extracted_at": "2026-09-12T08:07:52+09:00",
+    "extracted_at_text": "2026-09-12 08:07:52",
     "timezone": "Asia/Seoul",
     "world_count": 50,
     "item_count": 2500,
@@ -849,7 +849,7 @@
       "guild_name": "감마",
       "guild_master": "하니얌",
       "guild_level": 69,
-      "guild_member_count": 48,
+      "guild_member_count": 47,
       "max_guild_member_count": 50,
       "territory_flag_id": [
         "Garrison",
@@ -1031,7 +1031,7 @@
       "guild_name": "강",
       "guild_master": "추일",
       "guild_level": 60,
-      "guild_member_count": 11,
+      "guild_member_count": 12,
       "max_guild_member_count": 50,
       "territory_flag_id": [
         "Garrison"
@@ -1925,7 +1925,7 @@
       "guild_name": "블랙체리",
       "guild_master": "한로로",
       "guild_level": 51,
-      "guild_member_count": 43,
+      "guild_member_count": 44,
       "max_guild_member_count": 47,
       "territory_flag_id": [
         "Garrison"
@@ -4253,21 +4253,7 @@
       "world_group_id": "LIVE_W03",
       "world_id": "LIVE_W03_R1",
       "ranking": 26,
-      "ranking_change": 0,
-      "guild_name": "Re제로",
-      "guild_master": "다카포",
-      "guild_level": 38,
-      "guild_member_count": 30,
-      "max_guild_member_count": 46,
-      "territory_flag_id": [],
-      "territory_name": []
-    },
-    {
-      "world": "3-1",
-      "world_group_id": "LIVE_W03",
-      "world_id": "LIVE_W03_R1",
-      "ranking": 27,
-      "ranking_change": 0,
+      "ranking_change": 1,
       "guild_name": "신사",
       "guild_master": "신패",
       "guild_level": 38,
@@ -4281,6 +4267,20 @@
         "GARRISON01_LINESAUF",
         "FORTRESS00_SIGIL"
       ]
+    },
+    {
+      "world": "3-1",
+      "world_group_id": "LIVE_W03",
+      "world_id": "LIVE_W03_R1",
+      "ranking": 27,
+      "ranking_change": -1,
+      "guild_name": "Re제로",
+      "guild_master": "다카포",
+      "guild_level": 38,
+      "guild_member_count": 30,
+      "max_guild_member_count": 46,
+      "territory_flag_id": [],
+      "territory_name": []
     },
     {
       "world": "3-1",
@@ -6303,7 +6303,7 @@
       "guild_name": "영철이",
       "guild_master": "줍자",
       "guild_level": 60,
-      "guild_member_count": 50,
+      "guild_member_count": 44,
       "max_guild_member_count": 50,
       "territory_flag_id": [
         "Garrison"
@@ -7282,7 +7282,7 @@
       "ranking_change": 0,
       "guild_name": "귀문검류",
       "guild_master": "귀문검류",
-      "guild_level": 40,
+      "guild_level": 41,
       "guild_member_count": 40,
       "max_guild_member_count": 40,
       "territory_flag_id": [],
@@ -12503,7 +12503,7 @@
       "guild_name": "양천구",
       "guild_master": "근린문화회관",
       "guild_level": 59,
-      "guild_member_count": 36,
+      "guild_member_count": 37,
       "max_guild_member_count": 47,
       "territory_flag_id": [
         "Garrison"
@@ -15653,7 +15653,7 @@
       "guild_name": "피부과",
       "guild_master": "프락셀삼만원",
       "guild_level": 62,
-      "guild_member_count": 46,
+      "guild_member_count": 47,
       "max_guild_member_count": 50,
       "territory_flag_id": [
         "Garrison"
@@ -16359,7 +16359,7 @@
       "guild_name": "동쪽이",
       "guild_master": "작작",
       "guild_level": 69,
-      "guild_member_count": 37,
+      "guild_member_count": 36,
       "max_guild_member_count": 50,
       "territory_flag_id": [],
       "territory_name": []
@@ -17817,7 +17817,7 @@
       "guild_name": "식물원",
       "guild_master": "식물힐좀",
       "guild_level": 66,
-      "guild_member_count": 18,
+      "guild_member_count": 19,
       "max_guild_member_count": 50,
       "territory_flag_id": [
         "Castle"
@@ -18176,20 +18176,6 @@
       "world_id": "LIVE_W10_R4",
       "ranking": 25,
       "ranking_change": 0,
-      "guild_name": "서랍장",
-      "guild_master": "먼지",
-      "guild_level": 52,
-      "guild_member_count": 1,
-      "max_guild_member_count": 45,
-      "territory_flag_id": [],
-      "territory_name": []
-    },
-    {
-      "world": "10-4",
-      "world_group_id": "LIVE_W10",
-      "world_id": "LIVE_W10_R4",
-      "ranking": 26,
-      "ranking_change": 0,
       "guild_name": "흑백",
       "guild_master": "팜하니",
       "guild_level": 52,
@@ -18201,6 +18187,20 @@
       "territory_name": [
         "GARRISON03_AMINTA"
       ]
+    },
+    {
+      "world": "10-4",
+      "world_group_id": "LIVE_W10",
+      "world_id": "LIVE_W10_R4",
+      "ranking": 26,
+      "ranking_change": 0,
+      "guild_name": "서랍장",
+      "guild_master": "먼지",
+      "guild_level": 52,
+      "guild_member_count": 1,
+      "max_guild_member_count": 45,
+      "territory_flag_id": [],
+      "territory_name": []
     },
     {
       "world": "10-4",
@@ -18775,7 +18775,7 @@
       "guild_name": "좋은친구들",
       "guild_master": "천상",
       "guild_level": 59,
-      "guild_member_count": 50,
+      "guild_member_count": 48,
       "max_guild_member_count": 50,
       "territory_flag_id": [],
       "territory_name": []
@@ -23229,7 +23229,7 @@
       "guild_name": "꾸러기수비대",
       "guild_master": "똘기",
       "guild_level": 64,
-      "guild_member_count": 50,
+      "guild_member_count": 42,
       "max_guild_member_count": 50,
       "territory_flag_id": [],
       "territory_name": []
@@ -24027,7 +24027,7 @@
       "guild_name": "아기고양이",
       "guild_master": "아기두부",
       "guild_level": 66,
-      "guild_member_count": 48,
+      "guild_member_count": 49,
       "max_guild_member_count": 50,
       "territory_flag_id": [],
       "territory_name": []
