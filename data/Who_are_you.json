@@ -1,8 +1,8 @@
 {
   "metadata": {
     "data_type": "overall_ranking",
-    "extracted_at": "2026-09-14T00:58:36+09:00",
-    "extracted_at_text": "2026-09-14 00:58:36",
+    "extracted_at": "2026-09-14T05:35:16+09:00",
+    "extracted_at_text": "2026-09-14 05:35:16",
     "timezone": "Asia/Seoul",
     "world_count": 50,
     "item_count": 5000,
@@ -122,13 +122,25 @@
       "world": "2-1",
       "world_group_id": "LIVE_W02",
       "world_id": "LIVE_W02_R1",
+      "name": "사하구",
+      "level": 91,
+      "grade": 25,
+      "hunt_level": 25,
+      "class": "MirageBlade",
+      "guild": "미르",
+      "ranking": 10
+    },
+    {
+      "world": "2-1",
+      "world_group_id": "LIVE_W02",
+      "world_id": "LIVE_W02_R1",
       "name": "아현",
       "level": 91,
       "grade": 24,
       "hunt_level": 24,
       "class": "SolarSentinel",
       "guild": "미르",
-      "ranking": 10
+      "ranking": 11
     },
     {
       "world": "2-1",
@@ -139,18 +151,6 @@
       "grade": 24,
       "hunt_level": 24,
       "class": "Enforcer",
-      "guild": "미르",
-      "ranking": 11
-    },
-    {
-      "world": "2-1",
-      "world_group_id": "LIVE_W02",
-      "world_id": "LIVE_W02_R1",
-      "name": "사하구",
-      "level": 91,
-      "grade": 25,
-      "hunt_level": 25,
-      "class": "MirageBlade",
       "guild": "미르",
       "ranking": 12
     },
@@ -338,11 +338,11 @@
       "world": "2-1",
       "world_group_id": "LIVE_W02",
       "world_id": "LIVE_W02_R1",
-      "name": "파리",
+      "name": "주모의주걱",
       "level": 89,
-      "grade": 22,
-      "hunt_level": 22,
-      "class": "AbyssRevenant",
+      "grade": 21,
+      "hunt_level": 21,
+      "class": "IncenseArcher",
       "guild": "미르",
       "ranking": 28
     },
@@ -350,11 +350,11 @@
       "world": "2-1",
       "world_group_id": "LIVE_W02",
       "world_id": "LIVE_W02_R1",
-      "name": "주모의주걱",
+      "name": "파리",
       "level": 89,
-      "grade": 21,
-      "hunt_level": 21,
-      "class": "IncenseArcher",
+      "grade": 22,
+      "hunt_level": 22,
+      "class": "AbyssRevenant",
       "guild": "미르",
       "ranking": 29
     },
@@ -914,24 +914,24 @@
       "world": "2-1",
       "world_group_id": "LIVE_W02",
       "world_id": "LIVE_W02_R1",
-      "name": "토리토동",
-      "level": 85,
-      "grade": 21,
-      "hunt_level": 21,
-      "class": "Enforcer",
-      "guild": "미르",
-      "ranking": 76
-    },
-    {
-      "world": "2-1",
-      "world_group_id": "LIVE_W02",
-      "world_id": "LIVE_W02_R1",
       "name": "수록",
       "level": 85,
       "grade": 21,
       "hunt_level": 21,
       "class": "RuneScribe",
       "guild": null,
+      "ranking": 76
+    },
+    {
+      "world": "2-1",
+      "world_group_id": "LIVE_W02",
+      "world_id": "LIVE_W02_R1",
+      "name": "토리토동",
+      "level": 84,
+      "grade": 21,
+      "hunt_level": 21,
+      "class": "Enforcer",
+      "guild": "미르",
       "ranking": 77
     },
     {
@@ -1238,24 +1238,24 @@
       "world": "2-2",
       "world_group_id": "LIVE_W02",
       "world_id": "LIVE_W02_R2",
-      "name": "점멸형",
-      "level": 93,
-      "grade": 26,
-      "hunt_level": 26,
-      "class": "AbyssRevenant",
-      "guild": "알파",
-      "ranking": 3
-    },
-    {
-      "world": "2-2",
-      "world_group_id": "LIVE_W02",
-      "world_id": "LIVE_W02_R2",
       "name": "불닭",
       "level": 93,
       "grade": 26,
       "hunt_level": 26,
       "class": "Enforcer",
       "guild": "헌터",
+      "ranking": 3
+    },
+    {
+      "world": "2-2",
+      "world_group_id": "LIVE_W02",
+      "world_id": "LIVE_W02_R2",
+      "name": "점멸형",
+      "level": 93,
+      "grade": 26,
+      "hunt_level": 26,
+      "class": "AbyssRevenant",
+      "guild": "알파",
       "ranking": 4
     },
     {
@@ -1622,25 +1622,13 @@
       "world": "2-2",
       "world_group_id": "LIVE_W02",
       "world_id": "LIVE_W02_R2",
-      "name": "그램",
-      "level": 92,
-      "grade": 26,
-      "hunt_level": 26,
-      "class": "RuneScribe",
-      "guild": "알파",
-      "ranking": 35
-    },
-    {
-      "world": "2-2",
-      "world_group_id": "LIVE_W02",
-      "world_id": "LIVE_W02_R2",
       "name": "강철이빨",
       "level": 92,
       "grade": 25,
       "hunt_level": 25,
       "class": "RuneScribe",
       "guild": "헌터",
-      "ranking": 36
+      "ranking": 35
     },
     {
       "world": "2-2",
@@ -1652,7 +1640,7 @@
       "hunt_level": 26,
       "class": "IncenseArcher",
       "guild": "알파",
-      "ranking": 37
+      "ranking": 36
     },
     {
       "world": "2-2",
@@ -1664,7 +1652,7 @@
       "hunt_level": 26,
       "class": "IncenseArcher",
       "guild": "알파",
-      "ranking": 38
+      "ranking": 37
     },
     {
       "world": "2-2",
@@ -1676,6 +1664,18 @@
       "hunt_level": 26,
       "class": "AbyssRevenant",
       "guild": "베타",
+      "ranking": 38
+    },
+    {
+      "world": "2-2",
+      "world_group_id": "LIVE_W02",
+      "world_id": "LIVE_W02_R2",
+      "name": "그램",
+      "level": 92,
+      "grade": 26,
+      "hunt_level": 26,
+      "class": "RuneScribe",
+      "guild": "알파",
       "ranking": 39
     },
     {
@@ -1995,7 +1995,7 @@
       "world_group_id": "LIVE_W02",
       "world_id": "LIVE_W02_R2",
       "name": "빛두루",
-      "level": 91,
+      "level": 92,
       "grade": 24,
       "hunt_level": 24,
       "class": "Enforcer",
@@ -2186,25 +2186,13 @@
       "world": "2-2",
       "world_group_id": "LIVE_W02",
       "world_id": "LIVE_W02_R2",
-      "name": "맹수",
-      "level": 91,
-      "grade": 25,
-      "hunt_level": 25,
-      "class": "Enforcer",
-      "guild": "헌터",
-      "ranking": 82
-    },
-    {
-      "world": "2-2",
-      "world_group_id": "LIVE_W02",
-      "world_id": "LIVE_W02_R2",
       "name": "야냐",
       "level": 91,
       "grade": 24,
       "hunt_level": 24,
       "class": "SolarSentinel",
       "guild": "헌터",
-      "ranking": 83
+      "ranking": 82
     },
     {
       "world": "2-2",
@@ -2216,19 +2204,19 @@
       "hunt_level": 24,
       "class": "RuneScribe",
       "guild": "알파",
-      "ranking": 84
+      "ranking": 83
     },
     {
       "world": "2-2",
       "world_group_id": "LIVE_W02",
       "world_id": "LIVE_W02_R2",
-      "name": "피에프",
+      "name": "맹수",
       "level": 91,
-      "grade": 24,
-      "hunt_level": 24,
-      "class": "RuneScribe",
-      "guild": "베타",
-      "ranking": 85
+      "grade": 25,
+      "hunt_level": 25,
+      "class": "Enforcer",
+      "guild": "헌터",
+      "ranking": 84
     },
     {
       "world": "2-2",
@@ -2240,6 +2228,18 @@
       "hunt_level": 25,
       "class": "AbyssRevenant",
       "guild": "감마",
+      "ranking": 85
+    },
+    {
+      "world": "2-2",
+      "world_group_id": "LIVE_W02",
+      "world_id": "LIVE_W02_R2",
+      "name": "피에프",
+      "level": 91,
+      "grade": 24,
+      "hunt_level": 24,
+      "class": "RuneScribe",
+      "guild": "베타",
       "ranking": 86
     },
     {
@@ -2666,11 +2666,11 @@
       "world": "2-3",
       "world_group_id": "LIVE_W02",
       "world_id": "LIVE_W02_R3",
-      "name": "이수형",
+      "name": "뱀형",
       "level": 92,
       "grade": 26,
       "hunt_level": 26,
-      "class": "RuneScribe",
+      "class": "WildWarrior",
       "guild": "블랙중독",
       "ranking": 22
     },
@@ -2678,11 +2678,11 @@
       "world": "2-3",
       "world_group_id": "LIVE_W02",
       "world_id": "LIVE_W02_R3",
-      "name": "뱀형",
+      "name": "이수형",
       "level": 92,
       "grade": 26,
       "hunt_level": 26,
-      "class": "WildWarrior",
+      "class": "RuneScribe",
       "guild": "블랙중독",
       "ranking": 23
     },
@@ -3146,25 +3146,13 @@
       "world": "2-3",
       "world_group_id": "LIVE_W02",
       "world_id": "LIVE_W02_R3",
-      "name": "써커어른이",
-      "level": 91,
-      "grade": 24,
-      "hunt_level": 24,
-      "class": "RuneScribe",
-      "guild": "새나라의어른이",
-      "ranking": 62
-    },
-    {
-      "world": "2-3",
-      "world_group_id": "LIVE_W02",
-      "world_id": "LIVE_W02_R3",
       "name": "수달댕댕",
       "level": 91,
       "grade": 25,
       "hunt_level": 25,
       "class": "IncenseArcher",
       "guild": "골드중독",
-      "ranking": 63
+      "ranking": 62
     },
     {
       "world": "2-3",
@@ -3176,7 +3164,7 @@
       "hunt_level": 26,
       "class": "Enforcer",
       "guild": "블랙중독",
-      "ranking": 64
+      "ranking": 63
     },
     {
       "world": "2-3",
@@ -3188,7 +3176,7 @@
       "hunt_level": 25,
       "class": "RuneScribe",
       "guild": "블랙중독",
-      "ranking": 65
+      "ranking": 64
     },
     {
       "world": "2-3",
@@ -3200,7 +3188,7 @@
       "hunt_level": 24,
       "class": "Enforcer",
       "guild": "블랙체리",
-      "ranking": 66
+      "ranking": 65
     },
     {
       "world": "2-3",
@@ -3211,6 +3199,18 @@
       "grade": 24,
       "hunt_level": 24,
       "class": "Enforcer",
+      "guild": "새나라의어른이",
+      "ranking": 66
+    },
+    {
+      "world": "2-3",
+      "world_group_id": "LIVE_W02",
+      "world_id": "LIVE_W02_R3",
+      "name": "써커어른이",
+      "level": 91,
+      "grade": 24,
+      "hunt_level": 24,
+      "class": "RuneScribe",
       "guild": "새나라의어른이",
       "ranking": 67
     },
@@ -3374,11 +3374,11 @@
       "world": "2-3",
       "world_group_id": "LIVE_W02",
       "world_id": "LIVE_W02_R3",
-      "name": "줘니",
+      "name": "카스형",
       "level": 90,
-      "grade": 23,
-      "hunt_level": 23,
-      "class": "IncenseArcher",
+      "grade": 24,
+      "hunt_level": 24,
+      "class": "RuneScribe",
       "guild": "골드중독",
       "ranking": 81
     },
@@ -3386,11 +3386,11 @@
       "world": "2-3",
       "world_group_id": "LIVE_W02",
       "world_id": "LIVE_W02_R3",
-      "name": "카스형",
+      "name": "줘니",
       "level": 90,
-      "grade": 24,
-      "hunt_level": 24,
-      "class": "RuneScribe",
+      "grade": 23,
+      "hunt_level": 23,
+      "class": "IncenseArcher",
       "guild": "골드중독",
       "ranking": 82
     },
@@ -3434,11 +3434,11 @@
       "world": "2-3",
       "world_group_id": "LIVE_W02",
       "world_id": "LIVE_W02_R3",
-      "name": "도도도도도",
+      "name": "짬뽕",
       "level": 90,
       "grade": 24,
       "hunt_level": 24,
-      "class": "RuneScribe",
+      "class": "Enforcer",
       "guild": "골드중독",
       "ranking": 86
     },
@@ -3446,11 +3446,11 @@
       "world": "2-3",
       "world_group_id": "LIVE_W02",
       "world_id": "LIVE_W02_R3",
-      "name": "짬뽕",
-      "level": 90,
+      "name": "도도도도도",
+      "level": 89,
       "grade": 24,
       "hunt_level": 24,
-      "class": "Enforcer",
+      "class": "RuneScribe",
       "guild": "골드중독",
       "ranking": 87
     },
@@ -3470,37 +3470,25 @@
       "world": "2-3",
       "world_group_id": "LIVE_W02",
       "world_id": "LIVE_W02_R3",
-      "name": "워즈",
-      "level": 89,
-      "grade": 22,
-      "hunt_level": 22,
-      "class": "MirageBlade",
-      "guild": "새나라의어른이",
-      "ranking": 89
-    },
-    {
-      "world": "2-3",
-      "world_group_id": "LIVE_W02",
-      "world_id": "LIVE_W02_R3",
       "name": "버섯은싫어요",
       "level": 89,
       "grade": 23,
       "hunt_level": 23,
       "class": "Enforcer",
       "guild": "피난계단",
-      "ranking": 90
+      "ranking": 89
     },
     {
       "world": "2-3",
       "world_group_id": "LIVE_W02",
       "world_id": "LIVE_W02_R3",
-      "name": "트롤",
+      "name": "워즈",
       "level": 89,
-      "grade": 23,
-      "hunt_level": 23,
-      "class": "WildWarrior",
-      "guild": "골드중독",
-      "ranking": 91
+      "grade": 22,
+      "hunt_level": 22,
+      "class": "MirageBlade",
+      "guild": "새나라의어른이",
+      "ranking": 90
     },
     {
       "world": "2-3",
@@ -3511,6 +3499,18 @@
       "grade": 24,
       "hunt_level": 24,
       "class": "RuneScribe",
+      "guild": "골드중독",
+      "ranking": 91
+    },
+    {
+      "world": "2-3",
+      "world_group_id": "LIVE_W02",
+      "world_id": "LIVE_W02_R3",
+      "name": "트롤",
+      "level": 89,
+      "grade": 23,
+      "hunt_level": 23,
+      "class": "WildWarrior",
       "guild": "골드중독",
       "ranking": 92
     },
@@ -3710,11 +3710,11 @@
       "world": "2-4",
       "world_group_id": "LIVE_W02",
       "world_id": "LIVE_W02_R4",
-      "name": "통신병",
+      "name": "애니팡",
       "level": 92,
-      "grade": 26,
-      "hunt_level": 26,
-      "class": "RuneScribe",
+      "grade": 25,
+      "hunt_level": 25,
+      "class": "IncenseArcher",
       "guild": "ROKA",
       "ranking": 9
     },
@@ -3722,11 +3722,11 @@
       "world": "2-4",
       "world_group_id": "LIVE_W02",
       "world_id": "LIVE_W02_R4",
-      "name": "애니팡",
+      "name": "통신병",
       "level": 92,
-      "grade": 25,
-      "hunt_level": 25,
-      "class": "IncenseArcher",
+      "grade": 26,
+      "hunt_level": 26,
+      "class": "RuneScribe",
       "guild": "ROKA",
       "ranking": 10
     },
@@ -3866,25 +3866,13 @@
       "world": "2-4",
       "world_group_id": "LIVE_W02",
       "world_id": "LIVE_W02_R4",
-      "name": "노병",
-      "level": 91,
-      "grade": 25,
-      "hunt_level": 25,
-      "class": "IncenseArcher",
-      "guild": "ROKA",
-      "ranking": 22
-    },
-    {
-      "world": "2-4",
-      "world_group_id": "LIVE_W02",
-      "world_id": "LIVE_W02_R4",
       "name": "요희",
       "level": 91,
       "grade": 25,
       "hunt_level": 25,
       "class": "RuneScribe",
       "guild": "ROKA",
-      "ranking": 23
+      "ranking": 22
     },
     {
       "world": "2-4",
@@ -3896,13 +3884,25 @@
       "hunt_level": 25,
       "class": "Enforcer",
       "guild": "ROKA",
-      "ranking": 24
+      "ranking": 23
     },
     {
       "world": "2-4",
       "world_group_id": "LIVE_W02",
       "world_id": "LIVE_W02_R4",
       "name": "톱밥",
+      "level": 91,
+      "grade": 25,
+      "hunt_level": 25,
+      "class": "IncenseArcher",
+      "guild": "ROKA",
+      "ranking": 24
+    },
+    {
+      "world": "2-4",
+      "world_group_id": "LIVE_W02",
+      "world_id": "LIVE_W02_R4",
+      "name": "노병",
       "level": 91,
       "grade": 25,
       "hunt_level": 25,
@@ -5366,24 +5366,24 @@
       "world": "2-5",
       "world_group_id": "LIVE_W02",
       "world_id": "LIVE_W02_R5",
-      "name": "리산드라",
-      "level": 88,
-      "grade": 22,
-      "hunt_level": 22,
-      "class": "Enforcer",
-      "guild": "미루",
-      "ranking": 47
-    },
-    {
-      "world": "2-5",
-      "world_group_id": "LIVE_W02",
-      "world_id": "LIVE_W02_R5",
       "name": "겐죠",
       "level": 88,
       "grade": 22,
       "hunt_level": 22,
       "class": "IncenseArcher",
       "guild": "맞을짓만골라서하는중",
+      "ranking": 47
+    },
+    {
+      "world": "2-5",
+      "world_group_id": "LIVE_W02",
+      "world_id": "LIVE_W02_R5",
+      "name": "리산드라",
+      "level": 88,
+      "grade": 22,
+      "hunt_level": 22,
+      "class": "Enforcer",
+      "guild": "미루",
       "ranking": 48
     },
     {
@@ -5438,24 +5438,24 @@
       "world": "2-5",
       "world_group_id": "LIVE_W02",
       "world_id": "LIVE_W02_R5",
-      "name": "플랑크톤",
-      "level": 88,
-      "grade": 22,
-      "hunt_level": 22,
-      "class": "Enforcer",
-      "guild": null,
-      "ranking": 53
-    },
-    {
-      "world": "2-5",
-      "world_group_id": "LIVE_W02",
-      "world_id": "LIVE_W02_R5",
       "name": "버스기사",
       "level": 88,
       "grade": 21,
       "hunt_level": 21,
       "class": "RuneScribe",
       "guild": "유니뻐스",
+      "ranking": 53
+    },
+    {
+      "world": "2-5",
+      "world_group_id": "LIVE_W02",
+      "world_id": "LIVE_W02_R5",
+      "name": "플랑크톤",
+      "level": 88,
+      "grade": 22,
+      "hunt_level": 22,
+      "class": "Enforcer",
+      "guild": null,
       "ranking": 54
     },
     {
@@ -5834,24 +5834,24 @@
       "world": "2-5",
       "world_group_id": "LIVE_W02",
       "world_id": "LIVE_W02_R5",
-      "name": "명신",
-      "level": 85,
-      "grade": 20,
-      "hunt_level": 20,
-      "class": "Enforcer",
-      "guild": "안녕하소소소소소서",
-      "ranking": 86
-    },
-    {
-      "world": "2-5",
-      "world_group_id": "LIVE_W02",
-      "world_id": "LIVE_W02_R5",
       "name": "달리아",
       "level": 85,
       "grade": 20,
       "hunt_level": 20,
       "class": "RuneScribe",
       "guild": "별",
+      "ranking": 86
+    },
+    {
+      "world": "2-5",
+      "world_group_id": "LIVE_W02",
+      "world_id": "LIVE_W02_R5",
+      "name": "명신",
+      "level": 85,
+      "grade": 20,
+      "hunt_level": 20,
+      "class": "Enforcer",
+      "guild": "안녕하소소소소소서",
       "ranking": 87
     },
     {
@@ -5978,24 +5978,24 @@
       "world": "2-5",
       "world_group_id": "LIVE_W02",
       "world_id": "LIVE_W02_R5",
-      "name": "문드",
-      "level": 84,
-      "grade": 17,
-      "hunt_level": 17,
-      "class": "IncenseArcher",
-      "guild": "미루",
-      "ranking": 98
-    },
-    {
-      "world": "2-5",
-      "world_group_id": "LIVE_W02",
-      "world_id": "LIVE_W02_R5",
       "name": "한디",
       "level": 84,
       "grade": 17,
       "hunt_level": 17,
       "class": "Enforcer",
       "guild": "스파이",
+      "ranking": 98
+    },
+    {
+      "world": "2-5",
+      "world_group_id": "LIVE_W02",
+      "world_id": "LIVE_W02_R5",
+      "name": "문드",
+      "level": 84,
+      "grade": 17,
+      "hunt_level": 17,
+      "class": "IncenseArcher",
+      "guild": "미루",
       "ranking": 99
     },
     {
@@ -7039,7 +7039,7 @@
       "grade": 13,
       "hunt_level": 13,
       "class": "Enforcer",
-      "guild": "ASMR",
+      "guild": null,
       "ranking": 86
     },
     {
@@ -7526,24 +7526,24 @@
       "world": "3-2",
       "world_group_id": "LIVE_W03",
       "world_id": "LIVE_W03_R2",
-      "name": "노바",
-      "level": 92,
-      "grade": 25,
-      "hunt_level": 25,
-      "class": "IncenseArcher",
-      "guild": "북미깡",
-      "ranking": 27
-    },
-    {
-      "world": "3-2",
-      "world_group_id": "LIVE_W03",
-      "world_id": "LIVE_W03_R2",
       "name": "주기",
       "level": 92,
       "grade": 25,
       "hunt_level": 25,
       "class": "IncenseArcher",
       "guild": "북깡미",
+      "ranking": 27
+    },
+    {
+      "world": "3-2",
+      "world_group_id": "LIVE_W03",
+      "world_id": "LIVE_W03_R2",
+      "name": "노바",
+      "level": 92,
+      "grade": 25,
+      "hunt_level": 25,
+      "class": "IncenseArcher",
+      "guild": "북미깡",
       "ranking": 28
     },
     {
@@ -8139,7 +8139,7 @@
       "world_group_id": "LIVE_W03",
       "world_id": "LIVE_W03_R2",
       "name": "훅팀",
-      "level": 89,
+      "level": 90,
       "grade": 23,
       "hunt_level": 23,
       "class": "Enforcer",
@@ -8515,7 +8515,7 @@
       "grade": 26,
       "hunt_level": 26,
       "class": "AbyssRevenant",
-      "guild": null,
+      "guild": "플렉스",
       "ranking": 9
     },
     {
@@ -8659,7 +8659,7 @@
       "grade": 26,
       "hunt_level": 26,
       "class": "RuneScribe",
-      "guild": null,
+      "guild": "플렉스",
       "ranking": 21
     },
     {
@@ -8702,11 +8702,11 @@
       "world": "3-3",
       "world_group_id": "LIVE_W03",
       "world_id": "LIVE_W03_R3",
-      "name": "명검",
+      "name": "현읭",
       "level": 92,
       "grade": 26,
       "hunt_level": 26,
-      "class": "MirageBlade",
+      "class": "RuneScribe",
       "guild": "플렉스",
       "ranking": 25
     },
@@ -8714,11 +8714,11 @@
       "world": "3-3",
       "world_group_id": "LIVE_W03",
       "world_id": "LIVE_W03_R3",
-      "name": "현읭",
+      "name": "명검",
       "level": 92,
       "grade": 26,
       "hunt_level": 26,
-      "class": "RuneScribe",
+      "class": "MirageBlade",
       "guild": "플렉스",
       "ranking": 26
     },
@@ -9002,11 +9002,11 @@
       "world": "3-3",
       "world_group_id": "LIVE_W03",
       "world_id": "LIVE_W03_R3",
-      "name": "뽀글뽀글",
+      "name": "토리의작물고구마",
       "level": 92,
-      "grade": 24,
-      "hunt_level": 24,
-      "class": "IncenseArcher",
+      "grade": 26,
+      "hunt_level": 26,
+      "class": "RuneScribe",
       "guild": "플렉스",
       "ranking": 50
     },
@@ -9026,7 +9026,7 @@
       "world": "3-3",
       "world_group_id": "LIVE_W03",
       "world_id": "LIVE_W03_R3",
-      "name": "토리의작물고구마",
+      "name": "피치는못참지",
       "level": 92,
       "grade": 26,
       "hunt_level": 26,
@@ -9038,10 +9038,10 @@
       "world": "3-3",
       "world_group_id": "LIVE_W03",
       "world_id": "LIVE_W03_R3",
-      "name": "피치는못참지",
+      "name": "캡틴맨",
       "level": 92,
-      "grade": 26,
-      "hunt_level": 26,
+      "grade": 24,
+      "hunt_level": 24,
       "class": "RuneScribe",
       "guild": "플렉스",
       "ranking": 53
@@ -9050,11 +9050,11 @@
       "world": "3-3",
       "world_group_id": "LIVE_W03",
       "world_id": "LIVE_W03_R3",
-      "name": "캡틴맨",
+      "name": "뽀글뽀글",
       "level": 92,
       "grade": 24,
       "hunt_level": 24,
-      "class": "RuneScribe",
+      "class": "IncenseArcher",
       "guild": "플렉스",
       "ranking": 54
     },
@@ -9134,11 +9134,11 @@
       "world": "3-3",
       "world_group_id": "LIVE_W03",
       "world_id": "LIVE_W03_R3",
-      "name": "여름밤",
+      "name": "한대콩",
       "level": 92,
       "grade": 23,
       "hunt_level": 23,
-      "class": "Enforcer",
+      "class": "IncenseArcher",
       "guild": "롤렉스",
       "ranking": 61
     },
@@ -9146,11 +9146,11 @@
       "world": "3-3",
       "world_group_id": "LIVE_W03",
       "world_id": "LIVE_W03_R3",
-      "name": "한대콩",
+      "name": "여름밤",
       "level": 92,
       "grade": 23,
       "hunt_level": 23,
-      "class": "IncenseArcher",
+      "class": "Enforcer",
       "guild": "롤렉스",
       "ranking": 62
     },
@@ -9470,25 +9470,13 @@
       "world": "3-3",
       "world_group_id": "LIVE_W03",
       "world_id": "LIVE_W03_R3",
-      "name": "타쪼",
-      "level": 90,
-      "grade": 24,
-      "hunt_level": 24,
-      "class": "IncenseArcher",
-      "guild": "롤렉스",
-      "ranking": 89
-    },
-    {
-      "world": "3-3",
-      "world_group_id": "LIVE_W03",
-      "world_id": "LIVE_W03_R3",
       "name": "처룬",
       "level": 90,
       "grade": 23,
       "hunt_level": 23,
       "class": "IncenseArcher",
       "guild": "롤렉스",
-      "ranking": 90
+      "ranking": 89
     },
     {
       "world": "3-3",
@@ -9499,6 +9487,18 @@
       "grade": 24,
       "hunt_level": 24,
       "class": "Enforcer",
+      "guild": "롤렉스",
+      "ranking": 90
+    },
+    {
+      "world": "3-3",
+      "world_group_id": "LIVE_W03",
+      "world_id": "LIVE_W03_R3",
+      "name": "타쪼",
+      "level": 90,
+      "grade": 24,
+      "hunt_level": 24,
+      "class": "IncenseArcher",
       "guild": "롤렉스",
       "ranking": 91
     },
@@ -9667,7 +9667,7 @@
       "grade": 26,
       "hunt_level": 26,
       "class": "AbyssRevenant",
-      "guild": null,
+      "guild": "DOG",
       "ranking": 5
     },
     {
@@ -9710,24 +9710,24 @@
       "world": "3-4",
       "world_group_id": "LIVE_W03",
       "world_id": "LIVE_W03_R4",
-      "name": "골병든이니",
-      "level": 93,
-      "grade": 26,
-      "hunt_level": 26,
-      "class": "WildWarrior",
-      "guild": "DOG",
-      "ranking": 9
-    },
-    {
-      "world": "3-4",
-      "world_group_id": "LIVE_W03",
-      "world_id": "LIVE_W03_R4",
       "name": "태리정",
       "level": 93,
       "grade": 26,
       "hunt_level": 26,
       "class": "AbyssRevenant",
       "guild": "바다이야기",
+      "ranking": 9
+    },
+    {
+      "world": "3-4",
+      "world_group_id": "LIVE_W03",
+      "world_id": "LIVE_W03_R4",
+      "name": "골병든이니",
+      "level": 93,
+      "grade": 26,
+      "hunt_level": 26,
+      "class": "WildWarrior",
+      "guild": "DOG",
       "ranking": 10
     },
     {
@@ -10358,24 +10358,24 @@
       "world": "3-4",
       "world_group_id": "LIVE_W03",
       "world_id": "LIVE_W03_R4",
-      "name": "강모",
-      "level": 92,
-      "grade": 25,
-      "hunt_level": 25,
-      "class": "RuneScribe",
-      "guild": "DOG",
-      "ranking": 63
-    },
-    {
-      "world": "3-4",
-      "world_group_id": "LIVE_W03",
-      "world_id": "LIVE_W03_R4",
       "name": "맹세",
       "level": 92,
       "grade": 25,
       "hunt_level": 25,
       "class": "Enforcer",
       "guild": "바다이야기",
+      "ranking": 63
+    },
+    {
+      "world": "3-4",
+      "world_group_id": "LIVE_W03",
+      "world_id": "LIVE_W03_R4",
+      "name": "강모",
+      "level": 92,
+      "grade": 25,
+      "hunt_level": 25,
+      "class": "RuneScribe",
+      "guild": "DOG",
       "ranking": 64
     },
     {
@@ -12266,11 +12266,11 @@
       "world": "5-1",
       "world_group_id": "LIVE_W05",
       "world_id": "LIVE_W05_R1",
-      "name": "오만코",
+      "name": "오만원만주세요",
       "level": 90,
-      "grade": 23,
-      "hunt_level": 23,
-      "class": "RuneScribe",
+      "grade": 24,
+      "hunt_level": 24,
+      "class": "Enforcer",
       "guild": "오만",
       "ranking": 22
     },
@@ -12278,11 +12278,11 @@
       "world": "5-1",
       "world_group_id": "LIVE_W05",
       "world_id": "LIVE_W05_R1",
-      "name": "오만원만주세요",
+      "name": "오만코",
       "level": 90,
-      "grade": 24,
-      "hunt_level": 24,
-      "class": "Enforcer",
+      "grade": 23,
+      "hunt_level": 23,
+      "class": "RuneScribe",
       "guild": "오만",
       "ranking": 23
     },
@@ -13094,24 +13094,24 @@
       "world": "5-1",
       "world_group_id": "LIVE_W05",
       "world_id": "LIVE_W05_R1",
-      "name": "베르쿠치",
-      "level": 81,
-      "grade": 19,
-      "hunt_level": 19,
-      "class": "Enforcer",
-      "guild": "결사",
-      "ranking": 91
-    },
-    {
-      "world": "5-1",
-      "world_group_id": "LIVE_W05",
-      "world_id": "LIVE_W05_R1",
       "name": "파벳",
       "level": 81,
       "grade": 19,
       "hunt_level": 19,
       "class": "SolarSentinel",
       "guild": "문",
+      "ranking": 91
+    },
+    {
+      "world": "5-1",
+      "world_group_id": "LIVE_W05",
+      "world_id": "LIVE_W05_R1",
+      "name": "베르쿠치",
+      "level": 81,
+      "grade": 19,
+      "hunt_level": 19,
+      "class": "Enforcer",
+      "guild": "결사",
       "ranking": 92
     },
     {
@@ -13538,25 +13538,13 @@
       "world": "5-2",
       "world_group_id": "LIVE_W05",
       "world_id": "LIVE_W05_R2",
-      "name": "내가하지말랑햄찌",
-      "level": 91,
-      "grade": 24,
-      "hunt_level": 24,
-      "class": "IncenseArcher",
-      "guild": "아우름",
-      "ranking": 28
-    },
-    {
-      "world": "5-2",
-      "world_group_id": "LIVE_W05",
-      "world_id": "LIVE_W05_R2",
       "name": "수호킹",
       "level": 91,
       "grade": 25,
       "hunt_level": 25,
       "class": "Enforcer",
       "guild": "아우름",
-      "ranking": 29
+      "ranking": 28
     },
     {
       "world": "5-2",
@@ -13568,6 +13556,18 @@
       "hunt_level": 25,
       "class": "IncenseArcher",
       "guild": "AURA",
+      "ranking": 29
+    },
+    {
+      "world": "5-2",
+      "world_group_id": "LIVE_W05",
+      "world_id": "LIVE_W05_R2",
+      "name": "내가하지말랑햄찌",
+      "level": 91,
+      "grade": 24,
+      "hunt_level": 24,
+      "class": "IncenseArcher",
+      "guild": "아우름",
       "ranking": 30
     },
     {
@@ -13718,25 +13718,13 @@
       "world": "5-2",
       "world_group_id": "LIVE_W05",
       "world_id": "LIVE_W05_R2",
-      "name": "적송",
-      "level": 90,
-      "grade": 23,
-      "hunt_level": 23,
-      "class": "IncenseArcher",
-      "guild": "아우름",
-      "ranking": 43
-    },
-    {
-      "world": "5-2",
-      "world_group_id": "LIVE_W05",
-      "world_id": "LIVE_W05_R2",
       "name": "별바구",
       "level": 90,
       "grade": 24,
       "hunt_level": 24,
       "class": "Enforcer",
       "guild": "아우름",
-      "ranking": 44
+      "ranking": 43
     },
     {
       "world": "5-2",
@@ -13747,6 +13735,18 @@
       "grade": 23,
       "hunt_level": 23,
       "class": "RuneScribe",
+      "guild": "아우름",
+      "ranking": 44
+    },
+    {
+      "world": "5-2",
+      "world_group_id": "LIVE_W05",
+      "world_id": "LIVE_W05_R2",
+      "name": "적송",
+      "level": 90,
+      "grade": 23,
+      "hunt_level": 23,
+      "class": "IncenseArcher",
       "guild": "아우름",
       "ranking": 45
     },
@@ -13970,24 +13970,24 @@
       "world": "5-2",
       "world_group_id": "LIVE_W05",
       "world_id": "LIVE_W05_R2",
-      "name": "요루",
-      "level": 89,
-      "grade": 23,
-      "hunt_level": 23,
-      "class": "SolarSentinel",
-      "guild": "AURA",
-      "ranking": 64
-    },
-    {
-      "world": "5-2",
-      "world_group_id": "LIVE_W05",
-      "world_id": "LIVE_W05_R2",
       "name": "네네",
       "level": 89,
       "grade": 23,
       "hunt_level": 23,
       "class": "RuneScribe",
       "guild": "땡",
+      "ranking": 64
+    },
+    {
+      "world": "5-2",
+      "world_group_id": "LIVE_W05",
+      "world_id": "LIVE_W05_R2",
+      "name": "요루",
+      "level": 89,
+      "grade": 23,
+      "hunt_level": 23,
+      "class": "SolarSentinel",
+      "guild": "AURA",
       "ranking": 65
     },
     {
@@ -14019,7 +14019,7 @@
       "world_group_id": "LIVE_W05",
       "world_id": "LIVE_W05_R2",
       "name": "qwerqwer",
-      "level": 88,
+      "level": 89,
       "grade": 21,
       "hunt_level": 21,
       "class": "AbyssRevenant",
@@ -15134,24 +15134,24 @@
       "world": "5-3",
       "world_group_id": "LIVE_W05",
       "world_id": "LIVE_W05_R3",
-      "name": "방패왕",
-      "level": 85,
-      "grade": 20,
-      "hunt_level": 20,
-      "class": "Enforcer",
-      "guild": "오엔",
-      "ranking": 61
-    },
-    {
-      "world": "5-3",
-      "world_group_id": "LIVE_W05",
-      "world_id": "LIVE_W05_R3",
       "name": "가을군",
       "level": 85,
       "grade": 20,
       "hunt_level": 20,
       "class": "IncenseArcher",
       "guild": "빌런",
+      "ranking": 61
+    },
+    {
+      "world": "5-3",
+      "world_group_id": "LIVE_W05",
+      "world_id": "LIVE_W05_R3",
+      "name": "방패왕",
+      "level": 85,
+      "grade": 20,
+      "hunt_level": 20,
+      "class": "Enforcer",
+      "guild": "오엔",
       "ranking": 62
     },
     {
@@ -16190,24 +16190,24 @@
       "world": "5-4",
       "world_group_id": "LIVE_W05",
       "world_id": "LIVE_W05_R4",
-      "name": "댕곰",
-      "level": 89,
-      "grade": 22,
-      "hunt_level": 22,
-      "class": "Enforcer",
-      "guild": "곰",
-      "ranking": 49
-    },
-    {
-      "world": "5-4",
-      "world_group_id": "LIVE_W05",
-      "world_id": "LIVE_W05_R4",
       "name": "인턴",
       "level": 89,
       "grade": 24,
       "hunt_level": 24,
       "class": "Enforcer",
       "guild": "대기업",
+      "ranking": 49
+    },
+    {
+      "world": "5-4",
+      "world_group_id": "LIVE_W05",
+      "world_id": "LIVE_W05_R4",
+      "name": "댕곰",
+      "level": 89,
+      "grade": 22,
+      "hunt_level": 22,
+      "class": "Enforcer",
+      "guild": "곰",
       "ranking": 50
     },
     {
@@ -16706,24 +16706,24 @@
       "world": "5-4",
       "world_group_id": "LIVE_W05",
       "world_id": "LIVE_W05_R4",
-      "name": "빙가리",
-      "level": 86,
-      "grade": 20,
-      "hunt_level": 20,
-      "class": "WildWarrior",
-      "guild": "KPOP",
-      "ranking": 92
-    },
-    {
-      "world": "5-4",
-      "world_group_id": "LIVE_W05",
-      "world_id": "LIVE_W05_R4",
       "name": "헌신냥",
       "level": 86,
       "grade": 22,
       "hunt_level": 22,
       "class": "Enforcer",
       "guild": "쌀먹단",
+      "ranking": 92
+    },
+    {
+      "world": "5-4",
+      "world_group_id": "LIVE_W05",
+      "world_id": "LIVE_W05_R4",
+      "name": "빙가리",
+      "level": 86,
+      "grade": 20,
+      "hunt_level": 20,
+      "class": "WildWarrior",
+      "guild": "KPOP",
       "ranking": 93
     },
     {
@@ -16742,11 +16742,11 @@
       "world": "5-4",
       "world_group_id": "LIVE_W05",
       "world_id": "LIVE_W05_R4",
-      "name": "노조",
+      "name": "구월생",
       "level": 86,
-      "grade": 22,
-      "hunt_level": 22,
-      "class": "RuneScribe",
+      "grade": 21,
+      "hunt_level": 21,
+      "class": "WildWarrior",
       "guild": "하청업체",
       "ranking": 95
     },
@@ -16754,11 +16754,11 @@
       "world": "5-4",
       "world_group_id": "LIVE_W05",
       "world_id": "LIVE_W05_R4",
-      "name": "구월생",
+      "name": "노조",
       "level": 86,
-      "grade": 21,
-      "hunt_level": 21,
-      "class": "WildWarrior",
+      "grade": 22,
+      "hunt_level": 22,
+      "class": "RuneScribe",
       "guild": "하청업체",
       "ranking": 96
     },
@@ -17582,13 +17582,25 @@
       "world": "5-5",
       "world_group_id": "LIVE_W05",
       "world_id": "LIVE_W05_R5",
+      "name": "미로",
+      "level": 87,
+      "grade": 22,
+      "hunt_level": 22,
+      "class": "AbyssRevenant",
+      "guild": "브랜드",
+      "ranking": 65
+    },
+    {
+      "world": "5-5",
+      "world_group_id": "LIVE_W05",
+      "world_id": "LIVE_W05_R5",
       "name": "에프킬러",
       "level": 87,
       "grade": 21,
       "hunt_level": 21,
       "class": "RuneScribe",
       "guild": "천사",
-      "ranking": 65
+      "ranking": 66
     },
     {
       "world": "5-5",
@@ -17600,18 +17612,6 @@
       "hunt_level": 21,
       "class": "MirageBlade",
       "guild": "킹덤",
-      "ranking": 66
-    },
-    {
-      "world": "5-5",
-      "world_group_id": "LIVE_W05",
-      "world_id": "LIVE_W05_R5",
-      "name": "미로",
-      "level": 87,
-      "grade": 22,
-      "hunt_level": 22,
-      "class": "AbyssRevenant",
-      "guild": "브랜드",
       "ranking": 67
     },
     {
@@ -17798,11 +17798,11 @@
       "world": "5-5",
       "world_group_id": "LIVE_W05",
       "world_id": "LIVE_W05_R5",
-      "name": "코코아",
+      "name": "타니에",
       "level": 86,
       "grade": 20,
       "hunt_level": 20,
-      "class": "RuneScribe",
+      "class": "SolarSentinel",
       "guild": "킹덤",
       "ranking": 83
     },
@@ -17810,11 +17810,11 @@
       "world": "5-5",
       "world_group_id": "LIVE_W05",
       "world_id": "LIVE_W05_R5",
-      "name": "타니에",
+      "name": "코코아",
       "level": 86,
       "grade": 20,
       "hunt_level": 20,
-      "class": "SolarSentinel",
+      "class": "RuneScribe",
       "guild": "킹덤",
       "ranking": 84
     },
@@ -17966,24 +17966,24 @@
       "world": "5-5",
       "world_group_id": "LIVE_W05",
       "world_id": "LIVE_W05_R5",
-      "name": "처룬",
-      "level": 86,
-      "grade": 20,
-      "hunt_level": 20,
-      "class": "SolarSentinel",
-      "guild": "깽깽",
-      "ranking": 97
-    },
-    {
-      "world": "5-5",
-      "world_group_id": "LIVE_W05",
-      "world_id": "LIVE_W05_R5",
       "name": "냐리",
       "level": 86,
       "grade": 19,
       "hunt_level": 19,
       "class": "MirageBlade",
       "guild": "킹덤",
+      "ranking": 97
+    },
+    {
+      "world": "5-5",
+      "world_group_id": "LIVE_W05",
+      "world_id": "LIVE_W05_R5",
+      "name": "처룬",
+      "level": 86,
+      "grade": 20,
+      "hunt_level": 20,
+      "class": "SolarSentinel",
+      "guild": "깽깽",
       "ranking": 98
     },
     {
@@ -18362,11 +18362,11 @@
       "world": "8-1",
       "world_group_id": "LIVE_W08",
       "world_id": "LIVE_W08_R1",
-      "name": "철도",
+      "name": "더룰루",
       "level": 92,
-      "grade": 25,
-      "hunt_level": 25,
-      "class": "RuneScribe",
+      "grade": 26,
+      "hunt_level": 26,
+      "class": "IncenseArcher",
       "guild": "더킹",
       "ranking": 30
     },
@@ -18374,11 +18374,11 @@
       "world": "8-1",
       "world_group_id": "LIVE_W08",
       "world_id": "LIVE_W08_R1",
-      "name": "더룰루",
+      "name": "철도",
       "level": 92,
-      "grade": 26,
-      "hunt_level": 26,
-      "class": "IncenseArcher",
+      "grade": 25,
+      "hunt_level": 25,
+      "class": "RuneScribe",
       "guild": "더킹",
       "ranking": 31
     },
@@ -18975,7 +18975,7 @@
       "world_group_id": "LIVE_W08",
       "world_id": "LIVE_W08_R1",
       "name": "덕선이",
-      "level": 88,
+      "level": 89,
       "grade": 22,
       "hunt_level": 22,
       "class": "IncenseArcher",
@@ -19166,24 +19166,24 @@
       "world": "8-1",
       "world_group_id": "LIVE_W08",
       "world_id": "LIVE_W08_R1",
-      "name": "매콤크림파스타",
-      "level": 88,
-      "grade": 21,
-      "hunt_level": 21,
-      "class": "MirageBlade",
-      "guild": "고장난별빛",
-      "ranking": 97
-    },
-    {
-      "world": "8-1",
-      "world_group_id": "LIVE_W08",
-      "world_id": "LIVE_W08_R1",
       "name": "타호",
       "level": 88,
       "grade": 21,
       "hunt_level": 21,
       "class": "IncenseArcher",
       "guild": "뚝섬",
+      "ranking": 97
+    },
+    {
+      "world": "8-1",
+      "world_group_id": "LIVE_W08",
+      "world_id": "LIVE_W08_R1",
+      "name": "매콤크림파스타",
+      "level": 88,
+      "grade": 21,
+      "hunt_level": 21,
+      "class": "MirageBlade",
+      "guild": "고장난별빛",
       "ranking": 98
     },
     {
@@ -19478,11 +19478,11 @@
       "world": "8-2",
       "world_group_id": "LIVE_W08",
       "world_id": "LIVE_W08_R2",
-      "name": "다이아",
+      "name": "아니그게아니라",
       "level": 91,
       "grade": 24,
       "hunt_level": 24,
-      "class": "RuneScribe",
+      "class": "Enforcer",
       "guild": "홀리데이",
       "ranking": 23
     },
@@ -19490,11 +19490,11 @@
       "world": "8-2",
       "world_group_id": "LIVE_W08",
       "world_id": "LIVE_W08_R2",
-      "name": "아니그게아니라",
+      "name": "다이아",
       "level": 91,
       "grade": 24,
       "hunt_level": 24,
-      "class": "Enforcer",
+      "class": "RuneScribe",
       "guild": "홀리데이",
       "ranking": 24
     },
@@ -19886,24 +19886,24 @@
       "world": "8-2",
       "world_group_id": "LIVE_W08",
       "world_id": "LIVE_W08_R2",
-      "name": "초코하임",
-      "level": 88,
-      "grade": 22,
-      "hunt_level": 22,
-      "class": "RuneScribe",
-      "guild": "오예스",
-      "ranking": 57
-    },
-    {
-      "world": "8-2",
-      "world_group_id": "LIVE_W08",
-      "world_id": "LIVE_W08_R2",
       "name": "가르",
       "level": 88,
       "grade": 24,
       "hunt_level": 24,
       "class": "Enforcer",
       "guild": "전설",
+      "ranking": 57
+    },
+    {
+      "world": "8-2",
+      "world_group_id": "LIVE_W08",
+      "world_id": "LIVE_W08_R2",
+      "name": "초코하임",
+      "level": 88,
+      "grade": 22,
+      "hunt_level": 22,
+      "class": "RuneScribe",
+      "guild": "오예스",
       "ranking": 58
     },
     {
@@ -19995,7 +19995,7 @@
       "world_group_id": "LIVE_W08",
       "world_id": "LIVE_W08_R2",
       "name": "소림",
-      "level": 87,
+      "level": 88,
       "grade": 22,
       "hunt_level": 22,
       "class": "IncenseArcher",
@@ -20054,7 +20054,7 @@
       "world": "8-2",
       "world_group_id": "LIVE_W08",
       "world_id": "LIVE_W08_R2",
-      "name": "에이븐",
+      "name": "구르름",
       "level": 87,
       "grade": 21,
       "hunt_level": 21,
@@ -20066,7 +20066,7 @@
       "world": "8-2",
       "world_group_id": "LIVE_W08",
       "world_id": "LIVE_W08_R2",
-      "name": "구르름",
+      "name": "에이븐",
       "level": 87,
       "grade": 21,
       "hunt_level": 21,
@@ -20078,25 +20078,13 @@
       "world": "8-2",
       "world_group_id": "LIVE_W08",
       "world_id": "LIVE_W08_R2",
-      "name": "도도",
-      "level": 87,
-      "grade": 21,
-      "hunt_level": 21,
-      "class": "RuneScribe",
-      "guild": "홀리데이",
-      "ranking": 73
-    },
-    {
-      "world": "8-2",
-      "world_group_id": "LIVE_W08",
-      "world_id": "LIVE_W08_R2",
       "name": "사방",
       "level": 87,
       "grade": 22,
       "hunt_level": 22,
       "class": "Enforcer",
       "guild": "휴일",
-      "ranking": 74
+      "ranking": 73
     },
     {
       "world": "8-2",
@@ -20108,6 +20096,18 @@
       "hunt_level": 21,
       "class": "IncenseArcher",
       "guild": "전설",
+      "ranking": 74
+    },
+    {
+      "world": "8-2",
+      "world_group_id": "LIVE_W08",
+      "world_id": "LIVE_W08_R2",
+      "name": "도도",
+      "level": 87,
+      "grade": 21,
+      "hunt_level": 21,
+      "class": "RuneScribe",
+      "guild": "홀리데이",
       "ranking": 75
     },
     {
@@ -20378,24 +20378,24 @@
       "world": "8-2",
       "world_group_id": "LIVE_W08",
       "world_id": "LIVE_W08_R2",
-      "name": "킹승호",
-      "level": 85,
-      "grade": 21,
-      "hunt_level": 21,
-      "class": "Enforcer",
-      "guild": "동물의숲",
-      "ranking": 98
-    },
-    {
-      "world": "8-2",
-      "world_group_id": "LIVE_W08",
-      "world_id": "LIVE_W08_R2",
       "name": "오예스",
       "level": 85,
       "grade": 21,
       "hunt_level": 21,
       "class": "Enforcer",
       "guild": "오예스",
+      "ranking": 98
+    },
+    {
+      "world": "8-2",
+      "world_group_id": "LIVE_W08",
+      "world_id": "LIVE_W08_R2",
+      "name": "킹승호",
+      "level": 85,
+      "grade": 21,
+      "hunt_level": 21,
+      "class": "Enforcer",
+      "guild": "동물의숲",
       "ranking": 99
     },
     {
@@ -20475,7 +20475,7 @@
       "world_group_id": "LIVE_W08",
       "world_id": "LIVE_W08_R3",
       "name": "바베바",
-      "level": 90,
+      "level": 89,
       "grade": 23,
       "hunt_level": 23,
       "class": "IncenseArcher",
@@ -21266,11 +21266,11 @@
       "world": "8-3",
       "world_group_id": "LIVE_W08",
       "world_id": "LIVE_W08_R3",
-      "name": "구너상우",
+      "name": "다크꾸리",
       "level": 83,
-      "grade": 18,
-      "hunt_level": 18,
-      "class": "WildWarrior",
+      "grade": 19,
+      "hunt_level": 19,
+      "class": "IncenseArcher",
       "guild": "시아",
       "ranking": 72
     },
@@ -21278,11 +21278,11 @@
       "world": "8-3",
       "world_group_id": "LIVE_W08",
       "world_id": "LIVE_W08_R3",
-      "name": "다크꾸리",
+      "name": "구너상우",
       "level": 83,
-      "grade": 19,
-      "hunt_level": 19,
-      "class": "IncenseArcher",
+      "grade": 18,
+      "hunt_level": 18,
+      "class": "WildWarrior",
       "guild": "시아",
       "ranking": 73
     },
@@ -21590,24 +21590,24 @@
       "world": "8-3",
       "world_group_id": "LIVE_W08",
       "world_id": "LIVE_W08_R3",
-      "name": "의미",
-      "level": 81,
-      "grade": 16,
-      "hunt_level": 16,
-      "class": "SolarSentinel",
-      "guild": "시아",
-      "ranking": 99
-    },
-    {
-      "world": "8-3",
-      "world_group_id": "LIVE_W08",
-      "world_id": "LIVE_W08_R3",
       "name": "호반",
       "level": 81,
       "grade": 19,
       "hunt_level": 19,
       "class": "AbyssRevenant",
       "guild": "서브웨이",
+      "ranking": 99
+    },
+    {
+      "world": "8-3",
+      "world_group_id": "LIVE_W08",
+      "world_id": "LIVE_W08_R3",
+      "name": "의미",
+      "level": 81,
+      "grade": 16,
+      "hunt_level": 16,
+      "class": "SolarSentinel",
+      "guild": "시아",
       "ranking": 100
     },
     {
@@ -21639,7 +21639,7 @@
       "world_group_id": "LIVE_W08",
       "world_id": "LIVE_W08_R4",
       "name": "집결",
-      "level": 92,
+      "level": 93,
       "grade": 25,
       "hunt_level": 25,
       "class": "Enforcer",
@@ -21758,24 +21758,24 @@
       "world": "8-4",
       "world_group_id": "LIVE_W08",
       "world_id": "LIVE_W08_R4",
-      "name": "스바라시",
-      "level": 91,
-      "grade": 24,
-      "hunt_level": 24,
-      "class": "Enforcer",
-      "guild": "오늘밤",
-      "ranking": 13
-    },
-    {
-      "world": "8-4",
-      "world_group_id": "LIVE_W08",
-      "world_id": "LIVE_W08_R4",
       "name": "저때문에화났나요",
       "level": 91,
       "grade": 25,
       "hunt_level": 25,
       "class": "SolarSentinel",
       "guild": "집결지",
+      "ranking": 13
+    },
+    {
+      "world": "8-4",
+      "world_group_id": "LIVE_W08",
+      "world_id": "LIVE_W08_R4",
+      "name": "스바라시",
+      "level": 91,
+      "grade": 24,
+      "hunt_level": 24,
+      "class": "Enforcer",
+      "guild": "오늘밤",
       "ranking": 14
     },
     {
@@ -22118,25 +22118,13 @@
       "world": "8-4",
       "world_group_id": "LIVE_W08",
       "world_id": "LIVE_W08_R4",
-      "name": "니들이게맛을알아",
-      "level": 89,
-      "grade": 22,
-      "hunt_level": 22,
-      "class": "IncenseArcher",
-      "guild": "집결지",
-      "ranking": 43
-    },
-    {
-      "world": "8-4",
-      "world_group_id": "LIVE_W08",
-      "world_id": "LIVE_W08_R4",
       "name": "우세",
       "level": 89,
       "grade": 22,
       "hunt_level": 22,
       "class": "IncenseArcher",
       "guild": "악바리",
-      "ranking": 44
+      "ranking": 43
     },
     {
       "world": "8-4",
@@ -22148,6 +22136,18 @@
       "hunt_level": 23,
       "class": "Enforcer",
       "guild": "프리아",
+      "ranking": 44
+    },
+    {
+      "world": "8-4",
+      "world_group_id": "LIVE_W08",
+      "world_id": "LIVE_W08_R4",
+      "name": "니들이게맛을알아",
+      "level": 89,
+      "grade": 22,
+      "hunt_level": 22,
+      "class": "IncenseArcher",
+      "guild": "집결지",
       "ranking": 45
     },
     {
@@ -22538,24 +22538,24 @@
       "world": "8-4",
       "world_group_id": "LIVE_W08",
       "world_id": "LIVE_W08_R4",
-      "name": "유성",
-      "level": 87,
-      "grade": 22,
-      "hunt_level": 22,
-      "class": "Enforcer",
-      "guild": "두둥",
-      "ranking": 78
-    },
-    {
-      "world": "8-4",
-      "world_group_id": "LIVE_W08",
-      "world_id": "LIVE_W08_R4",
       "name": "투게더",
       "level": 87,
       "grade": 20,
       "hunt_level": 20,
       "class": "IncenseArcher",
       "guild": "프리아",
+      "ranking": 78
+    },
+    {
+      "world": "8-4",
+      "world_group_id": "LIVE_W08",
+      "world_id": "LIVE_W08_R4",
+      "name": "유성",
+      "level": 87,
+      "grade": 22,
+      "hunt_level": 22,
+      "class": "Enforcer",
+      "guild": "두둥",
       "ranking": 79
     },
     {
@@ -22694,24 +22694,24 @@
       "world": "8-4",
       "world_group_id": "LIVE_W08",
       "world_id": "LIVE_W08_R4",
-      "name": "깨꼬닥",
-      "level": 86,
-      "grade": 21,
-      "hunt_level": 21,
-      "class": "RuneScribe",
-      "guild": "매트",
-      "ranking": 91
-    },
-    {
-      "world": "8-4",
-      "world_group_id": "LIVE_W08",
-      "world_id": "LIVE_W08_R4",
       "name": "연장일",
       "level": 86,
       "grade": 21,
       "hunt_level": 21,
       "class": "RuneScribe",
       "guild": "이겜왜함",
+      "ranking": 91
+    },
+    {
+      "world": "8-4",
+      "world_group_id": "LIVE_W08",
+      "world_id": "LIVE_W08_R4",
+      "name": "깨꼬닥",
+      "level": 86,
+      "grade": 21,
+      "hunt_level": 21,
+      "class": "RuneScribe",
+      "guild": "매트",
       "ranking": 92
     },
     {
@@ -22778,24 +22778,24 @@
       "world": "8-4",
       "world_group_id": "LIVE_W08",
       "world_id": "LIVE_W08_R4",
-      "name": "필라푸스",
-      "level": 86,
-      "grade": 20,
-      "hunt_level": 20,
-      "class": "SolarSentinel",
-      "guild": "프리아",
-      "ranking": 98
-    },
-    {
-      "world": "8-4",
-      "world_group_id": "LIVE_W08",
-      "world_id": "LIVE_W08_R4",
       "name": "야후",
       "level": 86,
       "grade": 21,
       "hunt_level": 21,
       "class": "IncenseArcher",
       "guild": "결사명",
+      "ranking": 98
+    },
+    {
+      "world": "8-4",
+      "world_group_id": "LIVE_W08",
+      "world_id": "LIVE_W08_R4",
+      "name": "필라푸스",
+      "level": 86,
+      "grade": 20,
+      "hunt_level": 20,
+      "class": "SolarSentinel",
+      "guild": "프리아",
       "ranking": 99
     },
     {
@@ -22875,7 +22875,7 @@
       "world_group_id": "LIVE_W08",
       "world_id": "LIVE_W08_R5",
       "name": "고장난빠따",
-      "level": 92,
+      "level": 93,
       "grade": 26,
       "hunt_level": 26,
       "class": "AbyssRevenant",
@@ -24038,24 +24038,24 @@
       "world": "10-1",
       "world_group_id": "LIVE_W10",
       "world_id": "LIVE_W10_R1",
-      "name": "nana",
-      "level": 93,
-      "grade": 26,
-      "hunt_level": 26,
-      "class": "AbyssRevenant",
-      "guild": "NB",
-      "ranking": 3
-    },
-    {
-      "world": "10-1",
-      "world_group_id": "LIVE_W10",
-      "world_id": "LIVE_W10_R1",
       "name": "곰르신의빌딩한칸",
       "level": 93,
       "grade": 26,
       "hunt_level": 26,
       "class": "Enforcer",
       "guild": "뽀미",
+      "ranking": 3
+    },
+    {
+      "world": "10-1",
+      "world_group_id": "LIVE_W10",
+      "world_id": "LIVE_W10_R1",
+      "name": "nana",
+      "level": 93,
+      "grade": 26,
+      "hunt_level": 26,
+      "class": "AbyssRevenant",
+      "guild": "NB",
       "ranking": 4
     },
     {
@@ -24350,24 +24350,24 @@
       "world": "10-1",
       "world_group_id": "LIVE_W10",
       "world_id": "LIVE_W10_R1",
-      "name": "축복매화",
-      "level": 92,
-      "grade": 26,
-      "hunt_level": 26,
-      "class": "RuneScribe",
-      "guild": "NB",
-      "ranking": 29
-    },
-    {
-      "world": "10-1",
-      "world_group_id": "LIVE_W10",
-      "world_id": "LIVE_W10_R1",
       "name": "왕영은",
       "level": 92,
       "grade": 25,
       "hunt_level": 25,
       "class": "MirageBlade",
       "guild": "뽀미",
+      "ranking": 29
+    },
+    {
+      "world": "10-1",
+      "world_group_id": "LIVE_W10",
+      "world_id": "LIVE_W10_R1",
+      "name": "축복매화",
+      "level": 92,
+      "grade": 26,
+      "hunt_level": 26,
+      "class": "RuneScribe",
+      "guild": "NB",
       "ranking": 30
     },
     {
@@ -24626,24 +24626,24 @@
       "world": "10-1",
       "world_group_id": "LIVE_W10",
       "world_id": "LIVE_W10_R1",
-      "name": "빠삭",
-      "level": 91,
-      "grade": 24,
-      "hunt_level": 24,
-      "class": "Enforcer",
-      "guild": "NB",
-      "ranking": 52
-    },
-    {
-      "world": "10-1",
-      "world_group_id": "LIVE_W10",
-      "world_id": "LIVE_W10_R1",
       "name": "Forza",
       "level": 91,
       "grade": 25,
       "hunt_level": 25,
       "class": "Enforcer",
       "guild": "뽀미",
+      "ranking": 52
+    },
+    {
+      "world": "10-1",
+      "world_group_id": "LIVE_W10",
+      "world_id": "LIVE_W10_R1",
+      "name": "빠삭",
+      "level": 91,
+      "grade": 24,
+      "hunt_level": 24,
+      "class": "Enforcer",
+      "guild": "NB",
       "ranking": 53
     },
     {
@@ -24710,11 +24710,11 @@
       "world": "10-1",
       "world_group_id": "LIVE_W10",
       "world_id": "LIVE_W10_R1",
-      "name": "축산들",
+      "name": "드림캐처",
       "level": 91,
-      "grade": 26,
-      "hunt_level": 26,
-      "class": "RuneScribe",
+      "grade": 24,
+      "hunt_level": 24,
+      "class": "IncenseArcher",
       "guild": "NB",
       "ranking": 59
     },
@@ -24722,11 +24722,11 @@
       "world": "10-1",
       "world_group_id": "LIVE_W10",
       "world_id": "LIVE_W10_R1",
-      "name": "드림캐처",
+      "name": "축산들",
       "level": 91,
-      "grade": 24,
-      "hunt_level": 24,
-      "class": "IncenseArcher",
+      "grade": 26,
+      "hunt_level": 26,
+      "class": "RuneScribe",
       "guild": "NB",
       "ranking": 60
     },
@@ -24794,24 +24794,24 @@
       "world": "10-1",
       "world_group_id": "LIVE_W10",
       "world_id": "LIVE_W10_R1",
-      "name": "추신",
-      "level": 90,
-      "grade": 23,
-      "hunt_level": 23,
-      "class": "IncenseArcher",
-      "guild": "추론",
-      "ranking": 66
-    },
-    {
-      "world": "10-1",
-      "world_group_id": "LIVE_W10",
-      "world_id": "LIVE_W10_R1",
       "name": "더덕",
       "level": 90,
       "grade": 24,
       "hunt_level": 24,
       "class": "RuneScribe",
       "guild": "YB",
+      "ranking": 66
+    },
+    {
+      "world": "10-1",
+      "world_group_id": "LIVE_W10",
+      "world_id": "LIVE_W10_R1",
+      "name": "추신",
+      "level": 90,
+      "grade": 23,
+      "hunt_level": 23,
+      "class": "IncenseArcher",
+      "guild": "추론",
       "ranking": 67
     },
     {
@@ -24830,25 +24830,13 @@
       "world": "10-1",
       "world_group_id": "LIVE_W10",
       "world_id": "LIVE_W10_R1",
-      "name": "추산",
-      "level": 90,
-      "grade": 24,
-      "hunt_level": 24,
-      "class": "RuneScribe",
-      "guild": "추론",
-      "ranking": 69
-    },
-    {
-      "world": "10-1",
-      "world_group_id": "LIVE_W10",
-      "world_id": "LIVE_W10_R1",
       "name": "과락",
       "level": 90,
       "grade": 25,
       "hunt_level": 25,
       "class": "Enforcer",
       "guild": "NB",
-      "ranking": 70
+      "ranking": 69
     },
     {
       "world": "10-1",
@@ -24860,6 +24848,18 @@
       "hunt_level": 24,
       "class": "Enforcer",
       "guild": "YB",
+      "ranking": 70
+    },
+    {
+      "world": "10-1",
+      "world_group_id": "LIVE_W10",
+      "world_id": "LIVE_W10_R1",
+      "name": "추산",
+      "level": 90,
+      "grade": 24,
+      "hunt_level": 24,
+      "class": "RuneScribe",
+      "guild": "추론",
       "ranking": 71
     },
     {
@@ -24939,7 +24939,7 @@
       "world_group_id": "LIVE_W10",
       "world_id": "LIVE_W10_R1",
       "name": "온마님",
-      "level": 89,
+      "level": 90,
       "grade": 23,
       "hunt_level": 23,
       "class": "MirageBlade",
@@ -25262,11 +25262,11 @@
       "world": "10-2",
       "world_group_id": "LIVE_W10",
       "world_id": "LIVE_W10_R2",
-      "name": "장거한",
+      "name": "윤발",
       "level": 93,
       "grade": 26,
       "hunt_level": 26,
-      "class": "Enforcer",
+      "class": "SolarSentinel",
       "guild": "금쪽이",
       "ranking": 5
     },
@@ -25274,11 +25274,11 @@
       "world": "10-2",
       "world_group_id": "LIVE_W10",
       "world_id": "LIVE_W10_R2",
-      "name": "윤발",
+      "name": "장거한",
       "level": 93,
       "grade": 26,
       "hunt_level": 26,
-      "class": "SolarSentinel",
+      "class": "Enforcer",
       "guild": "금쪽이",
       "ranking": 6
     },
@@ -25562,24 +25562,24 @@
       "world": "10-2",
       "world_group_id": "LIVE_W10",
       "world_id": "LIVE_W10_R2",
-      "name": "강발코",
-      "level": 92,
-      "grade": 26,
-      "hunt_level": 26,
-      "class": "Enforcer",
-      "guild": "GB",
-      "ranking": 30
-    },
-    {
-      "world": "10-2",
-      "world_group_id": "LIVE_W10",
-      "world_id": "LIVE_W10_R2",
       "name": "번개",
       "level": 92,
       "grade": 26,
       "hunt_level": 26,
       "class": "RuneScribe",
       "guild": "금쪽이",
+      "ranking": 30
+    },
+    {
+      "world": "10-2",
+      "world_group_id": "LIVE_W10",
+      "world_id": "LIVE_W10_R2",
+      "name": "강발코",
+      "level": 92,
+      "grade": 26,
+      "hunt_level": 26,
+      "class": "Enforcer",
+      "guild": "GB",
       "ranking": 31
     },
     {
@@ -25658,24 +25658,24 @@
       "world": "10-2",
       "world_group_id": "LIVE_W10",
       "world_id": "LIVE_W10_R2",
-      "name": "강마적",
-      "level": 92,
-      "grade": 26,
-      "hunt_level": 26,
-      "class": "AbyssRevenant",
-      "guild": "GB",
-      "ranking": 38
-    },
-    {
-      "world": "10-2",
-      "world_group_id": "LIVE_W10",
-      "world_id": "LIVE_W10_R2",
       "name": "쿠동",
       "level": 92,
       "grade": 26,
       "hunt_level": 26,
       "class": "WildWarrior",
       "guild": "금쪽이",
+      "ranking": 38
+    },
+    {
+      "world": "10-2",
+      "world_group_id": "LIVE_W10",
+      "world_id": "LIVE_W10_R2",
+      "name": "강마적",
+      "level": 92,
+      "grade": 26,
+      "hunt_level": 26,
+      "class": "AbyssRevenant",
+      "guild": "GB",
       "ranking": 39
     },
     {
@@ -25850,24 +25850,24 @@
       "world": "10-2",
       "world_group_id": "LIVE_W10",
       "world_id": "LIVE_W10_R2",
-      "name": "강너굴",
-      "level": 92,
-      "grade": 26,
-      "hunt_level": 26,
-      "class": "IncenseArcher",
-      "guild": "GB",
-      "ranking": 54
-    },
-    {
-      "world": "10-2",
-      "world_group_id": "LIVE_W10",
-      "world_id": "LIVE_W10_R2",
       "name": "강루루",
       "level": 92,
       "grade": 25,
       "hunt_level": 25,
       "class": "IncenseArcher",
       "guild": "GN",
+      "ranking": 54
+    },
+    {
+      "world": "10-2",
+      "world_group_id": "LIVE_W10",
+      "world_id": "LIVE_W10_R2",
+      "name": "강너굴",
+      "level": 92,
+      "grade": 26,
+      "hunt_level": 26,
+      "class": "IncenseArcher",
+      "guild": "GB",
       "ranking": 55
     },
     {
@@ -25948,8 +25948,8 @@
       "world_id": "LIVE_W10_R2",
       "name": "노풍석",
       "level": 92,
-      "grade": 25,
-      "hunt_level": 25,
+      "grade": 26,
+      "hunt_level": 26,
       "class": "MirageBlade",
       "guild": "금쪽이",
       "ranking": 62
@@ -26043,7 +26043,7 @@
       "world_group_id": "LIVE_W10",
       "world_id": "LIVE_W10_R2",
       "name": "강펀치",
-      "level": 91,
+      "level": 92,
       "grade": 26,
       "hunt_level": 26,
       "class": "IncenseArcher",
@@ -26114,24 +26114,24 @@
       "world": "10-2",
       "world_group_id": "LIVE_W10",
       "world_id": "LIVE_W10_R2",
-      "name": "얌마",
-      "level": 91,
-      "grade": 25,
-      "hunt_level": 25,
-      "class": "Enforcer",
-      "guild": "금쪽이",
-      "ranking": 76
-    },
-    {
-      "world": "10-2",
-      "world_group_id": "LIVE_W10",
-      "world_id": "LIVE_W10_R2",
       "name": "강라리",
       "level": 91,
       "grade": 25,
       "hunt_level": 25,
       "class": "RuneScribe",
       "guild": "GN",
+      "ranking": 76
+    },
+    {
+      "world": "10-2",
+      "world_group_id": "LIVE_W10",
+      "world_id": "LIVE_W10_R2",
+      "name": "얌마",
+      "level": 91,
+      "grade": 25,
+      "hunt_level": 25,
+      "class": "Enforcer",
+      "guild": "금쪽이",
       "ranking": 77
     },
     {
@@ -26150,25 +26150,13 @@
       "world": "10-2",
       "world_group_id": "LIVE_W10",
       "world_id": "LIVE_W10_R2",
-      "name": "강태풍",
-      "level": 91,
-      "grade": 25,
-      "hunt_level": 25,
-      "class": "IncenseArcher",
-      "guild": "GB",
-      "ranking": 79
-    },
-    {
-      "world": "10-2",
-      "world_group_id": "LIVE_W10",
-      "world_id": "LIVE_W10_R2",
       "name": "향별",
       "level": 91,
       "grade": 24,
       "hunt_level": 24,
       "class": "Enforcer",
       "guild": "별무리",
-      "ranking": 80
+      "ranking": 79
     },
     {
       "world": "10-2",
@@ -26180,7 +26168,7 @@
       "hunt_level": 25,
       "class": "RuneScribe",
       "guild": "금쪽이",
-      "ranking": 81
+      "ranking": 80
     },
     {
       "world": "10-2",
@@ -26192,7 +26180,7 @@
       "hunt_level": 26,
       "class": "IncenseArcher",
       "guild": "GN",
-      "ranking": 82
+      "ranking": 81
     },
     {
       "world": "10-2",
@@ -26204,7 +26192,7 @@
       "hunt_level": 25,
       "class": "RuneScribe",
       "guild": "GN",
-      "ranking": 83
+      "ranking": 82
     },
     {
       "world": "10-2",
@@ -26216,7 +26204,7 @@
       "hunt_level": 25,
       "class": "RuneScribe",
       "guild": "별무리",
-      "ranking": 84
+      "ranking": 83
     },
     {
       "world": "10-2",
@@ -26228,7 +26216,7 @@
       "hunt_level": 24,
       "class": "MirageBlade",
       "guild": "GN",
-      "ranking": 85
+      "ranking": 84
     },
     {
       "world": "10-2",
@@ -26239,6 +26227,18 @@
       "grade": 26,
       "hunt_level": 26,
       "class": "AbyssRevenant",
+      "guild": "GB",
+      "ranking": 85
+    },
+    {
+      "world": "10-2",
+      "world_group_id": "LIVE_W10",
+      "world_id": "LIVE_W10_R2",
+      "name": "강태풍",
+      "level": 91,
+      "grade": 25,
+      "hunt_level": 25,
+      "class": "IncenseArcher",
       "guild": "GB",
       "ranking": 86
     },
@@ -27122,24 +27122,24 @@
       "world": "10-3",
       "world_group_id": "LIVE_W10",
       "world_id": "LIVE_W10_R3",
-      "name": "띠로리",
-      "level": 89,
-      "grade": 23,
-      "hunt_level": 23,
-      "class": "Enforcer",
-      "guild": "진짜",
-      "ranking": 60
-    },
-    {
-      "world": "10-3",
-      "world_group_id": "LIVE_W10",
-      "world_id": "LIVE_W10_R3",
       "name": "누이",
       "level": 89,
       "grade": 23,
       "hunt_level": 23,
       "class": "RuneScribe",
       "guild": "백야행",
+      "ranking": 60
+    },
+    {
+      "world": "10-3",
+      "world_group_id": "LIVE_W10",
+      "world_id": "LIVE_W10_R3",
+      "name": "띠로리",
+      "level": 89,
+      "grade": 23,
+      "hunt_level": 23,
+      "class": "Enforcer",
+      "guild": "진짜",
       "ranking": 61
     },
     {
@@ -27218,10 +27218,10 @@
       "world": "10-3",
       "world_group_id": "LIVE_W10",
       "world_id": "LIVE_W10_R3",
-      "name": "폴라포",
+      "name": "지원",
       "level": 88,
-      "grade": 22,
-      "hunt_level": 22,
+      "grade": 24,
+      "hunt_level": 24,
       "class": "Enforcer",
       "guild": "진짜",
       "ranking": 68
@@ -27230,10 +27230,10 @@
       "world": "10-3",
       "world_group_id": "LIVE_W10",
       "world_id": "LIVE_W10_R3",
-      "name": "지원",
+      "name": "폴라포",
       "level": 88,
-      "grade": 24,
-      "hunt_level": 24,
+      "grade": 22,
+      "hunt_level": 22,
       "class": "Enforcer",
       "guild": "진짜",
       "ranking": 69
@@ -27411,7 +27411,7 @@
       "world_group_id": "LIVE_W10",
       "world_id": "LIVE_W10_R3",
       "name": "쎠틀",
-      "level": 87,
+      "level": 88,
       "grade": 21,
       "hunt_level": 21,
       "class": "RuneScribe",
@@ -28034,13 +28034,25 @@
       "world": "10-4",
       "world_group_id": "LIVE_W10",
       "world_id": "LIVE_W10_R4",
+      "name": "장댕이",
+      "level": 90,
+      "grade": 25,
+      "hunt_level": 25,
+      "class": "RuneScribe",
+      "guild": "동물원",
+      "ranking": 36
+    },
+    {
+      "world": "10-4",
+      "world_group_id": "LIVE_W10",
+      "world_id": "LIVE_W10_R4",
       "name": "꿀돼징",
       "level": 90,
       "grade": 24,
       "hunt_level": 24,
       "class": "RuneScribe",
       "guild": "쭈꾸미원정대",
-      "ranking": 36
+      "ranking": 37
     },
     {
       "world": "10-4",
@@ -28051,18 +28063,6 @@
       "grade": 26,
       "hunt_level": 26,
       "class": "AbyssRevenant",
-      "guild": "동물원",
-      "ranking": 37
-    },
-    {
-      "world": "10-4",
-      "world_group_id": "LIVE_W10",
-      "world_id": "LIVE_W10_R4",
-      "name": "장댕이",
-      "level": 90,
-      "grade": 25,
-      "hunt_level": 25,
-      "class": "RuneScribe",
       "guild": "동물원",
       "ranking": 38
     },
@@ -28178,25 +28178,13 @@
       "world": "10-4",
       "world_group_id": "LIVE_W10",
       "world_id": "LIVE_W10_R4",
-      "name": "푸바오",
-      "level": 90,
-      "grade": 24,
-      "hunt_level": 24,
-      "class": "SolarSentinel",
-      "guild": "동물원",
-      "ranking": 48
-    },
-    {
-      "world": "10-4",
-      "world_group_id": "LIVE_W10",
-      "world_id": "LIVE_W10_R4",
       "name": "토뭉",
       "level": 90,
       "grade": 25,
       "hunt_level": 25,
       "class": "IncenseArcher",
       "guild": "동물원",
-      "ranking": 49
+      "ranking": 48
     },
     {
       "world": "10-4",
@@ -28208,7 +28196,7 @@
       "hunt_level": 23,
       "class": "RuneScribe",
       "guild": "동물원",
-      "ranking": 50
+      "ranking": 49
     },
     {
       "world": "10-4",
@@ -28220,6 +28208,18 @@
       "hunt_level": 22,
       "class": "IncenseArcher",
       "guild": "개판",
+      "ranking": 50
+    },
+    {
+      "world": "10-4",
+      "world_group_id": "LIVE_W10",
+      "world_id": "LIVE_W10_R4",
+      "name": "푸바오",
+      "level": 90,
+      "grade": 24,
+      "hunt_level": 24,
+      "class": "SolarSentinel",
+      "guild": "동물원",
       "ranking": 51
     },
     {
@@ -28358,24 +28358,24 @@
       "world": "10-4",
       "world_group_id": "LIVE_W10",
       "world_id": "LIVE_W10_R4",
-      "name": "비혼",
-      "level": 89,
-      "grade": 23,
-      "hunt_level": 23,
-      "class": "IncenseArcher",
-      "guild": "개판",
-      "ranking": 63
-    },
-    {
-      "world": "10-4",
-      "world_group_id": "LIVE_W10",
-      "world_id": "LIVE_W10_R4",
       "name": "백곰탱이",
       "level": 89,
       "grade": 24,
       "hunt_level": 24,
       "class": "IncenseArcher",
       "guild": "동물원",
+      "ranking": 63
+    },
+    {
+      "world": "10-4",
+      "world_group_id": "LIVE_W10",
+      "world_id": "LIVE_W10_R4",
+      "name": "비혼",
+      "level": 89,
+      "grade": 23,
+      "hunt_level": 23,
+      "class": "IncenseArcher",
+      "guild": "개판",
       "ranking": 64
     },
     {
@@ -28754,24 +28754,24 @@
       "world": "10-4",
       "world_group_id": "LIVE_W10",
       "world_id": "LIVE_W10_R4",
-      "name": "꼬리",
-      "level": 88,
-      "grade": 22,
-      "hunt_level": 22,
-      "class": "IncenseArcher",
-      "guild": "개판",
-      "ranking": 96
-    },
-    {
-      "world": "10-4",
-      "world_group_id": "LIVE_W10",
-      "world_id": "LIVE_W10_R4",
       "name": "신화",
       "level": 88,
       "grade": 22,
       "hunt_level": 22,
       "class": "RuneScribe",
       "guild": "리즈",
+      "ranking": 96
+    },
+    {
+      "world": "10-4",
+      "world_group_id": "LIVE_W10",
+      "world_id": "LIVE_W10_R4",
+      "name": "꼬리",
+      "level": 88,
+      "grade": 22,
+      "hunt_level": 22,
+      "class": "IncenseArcher",
+      "guild": "개판",
       "ranking": 97
     },
     {
@@ -29102,13 +29102,25 @@
       "world": "10-5",
       "world_group_id": "LIVE_W10",
       "world_id": "LIVE_W10_R5",
+      "name": "KAL",
+      "level": 92,
+      "grade": 25,
+      "hunt_level": 25,
+      "class": "RuneScribe",
+      "guild": "악연",
+      "ranking": 25
+    },
+    {
+      "world": "10-5",
+      "world_group_id": "LIVE_W10",
+      "world_id": "LIVE_W10_R5",
       "name": "공유",
       "level": 92,
       "grade": 25,
       "hunt_level": 25,
       "class": "AbyssRevenant",
       "guild": "Galaxy",
-      "ranking": 25
+      "ranking": 26
     },
     {
       "world": "10-5",
@@ -29120,7 +29132,7 @@
       "hunt_level": 25,
       "class": "AbyssRevenant",
       "guild": "악연",
-      "ranking": 26
+      "ranking": 27
     },
     {
       "world": "10-5",
@@ -29132,7 +29144,7 @@
       "hunt_level": 25,
       "class": "RuneScribe",
       "guild": "악연",
-      "ranking": 27
+      "ranking": 28
     },
     {
       "world": "10-5",
@@ -29144,7 +29156,7 @@
       "hunt_level": 25,
       "class": "AbyssRevenant",
       "guild": "명복",
-      "ranking": 28
+      "ranking": 29
     },
     {
       "world": "10-5",
@@ -29156,7 +29168,7 @@
       "hunt_level": 25,
       "class": "RuneScribe",
       "guild": "크라운",
-      "ranking": 29
+      "ranking": 30
     },
     {
       "world": "10-5",
@@ -29168,18 +29180,6 @@
       "hunt_level": 25,
       "class": "Enforcer",
       "guild": "명복",
-      "ranking": 30
-    },
-    {
-      "world": "10-5",
-      "world_group_id": "LIVE_W10",
-      "world_id": "LIVE_W10_R5",
-      "name": "KAL",
-      "level": 92,
-      "grade": 25,
-      "hunt_level": 25,
-      "class": "RuneScribe",
-      "guild": "악연",
       "ranking": 31
     },
     {
@@ -29210,25 +29210,13 @@
       "world": "10-5",
       "world_group_id": "LIVE_W10",
       "world_id": "LIVE_W10_R5",
-      "name": "MAN",
-      "level": 92,
-      "grade": 26,
-      "hunt_level": 26,
-      "class": "Enforcer",
-      "guild": "악연",
-      "ranking": 34
-    },
-    {
-      "world": "10-5",
-      "world_group_id": "LIVE_W10",
-      "world_id": "LIVE_W10_R5",
       "name": "제과아닌제이",
       "level": 92,
       "grade": 26,
       "hunt_level": 26,
       "class": "RuneScribe",
       "guild": "크라운",
-      "ranking": 35
+      "ranking": 34
     },
     {
       "world": "10-5",
@@ -29240,7 +29228,7 @@
       "hunt_level": 24,
       "class": "AbyssRevenant",
       "guild": "인연",
-      "ranking": 36
+      "ranking": 35
     },
     {
       "world": "10-5",
@@ -29252,7 +29240,7 @@
       "hunt_level": 25,
       "class": "AbyssRevenant",
       "guild": "명복",
-      "ranking": 37
+      "ranking": 36
     },
     {
       "world": "10-5",
@@ -29264,7 +29252,7 @@
       "hunt_level": 25,
       "class": "AbyssRevenant",
       "guild": "크라운",
-      "ranking": 38
+      "ranking": 37
     },
     {
       "world": "10-5",
@@ -29276,7 +29264,7 @@
       "hunt_level": 25,
       "class": "AbyssRevenant",
       "guild": "크라운",
-      "ranking": 39
+      "ranking": 38
     },
     {
       "world": "10-5",
@@ -29288,7 +29276,7 @@
       "hunt_level": 26,
       "class": "Enforcer",
       "guild": "크라운",
-      "ranking": 40
+      "ranking": 39
     },
     {
       "world": "10-5",
@@ -29300,6 +29288,18 @@
       "hunt_level": 25,
       "class": "RuneScribe",
       "guild": "크라운",
+      "ranking": 40
+    },
+    {
+      "world": "10-5",
+      "world_group_id": "LIVE_W10",
+      "world_id": "LIVE_W10_R5",
+      "name": "MAN",
+      "level": 92,
+      "grade": 26,
+      "hunt_level": 26,
+      "class": "Enforcer",
+      "guild": "악연",
       "ranking": 41
     },
     {
@@ -29330,24 +29330,24 @@
       "world": "10-5",
       "world_group_id": "LIVE_W10",
       "world_id": "LIVE_W10_R5",
-      "name": "리코",
-      "level": 91,
-      "grade": 24,
-      "hunt_level": 24,
-      "class": "IncenseArcher",
-      "guild": "크라운",
-      "ranking": 44
-    },
-    {
-      "world": "10-5",
-      "world_group_id": "LIVE_W10",
-      "world_id": "LIVE_W10_R5",
       "name": "똘이",
       "level": 91,
       "grade": 25,
       "hunt_level": 25,
       "class": "IncenseArcher",
       "guild": "명복",
+      "ranking": 44
+    },
+    {
+      "world": "10-5",
+      "world_group_id": "LIVE_W10",
+      "world_id": "LIVE_W10_R5",
+      "name": "리코",
+      "level": 91,
+      "grade": 24,
+      "hunt_level": 24,
+      "class": "IncenseArcher",
+      "guild": "크라운",
       "ranking": 45
     },
     {
@@ -29390,12 +29390,12 @@
       "world": "10-5",
       "world_group_id": "LIVE_W10",
       "world_id": "LIVE_W10_R5",
-      "name": "Arthur",
+      "name": "친일이완용",
       "level": 91,
       "grade": 25,
       "hunt_level": 25,
-      "class": "MirageBlade",
-      "guild": "크라운",
+      "class": "WildWarrior",
+      "guild": "악연",
       "ranking": 49
     },
     {
@@ -29414,12 +29414,12 @@
       "world": "10-5",
       "world_group_id": "LIVE_W10",
       "world_id": "LIVE_W10_R5",
-      "name": "친일이완용",
+      "name": "Arthur",
       "level": 91,
       "grade": 25,
       "hunt_level": 25,
-      "class": "WildWarrior",
-      "guild": "악연",
+      "class": "MirageBlade",
+      "guild": "크라운",
       "ranking": 51
     },
     {
@@ -30074,11 +30074,11 @@
       "world": "11-1",
       "world_group_id": "LIVE_W11",
       "world_id": "LIVE_W11_R1",
-      "name": "어게인",
+      "name": "stal",
       "level": 91,
       "grade": 24,
       "hunt_level": 24,
-      "class": "IncenseArcher",
+      "class": "RuneScribe",
       "guild": "방재실",
       "ranking": 6
     },
@@ -30086,11 +30086,11 @@
       "world": "11-1",
       "world_group_id": "LIVE_W11",
       "world_id": "LIVE_W11_R1",
-      "name": "stal",
+      "name": "어게인",
       "level": 91,
       "grade": 24,
       "hunt_level": 24,
-      "class": "RuneScribe",
+      "class": "IncenseArcher",
       "guild": "방재실",
       "ranking": 7
     },
@@ -30158,24 +30158,24 @@
       "world": "11-1",
       "world_group_id": "LIVE_W11",
       "world_id": "LIVE_W11_R1",
-      "name": "트럼프",
-      "level": 89,
-      "grade": 22,
-      "hunt_level": 22,
-      "class": "RuneScribe",
-      "guild": "방재실",
-      "ranking": 13
-    },
-    {
-      "world": "11-1",
-      "world_group_id": "LIVE_W11",
-      "world_id": "LIVE_W11_R1",
       "name": "브리더",
       "level": 89,
       "grade": 21,
       "hunt_level": 21,
       "class": "WildWarrior",
       "guild": "자유결사",
+      "ranking": 13
+    },
+    {
+      "world": "11-1",
+      "world_group_id": "LIVE_W11",
+      "world_id": "LIVE_W11_R1",
+      "name": "트럼프",
+      "level": 89,
+      "grade": 22,
+      "hunt_level": 22,
+      "class": "RuneScribe",
+      "guild": "방재실",
       "ranking": 14
     },
     {
@@ -30206,24 +30206,24 @@
       "world": "11-1",
       "world_group_id": "LIVE_W11",
       "world_id": "LIVE_W11_R1",
-      "name": "페어링",
-      "level": 89,
-      "grade": 23,
-      "hunt_level": 23,
-      "class": "IncenseArcher",
-      "guild": "가입",
-      "ranking": 17
-    },
-    {
-      "world": "11-1",
-      "world_group_id": "LIVE_W11",
-      "world_id": "LIVE_W11_R1",
       "name": "크로미",
       "level": 89,
       "grade": 21,
       "hunt_level": 21,
       "class": "SolarSentinel",
       "guild": "루피나",
+      "ranking": 17
+    },
+    {
+      "world": "11-1",
+      "world_group_id": "LIVE_W11",
+      "world_id": "LIVE_W11_R1",
+      "name": "페어링",
+      "level": 89,
+      "grade": 23,
+      "hunt_level": 23,
+      "class": "IncenseArcher",
+      "guild": "가입",
       "ranking": 18
     },
     {
@@ -30794,24 +30794,24 @@
       "world": "11-1",
       "world_group_id": "LIVE_W11",
       "world_id": "LIVE_W11_R1",
-      "name": "파란포션",
-      "level": 85,
-      "grade": 20,
-      "hunt_level": 20,
-      "class": "RuneScribe",
-      "guild": "태양",
-      "ranking": 66
-    },
-    {
-      "world": "11-1",
-      "world_group_id": "LIVE_W11",
-      "world_id": "LIVE_W11_R1",
       "name": "붐붐",
       "level": 85,
       "grade": 20,
       "hunt_level": 20,
       "class": "Enforcer",
       "guild": "라이트",
+      "ranking": 66
+    },
+    {
+      "world": "11-1",
+      "world_group_id": "LIVE_W11",
+      "world_id": "LIVE_W11_R1",
+      "name": "파란포션",
+      "level": 85,
+      "grade": 20,
+      "hunt_level": 20,
+      "class": "RuneScribe",
+      "guild": "태양",
       "ranking": 67
     },
     {
@@ -31790,25 +31790,13 @@
       "world": "11-2",
       "world_group_id": "LIVE_W11",
       "world_id": "LIVE_W11_R2",
-      "name": "꼰대가르숑",
-      "level": 91,
-      "grade": 25,
-      "hunt_level": 25,
-      "class": "Enforcer",
-      "guild": "화랑",
-      "ranking": 49
-    },
-    {
-      "world": "11-2",
-      "world_group_id": "LIVE_W11",
-      "world_id": "LIVE_W11_R2",
       "name": "티지",
       "level": 91,
       "grade": 24,
       "hunt_level": 24,
       "class": "AbyssRevenant",
       "guild": "shadow",
-      "ranking": 50
+      "ranking": 49
     },
     {
       "world": "11-2",
@@ -31819,6 +31807,18 @@
       "grade": 24,
       "hunt_level": 24,
       "class": "Enforcer",
+      "guild": "화랑",
+      "ranking": 50
+    },
+    {
+      "world": "11-2",
+      "world_group_id": "LIVE_W11",
+      "world_id": "LIVE_W11_R2",
+      "name": "태존",
+      "level": 90,
+      "grade": 24,
+      "hunt_level": 24,
+      "class": "AbyssRevenant",
       "guild": "화랑",
       "ranking": 51
     },
@@ -31838,25 +31838,13 @@
       "world": "11-2",
       "world_group_id": "LIVE_W11",
       "world_id": "LIVE_W11_R2",
-      "name": "태존",
-      "level": 90,
-      "grade": 24,
-      "hunt_level": 24,
-      "class": "AbyssRevenant",
-      "guild": "화랑",
-      "ranking": 53
-    },
-    {
-      "world": "11-2",
-      "world_group_id": "LIVE_W11",
-      "world_id": "LIVE_W11_R2",
       "name": "몽실",
       "level": 90,
       "grade": 24,
       "hunt_level": 24,
       "class": "SolarSentinel",
       "guild": "화랑",
-      "ranking": 54
+      "ranking": 53
     },
     {
       "world": "11-2",
@@ -31868,7 +31856,7 @@
       "hunt_level": 24,
       "class": "MirageBlade",
       "guild": "shadow",
-      "ranking": 55
+      "ranking": 54
     },
     {
       "world": "11-2",
@@ -31880,7 +31868,7 @@
       "hunt_level": 24,
       "class": "Enforcer",
       "guild": "shadow",
-      "ranking": 56
+      "ranking": 55
     },
     {
       "world": "11-2",
@@ -31892,7 +31880,7 @@
       "hunt_level": 25,
       "class": "RuneScribe",
       "guild": "화랑",
-      "ranking": 57
+      "ranking": 56
     },
     {
       "world": "11-2",
@@ -31904,7 +31892,7 @@
       "hunt_level": 22,
       "class": "MirageBlade",
       "guild": "화랑",
-      "ranking": 58
+      "ranking": 57
     },
     {
       "world": "11-2",
@@ -31916,7 +31904,7 @@
       "hunt_level": 24,
       "class": "RuneScribe",
       "guild": "오리온",
-      "ranking": 59
+      "ranking": 58
     },
     {
       "world": "11-2",
@@ -31928,7 +31916,7 @@
       "hunt_level": 24,
       "class": "Enforcer",
       "guild": "멸공",
-      "ranking": 60
+      "ranking": 59
     },
     {
       "world": "11-2",
@@ -31940,7 +31928,7 @@
       "hunt_level": 24,
       "class": "Enforcer",
       "guild": "shadow",
-      "ranking": 61
+      "ranking": 60
     },
     {
       "world": "11-2",
@@ -31951,6 +31939,18 @@
       "grade": 23,
       "hunt_level": 23,
       "class": "IncenseArcher",
+      "guild": "화랑",
+      "ranking": 61
+    },
+    {
+      "world": "11-2",
+      "world_group_id": "LIVE_W11",
+      "world_id": "LIVE_W11_R2",
+      "name": "꼰대가르숑",
+      "level": 90,
+      "grade": 25,
+      "hunt_level": 25,
+      "class": "Enforcer",
       "guild": "화랑",
       "ranking": 62
     },
@@ -32138,24 +32138,24 @@
       "world": "11-2",
       "world_group_id": "LIVE_W11",
       "world_id": "LIVE_W11_R2",
-      "name": "쪼이",
-      "level": 89,
-      "grade": 22,
-      "hunt_level": 22,
-      "class": "RuneScribe",
-      "guild": "오리온",
-      "ranking": 78
-    },
-    {
-      "world": "11-2",
-      "world_group_id": "LIVE_W11",
-      "world_id": "LIVE_W11_R2",
       "name": "당근이",
       "level": 89,
       "grade": 24,
       "hunt_level": 24,
       "class": "RuneScribe",
       "guild": "화랑",
+      "ranking": 78
+    },
+    {
+      "world": "11-2",
+      "world_group_id": "LIVE_W11",
+      "world_id": "LIVE_W11_R2",
+      "name": "쪼이",
+      "level": 89,
+      "grade": 22,
+      "hunt_level": 22,
+      "class": "RuneScribe",
+      "guild": "오리온",
       "ranking": 79
     },
     {
@@ -32366,24 +32366,24 @@
       "world": "11-2",
       "world_group_id": "LIVE_W11",
       "world_id": "LIVE_W11_R2",
-      "name": "심판바",
-      "level": 89,
-      "grade": 21,
-      "hunt_level": 21,
-      "class": "Enforcer",
-      "guild": "심판바",
-      "ranking": 97
-    },
-    {
-      "world": "11-2",
-      "world_group_id": "LIVE_W11",
-      "world_id": "LIVE_W11_R2",
       "name": "봄날",
       "level": 89,
       "grade": 23,
       "hunt_level": 23,
       "class": "Enforcer",
       "guild": "오리온",
+      "ranking": 97
+    },
+    {
+      "world": "11-2",
+      "world_group_id": "LIVE_W11",
+      "world_id": "LIVE_W11_R2",
+      "name": "심판바",
+      "level": 89,
+      "grade": 21,
+      "hunt_level": 21,
+      "class": "Enforcer",
+      "guild": "심판바",
       "ranking": 98
     },
     {
@@ -32547,7 +32547,7 @@
       "world_group_id": "LIVE_W11",
       "world_id": "LIVE_W11_R3",
       "name": "호잇",
-      "level": 91,
+      "level": 92,
       "grade": 25,
       "hunt_level": 25,
       "class": "Enforcer",
@@ -33196,8 +33196,8 @@
       "world_id": "LIVE_W11_R3",
       "name": "벨리온",
       "level": 85,
-      "grade": 19,
-      "hunt_level": 19,
+      "grade": 20,
+      "hunt_level": 20,
       "class": "AbyssRevenant",
       "guild": "태양",
       "ranking": 66
@@ -33422,24 +33422,24 @@
       "world": "11-3",
       "world_group_id": "LIVE_W11",
       "world_id": "LIVE_W11_R3",
-      "name": "클레이룬",
-      "level": 85,
-      "grade": 20,
-      "hunt_level": 20,
-      "class": "Enforcer",
-      "guild": "HERO",
-      "ranking": 85
-    },
-    {
-      "world": "11-3",
-      "world_group_id": "LIVE_W11",
-      "world_id": "LIVE_W11_R3",
       "name": "스핑크스",
       "level": 85,
       "grade": 21,
       "hunt_level": 21,
       "class": "MirageBlade",
       "guild": "도비",
+      "ranking": 85
+    },
+    {
+      "world": "11-3",
+      "world_group_id": "LIVE_W11",
+      "world_id": "LIVE_W11_R3",
+      "name": "클레이룬",
+      "level": 85,
+      "grade": 20,
+      "hunt_level": 20,
+      "class": "Enforcer",
+      "guild": "HERO",
       "ranking": 86
     },
     {
@@ -33566,24 +33566,24 @@
       "world": "11-3",
       "world_group_id": "LIVE_W11",
       "world_id": "LIVE_W11_R3",
-      "name": "이케부쿠로",
-      "level": 84,
-      "grade": 20,
-      "hunt_level": 20,
-      "class": "Enforcer",
-      "guild": "일본",
-      "ranking": 97
-    },
-    {
-      "world": "11-3",
-      "world_group_id": "LIVE_W11",
-      "world_id": "LIVE_W11_R3",
       "name": "임페리우스",
       "level": 84,
       "grade": 20,
       "hunt_level": 20,
       "class": "RuneScribe",
       "guild": "앙기리스의회",
+      "ranking": 97
+    },
+    {
+      "world": "11-3",
+      "world_group_id": "LIVE_W11",
+      "world_id": "LIVE_W11_R3",
+      "name": "이케부쿠로",
+      "level": 84,
+      "grade": 20,
+      "hunt_level": 20,
+      "class": "Enforcer",
+      "guild": "일본",
       "ranking": 98
     },
     {
@@ -34418,24 +34418,24 @@
       "world": "11-4",
       "world_group_id": "LIVE_W11",
       "world_id": "LIVE_W11_R4",
-      "name": "까츄",
-      "level": 92,
-      "grade": 25,
-      "hunt_level": 25,
-      "class": "RuneScribe",
-      "guild": "방랑",
-      "ranking": 68
-    },
-    {
-      "world": "11-4",
-      "world_group_id": "LIVE_W11",
-      "world_id": "LIVE_W11_R4",
       "name": "너여",
       "level": 92,
       "grade": 26,
       "hunt_level": 26,
       "class": "AbyssRevenant",
       "guild": "shadow",
+      "ranking": 68
+    },
+    {
+      "world": "11-4",
+      "world_group_id": "LIVE_W11",
+      "world_id": "LIVE_W11_R4",
+      "name": "까츄",
+      "level": 92,
+      "grade": 25,
+      "hunt_level": 25,
+      "class": "RuneScribe",
+      "guild": "방랑",
       "ranking": 69
     },
     {
@@ -34550,24 +34550,24 @@
       "world": "11-4",
       "world_group_id": "LIVE_W11",
       "world_id": "LIVE_W11_R4",
-      "name": "유랑내일",
-      "level": 91,
-      "grade": 25,
-      "hunt_level": 25,
-      "class": "RuneScribe",
-      "guild": "유랑",
-      "ranking": 79
-    },
-    {
-      "world": "11-4",
-      "world_group_id": "LIVE_W11",
-      "world_id": "LIVE_W11_R4",
       "name": "청초",
       "level": 91,
       "grade": 24,
       "hunt_level": 24,
       "class": "RuneScribe",
       "guild": "shadow",
+      "ranking": 79
+    },
+    {
+      "world": "11-4",
+      "world_group_id": "LIVE_W11",
+      "world_id": "LIVE_W11_R4",
+      "name": "유랑내일",
+      "level": 91,
+      "grade": 25,
+      "hunt_level": 25,
+      "class": "RuneScribe",
+      "guild": "유랑",
       "ranking": 80
     },
     {
@@ -35222,24 +35222,24 @@
       "world": "11-5",
       "world_group_id": "LIVE_W11",
       "world_id": "LIVE_W11_R5",
-      "name": "싸이코",
-      "level": 89,
-      "grade": 23,
-      "hunt_level": 23,
-      "class": "SolarSentinel",
-      "guild": "센스",
-      "ranking": 35
-    },
-    {
-      "world": "11-5",
-      "world_group_id": "LIVE_W11",
-      "world_id": "LIVE_W11_R5",
       "name": "장혁",
       "level": 89,
       "grade": 21,
       "hunt_level": 21,
       "class": "RuneScribe",
       "guild": "연태",
+      "ranking": 35
+    },
+    {
+      "world": "11-5",
+      "world_group_id": "LIVE_W11",
+      "world_id": "LIVE_W11_R5",
+      "name": "싸이코",
+      "level": 89,
+      "grade": 23,
+      "hunt_level": 23,
+      "class": "SolarSentinel",
+      "guild": "센스",
       "ranking": 36
     },
     {
@@ -35258,11 +35258,11 @@
       "world": "11-5",
       "world_group_id": "LIVE_W11",
       "world_id": "LIVE_W11_R5",
-      "name": "현준",
+      "name": "Keria",
       "level": 89,
       "grade": 23,
       "hunt_level": 23,
-      "class": "Enforcer",
+      "class": "RuneScribe",
       "guild": "연태",
       "ranking": 38
     },
@@ -35270,11 +35270,11 @@
       "world": "11-5",
       "world_group_id": "LIVE_W11",
       "world_id": "LIVE_W11_R5",
-      "name": "Keria",
+      "name": "현준",
       "level": 89,
       "grade": 23,
       "hunt_level": 23,
-      "class": "RuneScribe",
+      "class": "Enforcer",
       "guild": "연태",
       "ranking": 39
     },
@@ -35403,7 +35403,7 @@
       "world_group_id": "LIVE_W11",
       "world_id": "LIVE_W11_R5",
       "name": "아현",
-      "level": 88,
+      "level": 89,
       "grade": 21,
       "hunt_level": 21,
       "class": "IncenseArcher",
@@ -35450,25 +35450,13 @@
       "world": "11-5",
       "world_group_id": "LIVE_W11",
       "world_id": "LIVE_W11_R5",
-      "name": "BIBI",
-      "level": 88,
-      "grade": 22,
-      "hunt_level": 22,
-      "class": "Enforcer",
-      "guild": "연태",
-      "ranking": 54
-    },
-    {
-      "world": "11-5",
-      "world_group_id": "LIVE_W11",
-      "world_id": "LIVE_W11_R5",
       "name": "핵포탄",
       "level": 88,
       "grade": 23,
       "hunt_level": 23,
       "class": "Enforcer",
       "guild": "포탄",
-      "ranking": 55
+      "ranking": 54
     },
     {
       "world": "11-5",
@@ -35480,13 +35468,25 @@
       "hunt_level": 21,
       "class": "MirageBlade",
       "guild": "연수",
-      "ranking": 56
+      "ranking": 55
     },
     {
       "world": "11-5",
       "world_group_id": "LIVE_W11",
       "world_id": "LIVE_W11_R5",
       "name": "wow",
+      "level": 88,
+      "grade": 22,
+      "hunt_level": 22,
+      "class": "Enforcer",
+      "guild": "연태",
+      "ranking": 56
+    },
+    {
+      "world": "11-5",
+      "world_group_id": "LIVE_W11",
+      "world_id": "LIVE_W11_R5",
+      "name": "BIBI",
       "level": 88,
       "grade": 22,
       "hunt_level": 22,
@@ -35546,25 +35546,13 @@
       "world": "11-5",
       "world_group_id": "LIVE_W11",
       "world_id": "LIVE_W11_R5",
-      "name": "연자",
-      "level": 87,
-      "grade": 22,
-      "hunt_level": 22,
-      "class": "RuneScribe",
-      "guild": "연태",
-      "ranking": 62
-    },
-    {
-      "world": "11-5",
-      "world_group_id": "LIVE_W11",
-      "world_id": "LIVE_W11_R5",
       "name": "연화세정",
       "level": 87,
       "grade": 21,
       "hunt_level": 21,
       "class": "RuneScribe",
       "guild": "연태",
-      "ranking": 63
+      "ranking": 62
     },
     {
       "world": "11-5",
@@ -35576,6 +35564,18 @@
       "hunt_level": 20,
       "class": "SolarSentinel",
       "guild": "센스",
+      "ranking": 63
+    },
+    {
+      "world": "11-5",
+      "world_group_id": "LIVE_W11",
+      "world_id": "LIVE_W11_R5",
+      "name": "연자",
+      "level": 87,
+      "grade": 22,
+      "hunt_level": 22,
+      "class": "RuneScribe",
+      "guild": "연태",
       "ranking": 64
     },
     {
@@ -35654,11 +35654,11 @@
       "world": "11-5",
       "world_group_id": "LIVE_W11",
       "world_id": "LIVE_W11_R5",
-      "name": "악마",
+      "name": "군수",
       "level": 86,
       "grade": 21,
       "hunt_level": 21,
-      "class": "Enforcer",
+      "class": "IncenseArcher",
       "guild": "마왕군",
       "ranking": 71
     },
@@ -35666,25 +35666,13 @@
       "world": "11-5",
       "world_group_id": "LIVE_W11",
       "world_id": "LIVE_W11_R5",
-      "name": "군수",
+      "name": "악마",
       "level": 86,
       "grade": 21,
       "hunt_level": 21,
-      "class": "IncenseArcher",
+      "class": "Enforcer",
       "guild": "마왕군",
       "ranking": 72
-    },
-    {
-      "world": "11-5",
-      "world_group_id": "LIVE_W11",
-      "world_id": "LIVE_W11_R5",
-      "name": "슈욱",
-      "level": 86,
-      "grade": 20,
-      "hunt_level": 20,
-      "class": "Enforcer",
-      "guild": "마켓컬리",
-      "ranking": 73
     },
     {
       "world": "11-5",
@@ -35696,6 +35684,18 @@
       "hunt_level": 20,
       "class": "RuneScribe",
       "guild": "연수",
+      "ranking": 73
+    },
+    {
+      "world": "11-5",
+      "world_group_id": "LIVE_W11",
+      "world_id": "LIVE_W11_R5",
+      "name": "슈욱",
+      "level": 86,
+      "grade": 20,
+      "hunt_level": 20,
+      "class": "Enforcer",
+      "guild": "마켓컬리",
       "ranking": 74
     },
     {
@@ -35930,24 +35930,24 @@
       "world": "11-5",
       "world_group_id": "LIVE_W11",
       "world_id": "LIVE_W11_R5",
-      "name": "고해",
-      "level": 85,
-      "grade": 21,
-      "hunt_level": 21,
-      "class": "RuneScribe",
-      "guild": null,
-      "ranking": 94
-    },
-    {
-      "world": "11-5",
-      "world_group_id": "LIVE_W11",
-      "world_id": "LIVE_W11_R5",
       "name": "밤바람",
       "level": 85,
       "grade": 21,
       "hunt_level": 21,
       "class": "Enforcer",
       "guild": "밤",
+      "ranking": 94
+    },
+    {
+      "world": "11-5",
+      "world_group_id": "LIVE_W11",
+      "world_id": "LIVE_W11_R5",
+      "name": "고해",
+      "level": 85,
+      "grade": 21,
+      "hunt_level": 21,
+      "class": "RuneScribe",
+      "guild": null,
       "ranking": 95
     },
     {
@@ -36026,11 +36026,11 @@
       "world": "12-1",
       "world_group_id": "LIVE_W12",
       "world_id": "LIVE_W12_R1",
-      "name": "명품맥스형이다",
+      "name": "명품무사",
       "level": 93,
       "grade": 26,
       "hunt_level": 26,
-      "class": "WildWarrior",
+      "class": "Enforcer",
       "guild": "명품입니다",
       "ranking": 2
     },
@@ -36038,11 +36038,11 @@
       "world": "12-1",
       "world_group_id": "LIVE_W12",
       "world_id": "LIVE_W12_R1",
-      "name": "명품무사",
+      "name": "명품맥스형이다",
       "level": 93,
       "grade": 26,
       "hunt_level": 26,
-      "class": "Enforcer",
+      "class": "WildWarrior",
       "guild": "명품입니다",
       "ranking": 3
     },
@@ -36218,11 +36218,11 @@
       "world": "12-1",
       "world_group_id": "LIVE_W12",
       "world_id": "LIVE_W12_R1",
-      "name": "텐텐구",
+      "name": "명품굿데이",
       "level": 92,
-      "grade": 26,
-      "hunt_level": 26,
-      "class": "IncenseArcher",
+      "grade": 25,
+      "hunt_level": 25,
+      "class": "RuneScribe",
       "guild": "명품입니다",
       "ranking": 18
     },
@@ -36230,11 +36230,11 @@
       "world": "12-1",
       "world_group_id": "LIVE_W12",
       "world_id": "LIVE_W12_R1",
-      "name": "명품굿데이",
+      "name": "텐텐구",
       "level": 92,
-      "grade": 25,
-      "hunt_level": 25,
-      "class": "RuneScribe",
+      "grade": 26,
+      "hunt_level": 26,
+      "class": "IncenseArcher",
       "guild": "명품입니다",
       "ranking": 19
     },
@@ -37539,7 +37539,7 @@
       "world_group_id": "LIVE_W12",
       "world_id": "LIVE_W12_R2",
       "name": "링컨",
-      "level": 91,
+      "level": 92,
       "grade": 25,
       "hunt_level": 25,
       "class": "AbyssRevenant",
@@ -37910,24 +37910,24 @@
       "world": "12-2",
       "world_group_id": "LIVE_W12",
       "world_id": "LIVE_W12_R2",
-      "name": "산불",
-      "level": 90,
-      "grade": 25,
-      "hunt_level": 25,
-      "class": "RuneScribe",
-      "guild": "도깨비",
-      "ranking": 59
-    },
-    {
-      "world": "12-2",
-      "world_group_id": "LIVE_W12",
-      "world_id": "LIVE_W12_R2",
       "name": "연사",
       "level": 90,
       "grade": 23,
       "hunt_level": 23,
       "class": "IncenseArcher",
       "guild": "지능",
+      "ranking": 59
+    },
+    {
+      "world": "12-2",
+      "world_group_id": "LIVE_W12",
+      "world_id": "LIVE_W12_R2",
+      "name": "산불",
+      "level": 90,
+      "grade": 25,
+      "hunt_level": 25,
+      "class": "RuneScribe",
+      "guild": "도깨비",
       "ranking": 60
     },
     {
@@ -37970,24 +37970,24 @@
       "world": "12-2",
       "world_group_id": "LIVE_W12",
       "world_id": "LIVE_W12_R2",
-      "name": "불꽃파도",
-      "level": 90,
-      "grade": 22,
-      "hunt_level": 22,
-      "class": "WildWarrior",
-      "guild": "쇼핑몰",
-      "ranking": 64
-    },
-    {
-      "world": "12-2",
-      "world_group_id": "LIVE_W12",
-      "world_id": "LIVE_W12_R2",
       "name": "진하",
       "level": 90,
       "grade": 24,
       "hunt_level": 24,
       "class": "IncenseArcher",
       "guild": "냐옹",
+      "ranking": 64
+    },
+    {
+      "world": "12-2",
+      "world_group_id": "LIVE_W12",
+      "world_id": "LIVE_W12_R2",
+      "name": "불꽃파도",
+      "level": 90,
+      "grade": 22,
+      "hunt_level": 22,
+      "class": "WildWarrior",
+      "guild": "쇼핑몰",
       "ranking": 65
     },
     {
@@ -38270,24 +38270,24 @@
       "world": "12-2",
       "world_group_id": "LIVE_W12",
       "world_id": "LIVE_W12_R2",
-      "name": "카엘",
-      "level": 89,
-      "grade": 23,
-      "hunt_level": 23,
-      "class": "Enforcer",
-      "guild": "쇼핑몰",
-      "ranking": 89
-    },
-    {
-      "world": "12-2",
-      "world_group_id": "LIVE_W12",
-      "world_id": "LIVE_W12_R2",
       "name": "제로스",
       "level": 89,
       "grade": 22,
       "hunt_level": 22,
       "class": "Enforcer",
       "guild": "킹덤",
+      "ranking": 89
+    },
+    {
+      "world": "12-2",
+      "world_group_id": "LIVE_W12",
+      "world_id": "LIVE_W12_R2",
+      "name": "카엘",
+      "level": 89,
+      "grade": 23,
+      "hunt_level": 23,
+      "class": "Enforcer",
+      "guild": "쇼핑몰",
       "ranking": 90
     },
     {
@@ -40347,7 +40347,7 @@
       "world_group_id": "LIVE_W12",
       "world_id": "LIVE_W12_R4",
       "name": "삼사",
-      "level": 88,
+      "level": 89,
       "grade": 23,
       "hunt_level": 23,
       "class": "RuneScribe",
@@ -40934,13 +40934,25 @@
       "world": "12-5",
       "world_group_id": "LIVE_W12",
       "world_id": "LIVE_W12_R5",
+      "name": "일타강사구몬",
+      "level": 93,
+      "grade": 26,
+      "hunt_level": 26,
+      "class": "Enforcer",
+      "guild": "진격의매드",
+      "ranking": 11
+    },
+    {
+      "world": "12-5",
+      "world_group_id": "LIVE_W12",
+      "world_id": "LIVE_W12_R5",
       "name": "비비빅빅",
       "level": 93,
       "grade": 26,
       "hunt_level": 26,
       "class": "RuneScribe",
       "guild": "비비빅",
-      "ranking": 11
+      "ranking": 12
     },
     {
       "world": "12-5",
@@ -40952,7 +40964,7 @@
       "hunt_level": 26,
       "class": "IncenseArcher",
       "guild": "진격의디지몬",
-      "ranking": 12
+      "ranking": 13
     },
     {
       "world": "12-5",
@@ -40964,7 +40976,7 @@
       "hunt_level": 26,
       "class": "SolarSentinel",
       "guild": "진격의매드",
-      "ranking": 13
+      "ranking": 14
     },
     {
       "world": "12-5",
@@ -40975,18 +40987,6 @@
       "grade": 26,
       "hunt_level": 26,
       "class": "RuneScribe",
-      "guild": "진격의매드",
-      "ranking": 14
-    },
-    {
-      "world": "12-5",
-      "world_group_id": "LIVE_W12",
-      "world_id": "LIVE_W12_R5",
-      "name": "일타강사구몬",
-      "level": 92,
-      "grade": 26,
-      "hunt_level": 26,
-      "class": "Enforcer",
       "guild": "진격의매드",
       "ranking": 15
     },
@@ -41018,24 +41018,24 @@
       "world": "12-5",
       "world_group_id": "LIVE_W12",
       "world_id": "LIVE_W12_R5",
-      "name": "셔오",
-      "level": 92,
-      "grade": 25,
-      "hunt_level": 25,
-      "class": "RuneScribe",
-      "guild": "비비빅",
-      "ranking": 18
-    },
-    {
-      "world": "12-5",
-      "world_group_id": "LIVE_W12",
-      "world_id": "LIVE_W12_R5",
       "name": "츄츄몬",
       "level": 92,
       "grade": 26,
       "hunt_level": 26,
       "class": "IncenseArcher",
       "guild": "진격의매드",
+      "ranking": 18
+    },
+    {
+      "world": "12-5",
+      "world_group_id": "LIVE_W12",
+      "world_id": "LIVE_W12_R5",
+      "name": "셔오",
+      "level": 92,
+      "grade": 25,
+      "hunt_level": 25,
+      "class": "RuneScribe",
+      "guild": "비비빅",
       "ranking": 19
     },
     {
@@ -41462,37 +41462,25 @@
       "world": "12-5",
       "world_group_id": "LIVE_W12",
       "world_id": "LIVE_W12_R5",
-      "name": "도로몬",
-      "level": 91,
-      "grade": 24,
-      "hunt_level": 24,
-      "class": "RuneScribe",
-      "guild": "진격의디지몬",
-      "ranking": 55
-    },
-    {
-      "world": "12-5",
-      "world_group_id": "LIVE_W12",
-      "world_id": "LIVE_W12_R5",
       "name": "고양몬",
       "level": 91,
       "grade": 26,
       "hunt_level": 26,
       "class": "RuneScribe",
       "guild": "진격의매드",
-      "ranking": 56
+      "ranking": 55
     },
     {
       "world": "12-5",
       "world_group_id": "LIVE_W12",
       "world_id": "LIVE_W12_R5",
-      "name": "후루몬",
+      "name": "도로몬",
       "level": 91,
-      "grade": 25,
-      "hunt_level": 25,
-      "class": "Enforcer",
+      "grade": 24,
+      "hunt_level": 24,
+      "class": "RuneScribe",
       "guild": "진격의디지몬",
-      "ranking": 57
+      "ranking": 56
     },
     {
       "world": "12-5",
@@ -41504,6 +41492,18 @@
       "hunt_level": 25,
       "class": "IncenseArcher",
       "guild": "진격의매드",
+      "ranking": 57
+    },
+    {
+      "world": "12-5",
+      "world_group_id": "LIVE_W12",
+      "world_id": "LIVE_W12_R5",
+      "name": "후루몬",
+      "level": 91,
+      "grade": 25,
+      "hunt_level": 25,
+      "class": "Enforcer",
+      "guild": "진격의디지몬",
       "ranking": 58
     },
     {
@@ -41702,7 +41702,7 @@
       "world": "12-5",
       "world_group_id": "LIVE_W12",
       "world_id": "LIVE_W12_R5",
-      "name": "안가몬",
+      "name": "당근몬",
       "level": 90,
       "grade": 26,
       "hunt_level": 26,
@@ -41714,7 +41714,7 @@
       "world": "12-5",
       "world_group_id": "LIVE_W12",
       "world_id": "LIVE_W12_R5",
-      "name": "당근몬",
+      "name": "안가몬",
       "level": 90,
       "grade": 26,
       "hunt_level": 26,
